@@ -1,0 +1,44 @@
+[Distribution]
+Distribution=debian
+Release=bullseye
+
+[Output]
+Format=directory
+Output=/home/bodnar/vyos-lab/containers/vyos-base
+
+[Content]
+Packages=
+    systemd
+    systemd-container
+    iproute2
+    procps
+    iptables
+    net-tools
+    iputils-ping
+    vim-tiny
+    less
+    sudo
+    python3
+    python3-pip
+    openssh-server
+    quagga
+    bird
+    frr
+    tcpdump
+    traceroute
+    curl
+    wget
+    cloud-init
+    cloud-utils
+    cloud-guest-utils
+
+# Create a vyos user with sudo access
+BuildPackages=
+    wget
+    gnupg
+    
+# Cloud-init is used for initial system configuration
+WithNetwork=yes
+
+[Host]
+QemuMem=512M
