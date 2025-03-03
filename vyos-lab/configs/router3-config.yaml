@@ -12,11 +12,16 @@ write_files:
       [Network]
       Address=10.0.1.2/24
 
+      
+      [Network]
+      Address=10.0.1.2/24
+  
   - path: /etc/systemd/network/30-eth2.network
     content: |
       [Match]
       Name=eth2
 
+      
       [Network]
       Address=10.0.3.2/24
 
@@ -25,6 +30,7 @@ write_files:
       [Match]
       Name=eth3
 
+      
       [Network]
       Address=192.168.100.1/24
       # This network simulates internet access
@@ -47,4 +53,5 @@ runcmd:
   - systemctl restart systemd-networkd
   - systemctl restart frr
   - iptables -t nat -A POSTROUTING -o eth3 -s 10.0.0.0/8 -j MASQUERADE
+  - echo "Router 3 setup complete"
   - echo "Router 3 setup complete"
