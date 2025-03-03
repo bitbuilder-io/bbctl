@@ -1,0 +1,37 @@
+[package]
+name = "bbctl"
+version = "0.1.0"
+authors = ["Daniel Bodnar <1790726+danielbodnar@users.noreply.github.com>"]
+license = "MIT"
+edition = "2021"
+description = "BitBuilder Cloud CLI for provisioning multi-tenant infrastructure on bare metal servers"
+readme = "README.md"
+
+[dependencies]
+# UI
+crossterm = { version = "0.28.1", features = ["event-stream"] }
+futures = "0.3.31"
+ratatui = "0.29.0"
+
+# Async runtime
+tokio = { version = "1.40.0", features = ["full"] }
+
+# Core functionality
+clap = { version = "4.5.1", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8.8"
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+anyhow = "1.0.75"
+dirs = "5.0"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+env_logger = "0.10"
+indicatif = "0.17"
+openssl = { version = "0.10", features = ["vendored"] }
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.0"
+tempfile = "3.8"
+mockito = "1.2"

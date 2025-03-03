@@ -1,0 +1,14 @@
+[Distribution]
+Distribution=ubuntu
+Release=jammy
+
+[Output]
+Format=raw_btrfs
+Output=bbctl-test-container
+
+[Content]
+Packages=
+    openssh-server
+    iputils-ping
+    curl
+    iproute2
