@@ -15,7 +15,16 @@ cargo run -- [command] [subcommand] [args]
 # Build optimized release version
 cargo build --release
 
+# Check for compilation errors without building
+cargo check
+
+# Run tests
+cargo test
+
 # Run specific test
+cargo test test_name
+
+# Run specific test with output
 cargo test test_name -- --nocapture
 
 # Format code

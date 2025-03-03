@@ -378,7 +378,7 @@ async fn main() -> AppResult<()> {
                         println!("\n✅ SSH connection successful!");
                         
                         // If API key is provided, also test the API
-                        if let Some(api_key) = &api_key {
+                        if let Some(_api_key) = &api_key {
                             println!("\nTesting VyOS HTTP API...");
                             
                             let mut client_mut = client;
