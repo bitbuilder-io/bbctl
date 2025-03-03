@@ -1,0 +1,650 @@
+{
+  "numStartups": 28,
+  "autoUpdaterStatus": "enabled",
+  "preferredNotifChannel": "notifications_disabled",
+  "verbose": true,
+  "customApiKeyResponses": {
+    "approved": [
+      "M7rgs_CsyZA-14-m_wAA"
+    ],
+    "rejected": []
+  },
+  "userID": "e068748e3098eb9960cb99d05bbe96260cccd8ce390a2e6dfd75593362b7d74c",
+  "oauthAccount": {
+    "accountUuid": "b4313311-f668-4f16-8b51-da0db67b806d",
+    "emailAddress": "daniel.bodnar@gmail.com",
+    "organizationUuid": "e938dada-036f-4d0c-a411-21feafbc9c69"
+  },
+  "primaryApiKey": "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",
+  "hasCompletedOnboarding": true,
+  "lastOnboardingVersion": "0.2.9",
+  "projects": {
+    "/home/bodnar/.config/bookmarks": {
+      "allowedTools": [],
+      "context": {},
+      "history": [
+        "/clear ",
+        "/init ",
+        "/config "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.23580724999999997,
+      "lastAPIDuration": 31588,
+      "lastDuration": 90985,
+      "lastSessionId": "c4163851-68e9-4279-a9c8-f209d0d1c420"
+    },
+    "/home/bodnar/.config/bookmarks/data": {
+      "allowedTools": [
+        "Bash(./run.sh --help)",
+        "Bash(cd:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Can we turn this into a typescript cli using zod and bun please?",
+        "I already have duckdb installed at /usr/bin/duckdb - no need to install it.",
+        "Please create a duckdb database and schema for firefox.bookmarks.csv and all-active-stars.json and chrome.bookmarks.csv that I can use for efficiently searching by tag, topic, or full-text.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/.config/bookmarks/data/ts-bookmark-search": {
+      "allowedTools": [
+        "Bash(ls:*)"
+      ],
+      "context": {},
+      "history": [
+        "Please use bun for package manager and node runtime, and call this extension \"bitmarks\"",
+        "Please use wxt.dev to create a browser extension for firefox and google chrome with a vue + shadcn UI to help syncronize bookmarks and a full-page UI frontend for browsing, searching, tagging, and exporting. Most importantly, please read PROMPT.md and provide a new \"orgnize all bookmarks\" button that will apply that template in order to create a new auto-organizing bookmark management system."
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/code/triplit-test/bitmarks": {
+      "allowedTools": [],
+      "context": {},
+      "history": [
+        "/pr-comments ",
+        "This project is a live updating bookmark management database that displays live previews of pages and allows for efficient import, organizing, and exporting of browser bookmarks and github.com starred repos. Help me build that.",
+        "/init ",
+        "init"
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.1255489999999997,
+      "lastAPIDuration": 325326,
+      "lastDuration": 1351440,
+      "lastSessionId": "ce59c740-2dd8-4288-9e94-5a8fe0b49867"
+    },
+    "/home/bodnar/.config/bookmarks/data/bitmarks": {
+      "allowedTools": [
+        "Bash(bun add:*)",
+        "Bash(bun run:*)",
+        "Bash(bunx:*)",
+        "Bash(cd:*)",
+        "Bash(chmod:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)",
+        "Bash(npm install:*)"
+      ],
+      "context": {},
+      "history": [
+        "I installed and initialized the vue template at ./bitmarks-ext. Let's use that instead of the vanilla one",
+        "bun run build",
+        "/cost ",
+        "/compact "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 8.5542358,
+      "lastAPIDuration": 1572494,
+      "lastDuration": 28279296,
+      "lastSessionId": "fcb9e624-9393-4ad9-83d9-1d1874c8576e"
+    },
+    "/home/bodnar/.config/bookmarks/data/bitmarks-ext": {
+      "allowedTools": [
+        "Bash(bun add:*)",
+        "Bash(bun install:*)",
+        "Bash(bun run:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)",
+        "Bash(npm exec:*)",
+        "Bash(touch entrypoints/background.js && bun run build)"
+      ],
+      "context": {},
+      "history": [
+        "Ok, it's been initialized. I've also cloned down the wxt-dev project to ./wxt, so feel free to parse the docs folder there to read the source.",
+        "Couple of problems. First, bun isn't trusting installs by default. That's understandable. Let's use npm instead. Second, the directory structure of those entrypoints is suppose to be \"./src/entrypoints/{background,bookmarks,content,devtools,history,newtab,options,popup,sidepanel,sandbox}/index.ts\". I don't see a ./src/entrypoints in your generated code. So let's start over from scratch for this extension. I'm going to backup and delete the bitmarks and bitmarks-ext directories. Then, I'm going to reinitialize a new wxt.dev project using the vue template under ./bitmarks (/home/bodnar/.config/bookmarks/data/bitmarks). I will verify the project builds and starts up correctly. Then I want you to apply my original web extension request again from scratch inside the already initialized bitmarks project directory (/home/bodnar/.config/bookmarks/data/bitmarks). You won't have access to any of the web extension code you wrote, so you'll have to redo that. Do you understand? If so, let me know when you're ready and I'll tell you when you may proceed."
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/code/gh-stars-browser/gh-stars-ui": {
+      "allowedTools": [
+        "Bash(gh repo create:*)",
+        "Bash(git add:*)",
+        "Bash(git commit:*)",
+        "Bash(git push:*)",
+        "Bash(mkdir:*)",
+        "Bash(npm install:*)",
+        "Bash(npx changeset:*)"
+      ],
+      "context": {},
+      "history": [
+        "I'll review that later. Gotta run. Thanks for your help - you did wonderfully!",
+        "Sorry, I pressed enter too soon. 2. Please make up a good description for this project (and update the README.md while you're at it). 3. version should be 0.0.1. (side note: I'd like to use changesets to manage versions and changelogs. Please install the required dependencies for that). 4. Recommend a license that supports modern open source. 5. It should be private for now. 6. Choose 10 appropriate keywords and github topics.",
+        "1. 1790726+danielbodnar@users.noreply.github.com",
+        "My name: \"Daniel Bodnar\". Github username is danielbodnar. git repo will be github.com/danielbodnar/gh-stars-ui (please create it with 'gh repo create' - I'm already logged in and authenticated. Use the 'gh' command that's already installed for the other git-specific config questions in adr 0001. If I left anything out please ask me directly before making your commit.",
+        "Wonderful! These look awesome. I'd like to provide my answers by communicating them to you here, one adr at a time, and have you update those adr record files with my answers. Please make a helpful git commit after each decision has been recorded. Tell me when you're ready for the first one.",
+        "This project is a UI to browse, manage, and search github stars. I need you to create a a layout, necessary components, and data loader that will paginate through a user's starred repositories on github and render or display the readme in the main window. The sidebar needs to allow for sorting, filtering, searching, and starring / unstarring. Lastly, I want to augment the github repo's metadata with a full duckdb database to provide caching, indexing, full text searching, and custom tags / labels / keywords / etc. Finally, I want this site to provide a way of syncronizing this database with a browser's bookmarks by implementing an \"export\" feature that will allow for multiple formats and export destination types (chrome, firefox, csv, awesome-list, etc). Finally, I want to provide a tRPC api for all of these features. Before implementing ANYTHING, please begin by creating a docs/design-decisions directory and an adr file for every configurable option, techs stack choice, or other decision / question you may have to execute this. For example: astro provides several options for frontend frameworks (vue, react, solid, alpine.js, svelte, etc) and also multiple options for creating the astro components and pages (markdown, mdx, frontmatter, etc). I want you to gather all of these options and create an ADR record (./docs/design-decisions/0001-your-first-question-or-config-option.md - note the lowercase, kebab-case title, preceeded by a 4-charater-long incremental ID). One of your first questions should be the project-specific configuration values (my full name, my github email, my github username, and the full project git url, as well as any necessary package.json configuration values). Tell me when you've created all those ADRs, and I'll review them and provide my decisions and feedback for your review.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.9735924999999999,
+      "lastAPIDuration": 340502,
+      "lastDuration": 4269042,
+      "lastSessionId": "7e0afc5e-688c-435a-900e-3fa7b86fd382"
+    },
+    "/home/bodnar/Documents/Finances/chase": {
+      "allowedTools": [],
+      "context": {},
+      "history": [],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastDuration": 733050,
+      "lastSessionId": "6b8afc51-59c4-41d0-94e4-1df2be8bac64"
+    },
+    "/home/bodnar/Documents/Finances/bodnar-accounting": {
+      "allowedTools": [
+        "Bash(./bin/import-finance:*)",
+        "Bash(cd:*)",
+        "Bash(duckdb:*)",
+        "Bash(grep:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)",
+        "Bash(mv:*)",
+        "Bash(rmdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Let's use bun instead of npm.",
+        "I initialized a new @nuxt/ui app under ./ui. Customize that by replacing any generic template values (like the logo, company name, etc) with relevant ones for us and for this project (Our family name is \"Bodnars\", project name can be called \"Bodnar Accounting\"), and integrate this new duckdb database into the shadcn + nuxt UI with dashboards please.",
+        "/compact ",
+        "Thanks! Now one more thing - it seems we may have accidentally imported transactions multiple times while building this. Let's wipe the database and import the quicken simplifi data again (that should be the only file remaining in ./data/import/). While you're doing that, please review the last 3 months of transactions and create any missing categories, bills, subscriptions, tags, etc. Feel free to augment the data with additional features as you see fit. Please be careful while whiping the existing database transactions that we don't accidentally wipe out any tables or metadata or indexes or stored procs, or sql functions, etc that didn't originate in an import file.",
+        "Excellent. Now I'd like you to add, initialize, and implement the duckdb extensions for full-text-search (fts: https://duckdb.org/docs/stable/guides/sql_features/full_text_search), as well as the \"Vector Similarity Search Extension\" which uses an hnsw index to provide similarity searches, and then use those to make finding and categorizing new recurring bills, subscriptions, or expenses far more dynamic and flexible.",
+        "yes, but please also rename finance_import.sh to use the same standard as other shell files (kebab case, etc)",
+        "Can you please move all csv, xlx, and xlsx into data/import and update all scripts to import any file from that location that ends in csv, tsv, xls, xlsx, json, and yaml? ",
+        "/compact ",
+        "/config ",
+        "/cost ",
+        "That looks amazing. Now will you please create a list of shell scripts (use '/usr/bin/env bash' in the shebang line, and omit the \".sh\" extension) under ./bin with a full list of all the commands I might want to or need to run please. Then update the readme with significantly more detail, emojis, and github-flavored markdown features to make understanding, using, and contributing to this project so easy my 9yo daughter could do it (or my less technically competent wife) without my help.",
+        "Yes please",
+        "There was an error - \"INTERNAL Error: ExpressionExecutor::Execute called with a result vector of type VARCHAR that does not match expression type DECIMAL(12,2)\". Did you see that?",
+        "2. Please verify the categories for accuracy and update or create new ones as you see fit. You'll also find my business's bank account in there (BitBuilder Cloud, LLC - 5624, and the American Express \"Schwab Investor Card - 1001\"). 3. Let's go back to Jan 1, 2024 - all the way up to current. 4. The two most important features to be would be the ability to create native rules or logic in duckdb to automatically apply rules and tags and categories to new transactions, and the ability to see at a glance what is a recurring bill, subscription, etc vs a one of charge. I would also like to gain deep insight into budget areas and lock down my spending across the board, but currently don't have any ability or insight into what's actually happening.",
+        "1. Yes. And please standardize it. I'll eventually want to import transactions from all my brokerages and cryptocurrency wallets and exchanges as well.",
+        "I want you to analyze quicken_dsv_02_27_2025_9_07_26_PM.csv and the csv files in chase/* and create a duckdb database (duckdb is already installed), and import all the quicken simplifi data (quicken_dsv_02_27_2025_9_07_26_PM.csv) into it. Then I want you to analyze, categorize, and index these transactions so we can turn them into a fully automated budgeting and accounting system built on duckdb, bash, rust, and nuxt. I don't want you to initialize the nuxt or rust components yet, just duckdb and bash for now. Do you have any questions for me before beginning the analysis and import?",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/Documents/Finances/bodnar-accounting/ui": {
+      "allowedTools": [
+        "Bash(bun run:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "/compact ",
+        "Try that.",
+        "run 'npm view @duckdb/node-api readme | head -n 1000'",
+        "Hmm. Still getting an error regarding \"duckdb.Database is not a constructor\" from line 139 of server.api.duckdb.ts. Please run 'curl https://www.npmjs.com/package/@duckdb/node-api' to get the full documentation for this.",
+        "I think I fixed the duckdb issue. They released a new client in last month (jan 2025) called @duckdb/node-api which is sometimes referenced as \"duckdb node-neo\" (don't know why). I did try to build the project and am getting some lucide errors, so we might need to use a different icon library or something - not sure. Oh, and would you mind updating all datatables to use the smallest font size and display the max number of records possible when paginating (like, at least 250 if possible). Thanks! See if that duckdb/node-api change I made helps.",
+        "the database itself is fine. I got another error saying \"ERROR  Failed to import DuckDB: require is not defined\". I think it may have to do with the \"es2019\" target in tsconfig.json.",
+        " ERROR  DuckDB connection test failed\n\n✔ Nuxt Nitro server built in 413 ms                                                                nitro 12:27:40 AM\n\n ERROR  Error: Transform failed with 1 error:                                                       nitro 12:27:47 AM\n/home/bodnar/Documents/Finances/bodnar-accounting/ui/server/api/duckdb.ts:8:11: ERROR: Top-level await is not available in the configured target environment (\"es2019\")",
+        "ERROR  Error initializing DuckDB: duckdb$2.Database is not a constructor",
+        "We're using bun for the node runtime and package management. Can you update that in your persistent memory?",
+        "Let's continue with fixing the duckdb integration. It doesn't have to be duckdb though - we can use a database that's supported by nuxt if necessary. Let's see if we can make duckdb work a little more, and if we keep running into errors then pause and suggest some alternatives. ",
+        "/cost ",
+        "/compact ",
+        "Hey, I've gotta compact you here cause the context is running low. Can you pause the implementation work and update the project README.md and CLAUDE.md with any relevant information and in-progress tasks and let me know when you're ready?",
+        "Error message on the import/index.vue page: 'ERROR  Internal server error: [vue/compiler-sfc] Missing semicolon. (80:1)'",
+        "This is really great! Please continue - there's a lot of paths that don't work yet. Lets make this into the world's most awesome bookkeeping, budgeting, banking, accounting software ever!",
+        "Thanks. Can you run it with 'cd ui && bun run dev'. Let's see it it works!"
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 18.29830744999998,
+      "lastAPIDuration": 3922749,
+      "lastDuration": 14788014,
+      "lastSessionId": "810ab8a2-b750-42d2-a691-5713374fbd62"
+    },
+    "/home/bodnar": {
+      "allowedTools": [],
+      "context": {},
+      "history": [
+        "I don't need secrets.",
+        "I have csv-scanner (or is it called cvs-scanner) installed, as well as trivy and trufflehog. Can you use those to perform a system-wide analysis for malicious code, packages, or activity?",
+        "use 'paru rkhunter'. but that's going to come back empty. Instead, I'd like you to inspect /usr/lib/ld-linux-x86-64.so.2 and other suspecious processes like it by analyzing their bytecode / assemblycode. can you do that for me?",
+        "You'll have to prefix that with sudo: sudo lsof",
+        "I want to scan this machine for suspicious or malicious rootkits. I'm going to run lsof, but I'd like you to help me analyze it for malicious code. Can you do that?"
+      ],
+      "dontCrawlDirectory": true,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.22169820000000004,
+      "lastAPIDuration": 90919,
+      "lastDuration": 685700,
+      "lastSessionId": "0901e53e-f4a1-43af-8295-ea5c9525222f"
+    },
+    "/home/bodnar/.config/claude": {
+      "allowedTools": [],
+      "context": {},
+      "history": [
+        "/bye",
+        "I'm going to reboot",
+        "it's 'which hardinfo2'",
+        "I installed in. Try using that now.",
+        "let's install hardinfo2",
+        "no, that's ok, I think I applied those. In the mean time, what kind of benchmarks can we run to test this?",
+        "What is the full transparent_hugepage key? is that vm.transparent_hugepage? in other words, if I was going to use 'sysctl -w [transparent_hugepage]=madvise' what would that command be? (use archlinux and systemd, not rc.local). I applied the zfs changes. Please run `sudo cat /etc/modprobe.d/zfs.conf && sudo cat /proc/cmdline && sudo lsmod` for further details. ",
+        "Can you run: sudo sysctl -A and analyze that please",
+        "You'll want to run this kind of commands with sudo.",
+        "Hey Claude. I've got archlinux running on a zfs pool installed on a nvme drive, and having extreme performance issues. It's arch linux, and I'm running Hyprland on an nvidia GTX 1080 Ti, and I suspect maybe the shader cache is performing extreme disk trashing, but I'm not sure. Perhaps I don't have my sysctl values set correctly, or I've misconfigured the hugepagez... Can you help me diagnose and optimize this machine's performance?"
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.6954579999999999,
+      "lastAPIDuration": 260018,
+      "lastDuration": 1863209,
+      "lastSessionId": "78214196-2382-46c1-98d6-ae181d86d7b9"
+    },
+    "/home/bodnar/code/AnthropicFS": {
+      "allowedTools": [
+        "Bash(chmod:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Please first analyze whole project, not just ./src. You may omit the .git and node_modules directory. but I think that file *may* already be created elsewhere. If not, go ahead and create it.",
+        "This project is incomplete and doesn't work yet. I want you to use bun for the pm / node runtime engine and finish it please.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "exampleFiles": [
+        "src/AnthropicFS.ts",
+        "generate-from-github-topics.sh",
+        "generate-examples.sh",
+        "engineering-examples.md",
+        "README.md"
+      ],
+      "exampleFilesGeneratedAt": 1740770869268,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.8359763999999996,
+      "lastAPIDuration": 433862,
+      "lastDuration": 3480595,
+      "lastSessionId": "b0994f1e-fac0-42d2-858a-4ab2a87bc5d8"
+    },
+    "/home/bodnar/code/claude-cli": {
+      "allowedTools": [
+        "Bash(bun install)",
+        "Bash(bun run:*)",
+        "Bash(chmod:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "/compact ",
+        "I've verified the ANTHROPIC_API_KEY exists and works. no need to echo it.",
+        "Please debug and resolve any errors in this project. It doesn't currently work yet, and I don't believe it's building, compiling, or runnable yet. Btw, you should use bun for all package management and javascript runtime.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.2021561500000002,
+      "lastAPIDuration": 306556,
+      "lastDuration": 4487072,
+      "lastSessionId": "9b7deff1-a45b-4c65-a3cb-d8f345b60603"
+    },
+    "/home/bodnar/code/github.com/github.com/bitx-sh/bitx-config": {
+      "allowedTools": [
+        "Bash(chmod:*)",
+        "Bash(git add:*)",
+        "Bash(git status:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Thanks! Please commit all these changes, do a git push, and then submit a descriptive pr using the 'gh' cli (already installed and authenticated.",
+        "the jsr cli is already installed.",
+        "I renamed the repo to 'bitx-sh/config' on github ('https://github.com/bitx-sh/config') and created a package registry scope on jsr.io called '@bitx/config'. Can you install jsr and configure jsr.json, and then update all references in this project? Also, would you please enable support for jspm.io.",
+        "Thanks! And can you make this so that I can run 'npx @bitx-sh/config init biome' and have it download and execute please?",
+        "Please fix the \"bun run build\" command and other scripts in package.json. Please also update that command to use bun to compile a single executable binary that doesn't require a runtime.",
+        "Please finish implementing this. It doesn't work yet.",
+        "Add a \"Tech Stack\" section, and include any packages you found used in this project.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "exampleFiles": [
+        "core.ts",
+        "cli.ts",
+        "validator.ts",
+        "base.ts",
+        "index.ts"
+      ],
+      "exampleFilesGeneratedAt": 1740773834799,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 1.6869067500000006,
+      "lastAPIDuration": 326596,
+      "lastDuration": 2736505,
+      "lastSessionId": "7368bb76-f200-49b4-84c5-af5d756cf467"
+    },
+    "/home/bodnar/code/sidebery": {
+      "allowedTools": [
+        "Bash(bun add:*)",
+        "Bash(bun run tsc:*)",
+        "Bash(bun run:*)"
+      ],
+      "context": {},
+      "history": [
+        "/compact ",
+        "/pr-comments ",
+        "Let's stop for now. I'll come back to this later. Please save your progress and notes so I can run compact.",
+        "Continue",
+        "Looks like there's a LOT of type errors and issues. Please run the appropriate scripts like 'bun run lint' to debug and address these issues. Then run 'bun run dev.run -- /usr/bin/firefox-developer-edition' to start a dev server and launch firefox.",
+        "/compact ",
+        "Go ahead and run that, but use bun as the pm and js runtime. Also, I just installed that with 'bun i @anthropic-ai/sdk'",
+        "You've got an error everywhere you're trying to import \"Logs\" from src/services/logs.ts. Doesn't look like that function is being exported or even exists. Also, please make all of the settings for Claude configurable, including the AI Model, and use @anthropic-ai/sdk instead of the rest URL.",
+        "Continue please.",
+        "/compact ",
+        "continue",
+        "/cost ",
+        "I want you to update this extension to provide a way to automatically re-organize bookmarks using an AI like anthropic's Claude. The user should be able to configure a prompt instructions somewhere in the settings page, and then be able to right-click on a bookmark folder and select \"reorganize using ai...\"",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "exampleFiles": [
+        "tabs.fg.actions.ts",
+        "sidebar.actions.ts",
+        "tabs.fg.handlers.ts",
+        "settings.ts",
+        "keybindings.actions.ts"
+      ],
+      "exampleFilesGeneratedAt": 1740785453063,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 8.811297400000008,
+      "lastAPIDuration": 1269138,
+      "lastDuration": 14234799,
+      "lastSessionId": "36aa2b47-1603-4b07-a4c6-25898b375881"
+    },
+    "/home/bodnar/code/ai-swe": {
+      "allowedTools": [
+        "Bash(cd:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Let's build it in bun, curl, jq, playwright any other tools necessary. I want you to do this and go ahead and implement a complete, runnable, production quality scraping tool for RemoteOK, builtin, and weworkremotely. When you're ready, go ahead and test your work by running the code, Iterating and resolving any bugs you run into and repeating. When it's complete, I want to be able to see a directory structure of markdown files with the full job post and any metadata or relevant fields (like links to the job listing, when it was posted, etc). Feel free to take as many liberties as you see fit to make this work well. ",
+        "Thank you. Please save that to a markdown file. Next, I'm specifically looking for contract jobs paying a fixed rate of $1000-5000 for webdev like work in languages not on my avoid list (so no azure or other microsoft technologies - typescript is fine, dotnet is not, no php, no wordpress or other cms for that matter, no ruby). Keep it simple, like vue, nuxt, or job posts that don't define a specific language, but rather describe the project and express need for someone to help architect or design or pick out the right frameworks. Can you save these requirements to a FILTER.md file. Then, can you build a cli to drive either chrome or firefox using bun as the js runtime and pm. Also, if this is something you can do - quary these sites using standard linux tools and paginate through them (or using their API if they have one), please say so and offer suggestions on more efficient ways of crawling this sites.",
+        "That's awesome! Now, based on this conversation and everything you've learned about me, let's start identifying job boards and freelance sites similar to https://builtin.com. I'm not familiar with all the different job sites out there (but I hate linkedin, so please avoid it), can you suggest 40-50 potential sites with any unique nitches, and sort / rank them by how modern they are (so avoid dice.com) as well as how likely they align with my skills and talents.",
+        "Great. Now, would you mind adding my current position at Fidelity as a Principal Software, DevOps, and Cloud Engineer since July 2023 (I still own bitbuilder, so don't take that off). I don't have the current job listing available, but could you feel out ~10 points of responsibilities (including architecting AWS solutions, IAM policies and cloudformation templates, designing and building a full AWS CDK platform, EKS, Helm, Jenkins and Jenkins Core, and also designing and building a cloud orchestration cli, plus deploying Discourse on Alpine Linux containers into Kubernetes ). ",
+        "Thanks. I don't like python, let's take it off. And let's remove ruby for now as well. same with mongodb and redis. Also go. That looks good. We'll contnue that list later.",
+        "Thanks. Let's add in these top preferred languages: Rust, JS/TS, Bash/Shell, Vue (and Nuxt), Svelte, SolidJS, alpine.js, duckdb, postgresql, sqlite, docker + linux containers + devcontainers + localstack + k8s, openapi, json-schema, a section for configuration-schema languages like Cue and Dhall, Ruby... any others you can think of?",
+        "That looks good - thank you. As for the skills, those are currently too wordy and many irrelevant. Can you strip away the actual languages / tools / technologies for now and let's add all the categories of tools and languages that might be used to perform any of this positions I've filled: SWE (full stack, api, backend, mobile, database), devops, cloud, platform, and site reliability engineering, systems architect, sysadmin, datacenter architect, cloud-native and embedded linux engineer. I used to be a Windows Sysadmin and Network Administrator as well, and got my start programming in asp classic, moved to C#, and asp.net mvc - but hate all microsoft technologies since discovering linux and the unix philosophy. ",
+        "Thanks! So first and foremost, I'm a huge linux evangelist and a strong advocate and believer of the Unix Philosophy, as well as all 17 rules defined in The Art Of Unix Programming. So all things linux, containers, kernel, and shell are top of that list. That includes sysadmin stuff, linux network engineer, site reliability engineering, platform engineering, etc. Next, I've been a full stack web application engineer since 1996, and prefer Vue's incrementally adoptable approach over react's all-inclusive, exclusive, my-wayorthe-highway overly-complicated approach by far. I discovered angularJS back when it was in beta, and was instantly sold, but they unfortunately didn't learn from their mistakes of too many naming complications and dove off the deep end of complexity when they started building the Typescript flavor that we know today. I believe it's really, really hard to write something simple. I discovered Docker 2 months after it's public beta and was instantly sold as well. In fact, that's one of my best selling points (but I don't know how to phrase this): all my life I've been uncannily good at discovering, assessing, and just intuitively telling what is innovative, efficient, game-changing technology from the competition - and that includes picking the right tool for the right job (which requires both a deep understanding of the problem you're solving, as well as a deep understanding of the tools available to solve that problem... and then most importantly what a tool, technology, or language is NOT good at (those 20% edge cases that always exist and come back to haunt you because they were the wrong tool for the job and were never designed to, say, scale horizontally, for example). Doing that requires knowing what problem a language was invented to solve in the first place, and what those trade off design decisious were that were made in the beginning. Seeing that big picture, and understanding ever layer of the end-to-end puzzle, while also having deep subject matter expertise in the low level details - that's what I thrive at and am so good at and is something I haven't found in many people. I'm exceedingly good at picking up new concepts and technologies and figuring any problem out. With enough time, I can solve anything.",
+        "Let's update it with a preferred tech stack, as well as some languages I avoid and dislike. I've been building web applications for 27 years (mid 90's), so the number of languages and tools and technologies I've learned and have built things in is extensive and far too vast to recall in it's entirity. I'm not sure how to format, phrase, and structure these, so I'm just going to list as many as I can recall at the moment in an unstructured format and I trust you to make it look beautiful and sound awesome (probably close to the top of the document). Sound good? Also, please ask questions and make suggestions about related tools, languages, and technologies you think may be both relevant and worth listing (without either of us going overboard by listing things like \"yaml\" - that's just rediculous and would make us look amateur, don't you agree?). Does this some ideal to you?",
+        "Hey Claude, let's continue. I'd like to start with having you understand me, my skill set, experience, and cognitive stack, as this analysis will help you understand what kind of jobs and careers I excel in and want to filter for, and which ones to avoid. So let's start with having you scan the ./resume and ./resume/content folders and coalesce them into a beautifully formatted github-flavored markdown file and save it danielbodnar.md. Please be careful not to leave any details out, but go ahead and omit redundant content rewrite it so that it flows better gramatically while polishing it up so that it's pleasant and inviting to read without leaving out details.",
+        "Excellent. Thank you. Switching to another device and continue from there.",
+        "I need to define the tech stack, break down all the logical pieces and components, and define the business flow and pipeline both from a technical perspective and from a business flow and model perspective. much of the already exists in my head, but I'd like your help thinking through and documenting each piece, and also want to leverage your extensive training to have you suggest, recommend, and generate lists - both technical configuration options as well as idea generation. I'm aware of your limitations and understand them thoroughly, however im extremely technical and very very good at thinking outside of the box while also having strong opinions from ovee 3 decades of expertise, so if you dont know how to do something or cant do what i ask for then please stop, inform me, and suggest a handful of alternative approaches and wait for my further instructions. If you understand, then please record this and the prior project goal in a CLAUDE.md file and we will proceed.",
+        "hey claude, I would like your help building a cutting edge freelance and engineering automation pipeline that uses firefoxes BiDi or Google Chromes browser driver protocol to automate and drive the browser through converting job boards and freelance or consulting contract posts into markdown files in this directory. But I have some questions for you before we begin, and I want you to help me plan and design this first. "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/code/ai-swe/job-scraper": {
+      "allowedTools": [
+        "Bash(./scrape.sh:*)",
+        "Bash(bun:*)",
+        "Bash(chmod:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "Thats amazing and good for tonight. Let's run it for 100 jobs for each one just to fully test and we'll be done for the day.",
+        "Let's use 'Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0' specifically. And We work remotely can be removed entirely.",
+        "I just noticed you created a user agent with my email in it. That's a really bad idea - let's use Firefox's user agent instead please.",
+        "That is simply amazing! btw, weworkremotely isn't accessible. So, many of these are for full time employment. Can you continue this amazing work and extend it to scrape other freelance / contract / project-based sites like upwork?"
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    },
+    "/home/bodnar/code/ai-swe/job-scraper/output": {
+      "allowedTools": [
+        "Bash(mkdir:*)"
+      ],
+      "context": {},
+      "history": [
+        "/compact "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 4.864174550000003,
+      "lastAPIDuration": 1044829,
+      "lastDuration": 13710282,
+      "lastSessionId": "75310481-cbcf-4d40-8f8d-044757fb4196"
+    },
+    "/home/bodnar/code/bitbuilder.io/bbctl": {
+      "allowedTools": [
+        "Bash(cargo build:*)",
+        "Bash(cargo run:*)",
+        "Bash(cargo:*)",
+        "Bash(cd:*)",
+        "Bash(chmod:*)",
+        "Bash(find:*)",
+        "Bash(git add:*)",
+        "Bash(git log:*)",
+        "Bash(ls:*)",
+        "Bash(mkdir:*)",
+        "Bash(target/release/bbctl instances:*)",
+        "Bash(target/release/bbctl:*)"
+      ],
+      "context": {},
+      "history": [
+        "great! please document everything in /home/bodnar/code/bitbuilder.io/bbctl/docs/ARCHITECTURE_DESIGN.md, including the current progress and anything WIP or outstanding. i need to compact you again and dont want to lose that again.",
+        "i want to test this cli against a dynamically provisioned systemd-vmspawn multi-tenant secure, E2E encrypted vyos-lab that uses VyOS, WireGuard, VXLAN, OSPF, L3VPN. I saved an initial design doc to the docs directory, and you can review vyos's documentation in /tmp/vyos-documentation (i think - may by /tmp/vyos-docs).",
+        "look in PLAN.md please",
+        "ls",
+        "!pwd",
+        "Hmm... do you have any log of our conversation regarding a vyos-lab built on L3VPN, VXLan, wireguard, and multi-tenant, multi-cloud overlays? was that saved under /tmp/vyos-docs?",
+        "please continue with implementing Phase 1 as defined above and in ./PLAN.md",
+        "Continue",
+        "/compact ",
+        "looks great, but lets expand on that plan and save it to a markdown file so I can compact your context before continuing.",
+        "would any of this work better (especially if / when we scale out over public clouds): \nhttps://docs.vyos.io/en/latest/configexamples/dmvpn-dualhub-dualcloud.html \nhttps://docs.vyos.io/en/latest/configexamples/inter-vrf-routing-vrf-lite.html \nhttps://docs.vyos.io/en/latest/configexamples/ha.html#configure-wireguard \nand especially this one: https://docs.vyos.io/en/latest/configexamples/autotest/L3VPN_EVPN/L3VPN_EVPN.html \n\nalso, i would prefer to use https://docs.vyos.io/en/latest/automation/cloud-init.html#nocloud or \nand / or https://docs.vyos.io/en/latest/automation/vyos-api.html \nhttps://docs.vyos.io/en/latest/configuration/service/https.html#http-api\n(please use curl to fetch all of those or just clone the github repo). \n",
+        "are those systemd network files host level or vyos configs? and those vyos instances should have an internal wireguard underlay or overlay management network, in addition to an isolated overlay network for each tenant. ",
+        "Lets create a fully virtualized vyos lab on vms using systemd-vmspawn. we need several layers here, and should be configuring the host instances of vyos via a vyos config file or with cloud-init / cloud-config.",
+        "not sure thats necessary. I want to build an authenticated rpc (whatever the rust equivilant of trpc.io is, but we need to have json-schemas and openapi or zod-based schemas as well) backend api that will receive the client provisioning request. part of that will also require deploying a \"builder\" instance with a wireguard overlay which this cli can use to push code into and the build containers on the tenant's new vnet (which will use wireguard - fly.io uses wormhole for this). you may use ssh in lue of an already provisioned api and tenant auth accounts for now, but ssh shouldnt be configured for cargo unless theres a good reason.",
+        "i have a baremetal vyos instance running in a colo datacenter. please test this against 'ssh vyos@5.254.54.3 -p 60022' and fix / add any necessary improvements as you see fit.",
+        "/compact ",
+        "wonderful! please update CLAUDE.md with latest notee and let me know when you are ready to be compacted",
+        "wonderful! please commit and push (add flyctl to gitignore first)",
+        "great! please run it and test against a local systemd-vmspawn or mkosi image.",
+        "Hey claude, I want to build an all-in-one single-file cli for provisioning multi-tenant infrastructure on baremetal servers running vyos v1.5 or proxmox, similar to fly.io and flyctl (which ive cloned down to this repo), with the ability to scale out over public clouds with a secure e2e encryption layer. The public cloud overlay will come later, but id like you to replicate the flyctl features in rust for my BitBuilder Cloud business.",
+        "/init "
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 8.689510700000001,
+      "lastAPIDuration": 1780805,
+      "lastDuration": 9677720,
+      "lastSessionId": "a1f7f636-1e6a-49d5-a050-0b22ef538093"
+    },
+    "/home/bodnar/code/bitbuilder.io/bbctl/tests/containers": {
+      "allowedTools": [
+        "Bash(cd:*)",
+        "Bash(ls:*)",
+        "Bash(podman build:*)",
+        "Bash(sudo systemd-nspawn:*)"
+      ],
+      "context": {},
+      "history": [
+        "use podman instead of docker"
+      ],
+      "dontCrawlDirectory": false,
+      "enableArchitectTool": false,
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "approvedMcprcServers": [],
+      "rejectedMcprcServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "hasCompletedProjectOnboarding": true
+    }
+  },
+  "hasAcknowledgedCostThreshold": true,
+  "lastReleaseNotesSeen": "0.2.27"
+}
