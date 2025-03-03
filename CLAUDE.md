@@ -8,7 +8,6 @@ cargo build
 # Run
 cargo run
 
-<<<<<<< HEAD
 # Run with specific command
 cargo run -- [command] [subcommand] [args]
 
@@ -38,7 +37,7 @@ cargo run -- volumes create my-volume --size 10 --region nyc
 
 # Create network
 cargo run -- networks create my-network --cidr 192.168.1.0/24
-=======
+
 # Build optimized release version
 cargo build --release
 
@@ -53,7 +52,6 @@ cargo test test_name
 
 # Run specific test with output
 cargo test test_name -- --nocapture
->>>>>>> d4f44c0 (api and vyos lab)
 ```
 
 ## Code Style Guidelines
@@ -63,7 +61,7 @@ cargo test test_name -- --nocapture
   - Use snake_case for variables, functions, and modules
   - Use PascalCase for structs, enums, and traits
 - **Error Handling**: Use `AppResult<T>` for functions that can fail
-<<<<<<< HEAD
+
 - **State Management**: Follow the App/AppMode pattern for managing application state
 - **UI Components**: Use Ratatui components (List, Table, Paragraph) with consistent styling
 - **Provider APIs**: VyOS and Proxmox providers should implement common traits
@@ -77,11 +75,11 @@ cargo test test_name -- --nocapture
 - **src/main.rs**: CLI command processing using Clap
 
 Future work includes integrating with actual VyOS and Proxmox APIs and adding E2E encryption for public cloud integration.
-=======
+
 - **Imports**: Group imports by crate, with std first, then external, then internal
 - **Document**: Use three slashes (`///`) for public API documentation
 - **Async**: Use tokio runtime with futures for async operations
 
 ## Project Structure
 The app is organized following a typical TUI pattern with app state, event handling, and UI rendering modules. Follow existing patterns when adding new functionality.
->>>>>>> d4f44c0 (api and vyos lab)
+
