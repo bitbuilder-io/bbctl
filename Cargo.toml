@@ -30,14 +30,11 @@ env_logger = "0.10"
 indicatif = "0.17"
 openssl = { version = "0.10", features = ["vendored"] }
 
-<<<<<<< HEAD
-=======
 # API & RPC will be added later
 
 # Networking & Security
 uuid = { version = "1.4", features = ["v4", "serde"] }
 
->>>>>>> d4f44c0 (api and vyos lab)
 [dev-dependencies]
 assert_cmd = "2.0"
 predicates = "3.0"
