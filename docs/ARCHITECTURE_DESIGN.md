@@ -84,6 +84,26 @@ The bbctl architecture consists of multiple layers:
 
 - Local Settings: User preferences and defaults
 - Credentials: Secure storage for authentication information
+   - CLI Commands: Handles command-line arguments and options
+   - Terminal UI (TUI): Interactive dashboard for visualization and management
+
+2. **Service Layer**
+   - Provider Services: Manages infrastructure providers
+   - Resource Services: Abstracts operations on instances, volumes, networks
+
+3. **API Layer**
+   - VyOS API: Client for VyOS HTTP API and SSH interfaces
+   - Proxmox API: Client for Proxmox REST API
+
+4. **Data Model Layer**
+   - Instances: VM/container representations
+   - Volumes: Storage abstractions
+   - Networks: Network and connectivity abstractions
+   - Providers: Provider metadata and capabilities
+
+5. **Configuration Layer**
+   - Local Settings: User preferences and defaults
+   - Credentials: Secure storage for authentication information
 
 ## Implementation Details
 
@@ -143,6 +163,14 @@ pub trait Provider {
     /// Check connection status
     fn check_connection(&self) -> Result<bool>;
 
+```rust
+pub trait Provider {
+    /// Connect to the provider
+    fn connect(&self) -> Result<()>;
+    
+    /// Check connection status
+    fn check_connection(&self) -> Result<bool>;
+    
     /// Get provider name
     fn name(&self) -> &str;
 }
@@ -155,6 +183,19 @@ The VyOS API client supports: - SSH-based configuration management - HTTP API in
 #### Proxmox API Client
 
 The Proxmox API client supports: - REST API integration for VM management - Resource allocation and monitoring - Template management for deployments - Both token and username/password authentication
+The VyOS API client supports:
+- SSH-based configuration management
+- HTTP API integration for automated provisioning
+- WireGuard key generation and management
+- L3VPN and VXLAN configuration
+
+#### Proxmox API Client
+
+The Proxmox API client supports:
+- REST API integration for VM management
+- Resource allocation and monitoring
+- Template management for deployments
+- Both token and username/password authentication
 
 ### 3. Data Models
 
@@ -163,6 +204,7 @@ The Proxmox API client supports: - REST API integration for VM management - Reso
 Represents virtual machines and containers:
 
 ```bash
+```rust
 pub struct Instance {
     pub id: Uuid,
     pub name: String,
@@ -183,6 +225,7 @@ pub struct Instance {
 Represents storage volumes:
 
 ```bash
+```rust
 pub struct Volume {
     pub id: Uuid,
     pub name: String,
@@ -205,6 +248,7 @@ pub struct Volume {
 Represents virtual networks:
 
 ```bash
+```rust
 pub struct Network {
     pub id: Uuid,
     pub name: String,
@@ -232,6 +276,7 @@ pub struct Network {
 Manages infrastructure providers, their credentials, and connections:
 
 ```bash
+```rust
 pub struct ProviderService {
     providers: Providers,
     credentials: Credentials,
@@ -243,6 +288,7 @@ pub struct ProviderService {
 Handles VM/container lifecycle operations:
 
 ```bash
+```rust
 pub struct InstanceService {
     storage: InstanceStorage,
     provider_service: ProviderService,
@@ -368,6 +414,37 @@ The test environment is managed by a set of scripts:
 - ✅ VyOS lab setup scripts
 - ✅ L3VPN and EVPN configuration
 - ✅ WireGuard secure management
+   - ✅ Provider interface trait
+   - ✅ VyOS API client
+   - ✅ Proxmox API client
+
+2. **Data Models**
+   - ✅ Instance model
+   - ✅ Volume model
+   - ✅ Network model
+   - ✅ Provider model
+
+3. **Configuration Management**
+   - ✅ Settings model and storage
+   - ✅ Provider configuration
+   - ✅ Credential management
+
+4. **Basic Services**
+   - ✅ Provider service
+   - ✅ Instance service (partial)
+
+5. **CLI Interface**
+   - ✅ Basic command structure
+   - ✅ VyOS connectivity testing
+
+6. **Terminal UI**
+   - ✅ Basic TUI framework
+   - ✅ Navigation and layout
+
+7. **Test Environment**
+   - ✅ VyOS lab setup scripts
+   - ✅ L3VPN and EVPN configuration
+   - ✅ WireGuard secure management
 
 ### Work in Progress
 
@@ -386,6 +463,17 @@ The test environment is managed by a set of scripts:
 
 - 🔄 Real-time data updates
 - 🔄 Resource management wizards
+   - 🔄 Volume service implementation
+   - 🔄 Network service implementation
+   - 🔄 API integration for resources
+
+2. **CLI Interface**
+   - 🔄 Complete command implementations
+   - 🔄 Error handling and user feedback
+
+3. **Terminal UI**
+   - 🔄 Real-time data updates
+   - 🔄 Resource management wizards
 
 ### Planned Work
 
@@ -413,6 +501,25 @@ The test environment is managed by a set of scripts:
 - 📝 Public cloud integration
 - 📝 CI/CD workflows
 - 📝 Integration with external tools
+   - 📝 Persistence layer for local state
+   - 📝 Synchronization with remote state
+   - 📝 Event system for notifications
+
+2. **Security Features**
+   - 📝 Token rotation
+   - 📝 Credential encryption
+   - 📝 Secure remote execution
+
+3. **Advanced Features**
+   - 📝 Multi-tenant management
+   - 📝 Role-based access control
+   - 📝 Audit logging
+   - 📝 Resource quotas and limits
+
+4. **Integration**
+   - 📝 Public cloud integration
+   - 📝 CI/CD workflows
+   - 📝 Integration with external tools
 
 ## Implementation Roadmap
 
@@ -486,6 +593,9 @@ The test environment is managed by a set of scripts:
 - **Naming**:
 - Use snake_case for variables, functions, and modules
 - Use PascalCase for structs, enums, and traits
+- **Naming**: 
+  - Use snake_case for variables, functions, and modules
+  - Use PascalCase for structs, enums, and traits
 - **Error Handling**: Use `AppResult<T>` for functions that can fail
 - **Imports**: Group imports by crate, with std first, then external, then internal
 - **Document**: Use three slashes (`///`) for public API documentation
@@ -504,4 +614,5 @@ The bbctl project is a comprehensive tool for managing multi-tenant infrastructu
 
 Phase 1 of the implementation has been completed, establishing the core infrastructure, API clients, data models, and test environment. Ongoing work focuses on completing the service layer implementations and enhancing the CLI and TUI interfaces.
 
+The project follows a clear roadmap with well-defined phases, targeting a complete infrastructure management solution that supports secure multi-tenancy and seamless operations across different providers.
 The project follows a clear roadmap with well-defined phases, targeting a complete infrastructure management solution that supports secure multi-tenancy and seamless operations across different providers.

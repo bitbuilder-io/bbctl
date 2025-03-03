@@ -49,6 +49,7 @@ The lab will consist of:
 
 - **Network Configuration**:
   - Management network (172.27.0.0/16)
+  - Management network (172.27.0.0/16) 
   - Backbone network (172.16.0.0/16)
   - Public IP space simulation (5.254.54.0/26)
   - Tenant space (100.64.0.0/16)
@@ -502,4 +503,5 @@ The following methods can be used to verify and troubleshoot the test environmen
 2. Implement automated testing with the lab
 3. Add CI/CD pipeline for continuous testing
 4. Extend the lab with additional provider types (Proxmox)
+5. Implement high availability scenarios
 5. Implement high availability scenarios

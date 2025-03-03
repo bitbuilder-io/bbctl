@@ -146,3 +146,4 @@ For more details on the technologies used in this lab, refer to:
 - [VyOS L3VPN/EVPN Documentation](https://docs.vyos.io/en/latest/configexamples/autotest/L3VPN_EVPN/L3VPN_EVPN.html)
 - [VyOS WireGuard Documentation](https://docs.vyos.io/en/latest/configexamples/autotest/Wireguard/Wireguard.html)
 - [VyOS VRF Documentation](https://docs.vyos.io/en/latest/configuration/vrf/index.html)
+- [VyOS VRF Documentation](https://docs.vyos.io/en/latest/configuration/vrf/index.html)
