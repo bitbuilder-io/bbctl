@@ -1,0 +1,124 @@
+#!/bin/bash
+set -e
+
+# Create vyos user with sudo access
+useradd -m -s /bin/bash vyos
+echo "vyos:vyos" | chpasswd
+echo "vyos ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/vyos
+chmod 0440 /etc/sudoers.d/vyos
+
+# Setup SSH
+mkdir -p /home/vyos/.ssh
+chmod 700 /home/vyos/.ssh
+touch /home/vyos/.ssh/authorized_keys
+chmod 600 /home/vyos/.ssh/authorized_keys
+chown -R vyos:vyos /home/vyos/.ssh
+
+# Configure cloud-init
+cat > /etc/cloud/cloud.cfg << 'EOF'
+datasource_list: [ NoCloud, ConfigDrive, None ]
+disable_root: false
+preserve_hostname: false
+manage_etc_hosts: true
+ssh_pwauth: true
+
+users:
+  - name: vyos
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    shell: /bin/bash
+
+cloud_init_modules:
+ - seed_random
+ - bootcmd
+ - write_files
+ - growpart
+ - resizefs
+ - set_hostname
+ - update_hostname
+ - update_etc_hosts
+ - ca_certs
+ - users_groups
+ - ssh
+
+cloud_config_modules:
+ - runcmd
+ - ssh_import_id
+
+cloud_final_modules:
+ - scripts_user
+ - ssh_authkey_fingerprints
+ - keys_to_console
+ - final_message
+EOF
+
+# Configure systemd to enable network interfaces
+mkdir -p /etc/systemd/network
+cat > /etc/systemd/network/10-eth0.network << 'EOF'
+[Match]
+Name=eth0
+
+[Network]
+DHCP=yes
+EOF
+
+# Enable necessary services
+systemctl enable systemd-networkd
+systemctl enable systemd-resolved
+systemctl enable ssh
+systemctl enable cloud-init
+
+# Setup frr configuration directory
+mkdir -p /etc/frr
+touch /etc/frr/daemons
+touch /etc/frr/frr.conf
+chmod 640 /etc/frr/frr.conf
+chown -R frr:frr /etc/frr
+
+# Create a simple first-boot script that will run VyOS-like features
+cat > /etc/systemd/system/vyos-setup.service << 'EOF'
+[Unit]
+Description=Setup VyOS-like environment
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/vyos-setup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /usr/local/bin/vyos-setup.sh << 'EOF'
+#!/bin/bash
+# Enable IP forwarding
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# Setup FRR daemons
+sed -i 's/^bgpd=no/bgpd=yes/' /etc/frr/daemons
+sed -i 's/^ospfd=no/ospfd=yes/' /etc/frr/daemons
+
+# Start FRR
+systemctl restart frr
+
+# Create VyOS-like command environment
+ln -sf /usr/bin/vtysh /usr/local/bin/show
+EOF
+
+chmod +x /usr/local/bin/vyos-setup.sh
+systemctl enable vyos-setup.service
+
+# Make the system more VyOS-like with appropriate message of the day
+cat > /etc/motd << 'EOF'
+Welcome to VyOS Lab!
+
+This is a simulated VyOS environment running in a container.
+Use 'sudo vtysh' to access the FRR CLI.
+
+EOF
+
+# Create a symlink for systemd-resolved
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+echo "Setup complete!"

@@ -1,0 +1,50 @@
+#cloud-config
+hostname: router3
+fqdn: router3.local
+
+# Configure network interfaces
+write_files:
+  - path: /etc/systemd/network/20-eth1.network
+    content: |
+      [Match]
+      Name=eth1
+      
+      [Network]
+      Address=10.0.1.2/24
+  
+  - path: /etc/systemd/network/30-eth2.network
+    content: |
+      [Match]
+      Name=eth2
+      
+      [Network]
+      Address=10.0.3.2/24
+
+  - path: /etc/systemd/network/40-eth3.network
+    content: |
+      [Match]
+      Name=eth3
+      
+      [Network]
+      Address=192.168.100.1/24
+      # This network simulates internet access
+
+  - path: /etc/frr/frr.conf
+    content: |
+      hostname router3
+      log file /var/log/frr/frr.log
+      !
+      router ospf
+       network 10.0.0.0/8 area 0
+       default-information originate always
+      !
+      ip route 0.0.0.0/0 192.168.100.254
+      !
+      line vty
+      !
+
+runcmd:
+  - systemctl restart systemd-networkd
+  - systemctl restart frr
+  - iptables -t nat -A POSTROUTING -o eth3 -s 10.0.0.0/8 -j MASQUERADE
+  - echo "Router 3 setup complete"
