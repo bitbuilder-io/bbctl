@@ -135,7 +135,7 @@ bbctl/
 
 The `Provider` trait defines the common interface for all infrastructure providers:
 
-``` rust
+```rust
 pub trait Provider {
     /// Connect to the provider
     fn connect(&self) -> Result<()>;
@@ -162,7 +162,7 @@ The Proxmox API client supports: - REST API integration for VM management - Reso
 
 Represents virtual machines and containers:
 
-``` rust
+```rust
 pub struct Instance {
     pub id: Uuid,
     pub name: String,
@@ -182,7 +182,7 @@ pub struct Instance {
 
 Represents storage volumes:
 
-``` rust
+```rust
 pub struct Volume {
     pub id: Uuid,
     pub name: String,
@@ -204,7 +204,7 @@ pub struct Volume {
 
 Represents virtual networks:
 
-``` rust
+```rust
 pub struct Network {
     pub id: Uuid,
     pub name: String,
@@ -231,7 +231,7 @@ pub struct Network {
 
 Manages infrastructure providers, their credentials, and connections:
 
-``` rust
+```rust
 pub struct ProviderService {
     providers: Providers,
     credentials: Credentials,
@@ -242,7 +242,7 @@ pub struct ProviderService {
 
 Handles VM/container lifecycle operations:
 
-``` rust
+```rust
 pub struct InstanceService {
     storage: InstanceStorage,
     provider_service: ProviderService,
