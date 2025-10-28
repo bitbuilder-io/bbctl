@@ -51,8 +51,6 @@ enum Commands {
         #[command(subcommand)]
         action: NetworksCommands,
     },
-<<<<<<< HEAD
-=======
     /// Test connectivity to a VyOS router
     TestVyOS {
         /// VyOS host to connect to
@@ -79,7 +77,6 @@ enum Commands {
         #[arg(long)]
         api_key: Option<String>,
     },
->>>>>>> d4f44c0 (api and vyos lab)
 }
 
 #[derive(Subcommand)]
@@ -182,10 +179,6 @@ enum NetworksCommands {
     },
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d4f44c0 (api and vyos lab)
 fn cli_handler(cli: Cli) -> AppResult<()> {
     match cli.command {
         Some(Commands::Init { name }) => {
@@ -293,14 +286,11 @@ fn cli_handler(cli: Cli) -> AppResult<()> {
                 }
             }
         }
-<<<<<<< HEAD
-=======
         Some(Commands::TestVyOS { host, port, username }) => {
             // This would block, so we need to call it outside the CLI handler
             // Will be implemented in main()
             return Err("Use tokio runtime to test VyOS connectivity".into());
         }
->>>>>>> d4f44c0 (api and vyos lab)
         None => {
             // If no subcommand is provided, we'll exit and let the main function
             // launch the TUI mode
@@ -345,23 +335,17 @@ async fn main() -> AppResult<()> {
     // Setup logging
     env_logger::init();
     
-<<<<<<< HEAD
-=======
     // Initialize configuration
     if let Err(e) = crate::config::init_config() {
         eprintln!("Warning: Failed to initialize configuration: {}", e);
         eprintln!("Some functionality may be limited.");
     }
     
->>>>>>> d4f44c0 (api and vyos lab)
     // Parse command line arguments
     let cli = Cli::parse();
     
     // If we have command-line arguments, handle them
     if env::args().len() > 1 {
-<<<<<<< HEAD
-        cli_handler(cli)
-=======
         // Handle special async commands first
         match &cli.command {
             Some(Commands::TestVyOS { host, port, username, password, key_path, api_key }) => {
@@ -457,7 +441,6 @@ async fn main() -> AppResult<()> {
         }
         
         Ok(())
->>>>>>> d4f44c0 (api and vyos lab)
     } else {
         // Otherwise, launch the TUI
         run_tui().await

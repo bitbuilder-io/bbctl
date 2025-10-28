@@ -1,0 +1,40 @@
+# BitBuilder Cloud CLI Bun Configuration
+
+# General settings
+[install]
+# Prefer exact versions by default for predictable builds
+exact = true
+# Don't hoist dependencies to reduce the chance of dependency conflicts
+hoist = false
+
+# Runtime settings
+[runtime]
+# Use ES modules
+module = "module"
+
+# Test settings
+[test]
+# Set test timeout to 10 seconds
+timeout = 10000
+# Include the source directory in tests
+include = ["./src/**/*.test.ts", "./src/**/*.spec.ts"]
+
+# Build settings
+[build]
+# Entry point for the build
+entry = "./src/index.ts"
+# Target for the build
+target = "node"
+# Output directory
+outdir = "./dist"
+# Define environment variables for production builds
+env = { NODE_ENV = "production" }
+
+# Development settings
+[dev]
+# Hot reload for development
+hot = true
+# Open the browser when starting dev server (for UI components, if added later)
+open = false
+# Port for dev server
+port = 3000
