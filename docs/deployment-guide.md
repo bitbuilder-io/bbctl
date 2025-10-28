@@ -8,21 +8,21 @@ This guide provides comprehensive instructions for deploying applications and in
 
 BitBuilder Cloud CLI is designed around a consistent infrastructure-as-code approach to deployments:
 
--   **Resources**: The building blocks of your infrastructure (instances, volumes, networks)
--   **Templates**: Reusable configurations for deployment
--   **Environments**: Distinct deployment targets (development, staging, production)
--   **Workspaces**: Isolated deployment contexts for multi-tenant usage
+- **Resources**: The building blocks of your infrastructure (instances, volumes, networks)
+- **Templates**: Reusable configurations for deployment
+- **Environments**: Distinct deployment targets (development, staging, production)
+- **Workspaces**: Isolated deployment contexts for multi-tenant usage
 
 ### Deployment Workflow
 
 The typical deployment workflow consists of:
 
-1.  **Define**: Create deployment configuration and resources
-2.  **Validate**: Verify configuration and check dependencies
-3.  **Deploy**: Provision resources and deploy applications
-4.  **Configure**: Apply post-deployment configuration
-5.  **Verify**: Confirm successful deployment
-6.  **Monitor**: Track performance and health
+1. **Define**: Create deployment configuration and resources
+2. **Validate**: Verify configuration and check dependencies
+3. **Deploy**: Provision resources and deploy applications
+4. **Configure**: Apply post-deployment configuration
+5. **Verify**: Confirm successful deployment
+6. **Monitor**: Track performance and health
 
 ## Deployment Configuration
 
@@ -77,15 +77,15 @@ volumes.data.size = 500
 
 ### Creating a Deployment
 
-1.  Initialize a new project:
+1. Initialize a new project:
 
 ```bash
 bbctl init --name my-web-app
 ```
 
-2.  Create a `deploy.toml` file in the project directory
+2. Create a `deploy.toml` file in the project directory
 
-3.  Deploy the application:
+3. Deploy the application:
 
 ```bash
 bbctl deploy
@@ -153,7 +153,7 @@ Implement blue-green deployment strategy:
 ```toml
 [deployment.strategy]
 type = "blue-green"
-traffic_shift = "instant"  # or "gradual"
+traffic_shift = "instant" # or "gradual"
 verification_period = "2m"
 rollback_on_failure = true
 ```
@@ -164,13 +164,13 @@ rollback_on_failure = true
 
 For Terraform integration:
 
-1.  Install the bbctl Terraform provider:
+1. Install the bbctl Terraform provider:
 
 ```bash
 terraform init -plugin-dir=~/.terraform.d/plugins
 ```
 
-2.  Create a Terraform configuration using bbctl resources:
+2. Create a Terraform configuration using bbctl resources:
 
 ```hcl
 provider "bbctl" {
@@ -186,7 +186,7 @@ resource "bbctl_instance" "web" {
 }
 ```
 
-3.  Apply the Terraform configuration:
+3. Apply the Terraform configuration:
 
 ```bash
 terraform apply
@@ -197,19 +197,19 @@ terraform apply
 For Pulumi integration:
 
 ```typescript
-import * as bbctl from "@pulumi/bbctl";
+import * as bbctl from '@pulumi/bbctl';
 
-const network = new bbctl.Network("app-network", {
-    cidr: "10.0.0.0/24",
-    provider: "vyos-router",
-    region: "nyc",
+const network = new bbctl.Network('app-network', {
+  cidr: '10.0.0.0/24',
+  provider: 'vyos-router',
+  region: 'nyc',
 });
 
-const instance = new bbctl.Instance("web-server", {
-    provider: "vyos-router",
-    region: "nyc",
-    size: "standard",
-    networks: [network.id],
+const instance = new bbctl.Instance('web-server', {
+  provider: 'vyos-router',
+  region: 'nyc',
+  size: 'standard',
+  networks: [network.id],
 });
 
 export const instanceIp = instance.publicIp;
@@ -313,7 +313,7 @@ Deploy across multiple regions:
 ```toml
 [regions]
 enabled = ["nyc", "sfo", "fra"]
-strategy = "all"  # or "weighted"
+strategy = "all" # or "weighted"
 
 [regions.nyc]
 weight = 60
@@ -338,7 +338,7 @@ zones = ["a", "b", "c"]
 distribution = "spread"
 
 [instances]
-count = 6  # 2 instances per zone
+count = 6 # 2 instances per zone
 
 [database]
 replicas = 3
@@ -380,7 +380,7 @@ fail_on_error = true
 enabled = true
 endpoints = [
   { url = "/health", expect_status = 200 },
-  { url = "/api/status", expect_contains = "running" }
+  { url = "/api/status", expect_contains = "running" },
 ]
 timeout = "30s"
 retries = 3
@@ -443,18 +443,23 @@ bbctl deployments rollback --previous
 
 ### Common Issues and Solutions
 
-1.  **Resource Provisioning Failures**
-  -   Check provider connectivity
-  -   Verify resource limits and quotas
-  -   Review error logs with `bbctl logs get d-01234567`
-2.  **Network Configuration Issues**
-  -   Verify CIDR blocks don't overlap
-  -   Ensure security groups allow required traffic
-  -   Check DNS resolution with `bbctl network test-dns net-01234567`
-3.  **Application Deployment Failures**
-  -   Validate application configuration
-  -   Check for dependency issues
-  -   Examine application logs with `bbctl instances logs i-01234567`
+1. **Resource Provisioning Failures**
+
+- Check provider connectivity
+- Verify resource limits and quotas
+- Review error logs with `bbctl logs get d-01234567`
+
+2. **Network Configuration Issues**
+
+- Verify CIDR blocks don't overlap
+- Ensure security groups allow required traffic
+- Check DNS resolution with `bbctl network test-dns net-01234567`
+
+3. **Application Deployment Failures**
+
+- Validate application configuration
+- Check for dependency issues
+- Examine application logs with `bbctl instances logs i-01234567`
 
 ### Deployment Logs
 
@@ -477,10 +482,10 @@ BitBuilder Cloud CLI provides a powerful platform for deploying and managing inf
 
 ## Additional Resources
 
--   [User Guide] - Comprehensive usage instructions
--   [Command Reference] - Detailed command documentation
--   [Configuration Guide] - Configuration file reference
--   [Architecture Design] - System architecture details
+- [User Guide] - Comprehensive usage instructions
+- [Command Reference] - Detailed command documentation
+- [Configuration Guide] - Configuration file reference
+- [Architecture Design] - System architecture details
 
 [User Guide]: user-guide.md
 [Command Reference]: command-reference.md

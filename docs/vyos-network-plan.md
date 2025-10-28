@@ -74,7 +74,7 @@ graph LR
 
 The physical infrastructure consists of:
 
-- **Datacenter 1**: 
+- **Datacenter 1**:
   - Public Block: 5.254.54.0/26 (62 usable IPs)
   - Networking: 4x Intel X710 (10G) + 2x Mellanox CX4 (25G)
   - Management: IPMI via dedicated 1GbE NIC
@@ -95,6 +95,7 @@ Each bare metal server runs:
 4. systemd-vmspawn for VM deployment
 
 **NIC Configuration**:
+
 ```bash
 #!/bin/bash
 
@@ -277,15 +278,15 @@ Automate tenant onboarding and provisioning with cloud-init:
 vyos_config_commands:
   # Create Tenant VRF
   - set vrf name ${TENANT_VRF} table '${VRF_TABLE_ID}'
-  
+
   # Configure VXLAN for Tenant
   - set interfaces vxlan vxlan${VNI} vni '${VNI}'
   - set interfaces vxlan vxlan${VNI} vrf '${TENANT_VRF}'
-  
+
   # Configure BGP for Tenant
   - set vrf name ${TENANT_VRF} protocols bgp address-family ipv4-unicast route-target vpn export '65000:${TENANT_ID}'
   - set vrf name ${TENANT_VRF} protocols bgp address-family ipv4-unicast route-target vpn import '65000:${TENANT_ID}'
-  
+
   # Configure WireGuard for Tenant
   - set interfaces wireguard wg${TENANT_ID} address '100.64.${TENANT_ID}.1/24'
   - set interfaces wireguard wg${TENANT_ID} vrf '${TENANT_VRF}'
@@ -1025,7 +1026,7 @@ tenant_policies:
         destination:
           type: service
           service: web-servers
-      
+
       - id: 2
         description: "Allow Database Access"
         action: accept
@@ -1037,7 +1038,7 @@ tenant_policies:
         destination:
           type: service
           service: database-servers
-          
+
       - id: 3
         description: "Block External SSH"
         action: drop
@@ -1047,13 +1048,13 @@ tenant_policies:
           type: external
         destination:
           type: any
-          
+
     services:
       - id: web-servers
         addresses:
           - 100.64.1.10/32
           - 100.64.1.11/32
-          
+
       - id: database-servers
         addresses:
           - 100.64.1.20/32
@@ -1138,7 +1139,7 @@ monitoring:
       high_resolution: 24h
       medium_resolution: 7d
       low_resolution: 90d
-      
+
   metrics:
     - name: interface_utilization
       description: "Network interface utilization percentage"
@@ -1151,7 +1152,7 @@ monitoring:
         warning: 70
         critical: 85
         duration: 5m
-        
+
     - name: bgp_session_status
       description: "BGP session state"
       type: state
@@ -1163,7 +1164,7 @@ monitoring:
         warning: "Connect"
         critical: "Idle"
         duration: 2m
-        
+
     - name: memory_utilization
       description: "System memory utilization"
       type: gauge
@@ -1175,7 +1176,7 @@ monitoring:
         warning: 80
         critical: 90
         duration: 5m
-        
+
   alerting:
     routes:
       - name: critical
@@ -1184,22 +1185,22 @@ monitoring:
             address: network-ops@example.com
           - type: pagerduty
             service_key: 1234567890abcdef
-            
+
       - name: warning
         targets:
           - type: email
             address: monitoring@example.com
           - type: slack
             webhook: https://hooks.slack.com/services/XXX/YYY/ZZZ
-            
+
   dashboards:
     - name: Network Overview
       panels:
         - title: Interface Utilization
           type: graph
-          metrics: 
+          metrics:
             - interface_utilization
-          
+
         - title: BGP Session Status
           type: state
           metrics:

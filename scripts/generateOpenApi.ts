@@ -1,14 +1,14 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { openApiSchema } from "../schema";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { openApiSchema } from '../schema';
 
 // Get current file directory with ESM compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const OUTPUT_DIR = join(__dirname, "../api-docs");
-const OUTPUT_FILE = join(OUTPUT_DIR, "openapi.json");
+const OUTPUT_DIR = join(__dirname, '../api-docs');
+const OUTPUT_FILE = join(OUTPUT_DIR, 'openapi.json');
 
 // Create directory if it doesn't exist
 if (!existsSync(OUTPUT_DIR)) {
@@ -18,15 +18,15 @@ if (!existsSync(OUTPUT_DIR)) {
 
 // Write OpenAPI schema to file
 try {
-  writeFileSync(OUTPUT_FILE, JSON.stringify(openApiSchema, null, 2), "utf8");
+  writeFileSync(OUTPUT_FILE, JSON.stringify(openApiSchema, null, 2), 'utf8');
   console.log(`Successfully generated OpenAPI schema: ${OUTPUT_FILE}`);
 } catch (error) {
-  console.error("Error generating OpenAPI schema:", error);
+  console.error('Error generating OpenAPI schema:', error);
   process.exit(1);
 }
 
 // Generate a simple HTML to view the schema with Swagger UI
-const HTML_FILE = join(OUTPUT_DIR, "index.html");
+const HTML_FILE = join(OUTPUT_DIR, 'index.html');
 const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +96,7 @@ const htmlContent = `
 `;
 
 try {
-  writeFileSync(HTML_FILE, htmlContent, "utf8");
+  writeFileSync(HTML_FILE, htmlContent, 'utf8');
   console.log(`Successfully generated Swagger UI HTML: ${HTML_FILE}`);
   console.log(`Open ${HTML_FILE} in your browser to view the API documentation`);
   console.log(`Documentation links have been added to the UI:`);
@@ -104,5 +104,5 @@ try {
   console.log(`- Rust Integration Guide: docs/rust-integration.md`);
   console.log(`- Architecture Design: docs/ARCHITECTURE_DESIGN.md`);
 } catch (error) {
-  console.error("Error generating Swagger UI HTML:", error);
+  console.error('Error generating Swagger UI HTML:', error);
 }

@@ -4,12 +4,12 @@ BitBuilder Cloud CLI is an all-in-one tool for provisioning and managing multi-t
 
 ## Features
 
--   **Manage VMs**: Create, configure, and manage virtual machines across your infrastructure
--   **Storage Management**: Provision and attach volumes to your applications
--   **Network Configuration**: Set up and manage virtual networks with secure connectivity
--   **Multi-provider Support**: Works with VyOS v1.5 and Proxmox
--   **Bare Metal Efficiency**: Optimized for bare metal server deployment
--   **Future Public Cloud Integration**: Scale out to public clouds with E2E encryption (coming soon)
+- **Manage VMs**: Create, configure, and manage virtual machines across your infrastructure
+- **Storage Management**: Provision and attach volumes to your applications
+- **Network Configuration**: Set up and manage virtual networks with secure connectivity
+- **Multi-provider Support**: Works with VyOS v1.5 and Proxmox
+- **Bare Metal Efficiency**: Optimized for bare metal server deployment
+- **Future Public Cloud Integration**: Scale out to public clouds with E2E encryption (coming soon)
 
 ## Installation
 
@@ -95,10 +95,10 @@ For more information about the test lab, see [tests/vyos-lab/README.md] or the [
 
 ### User Documentation
 
--   [User Guide] - Complete guide for using bbctl
--   [Command Reference] - Detailed documentation of all commands
--   [Configuration Guide] - How to configure bbctl
--   [Deployment Guide] - Guide for deploying applications
+- [User Guide] - Complete guide for using bbctl
+- [Command Reference] - Detailed documentation of all commands
+- [Configuration Guide] - How to configure bbctl
+- [Deployment Guide] - Guide for deploying applications
 
 [User Guide]: docs/user-guide.md
 [Command Reference]: docs/command-reference.md
@@ -107,9 +107,9 @@ For more information about the test lab, see [tests/vyos-lab/README.md] or the [
 
 ### Technical Documentation
 
--   [Architecture Design] - Technical architecture of the bbctl project
--   [API Documentation] - API schema and OpenAPI documentation
--   [Rust Integration] - Guide for maintaining Rust and TypeScript compatibility
+- [Architecture Design] - Technical architecture of the bbctl project
+- [API Documentation] - API schema and OpenAPI documentation
+- [Rust Integration] - Guide for maintaining Rust and TypeScript compatibility
 
 [Architecture Design]: docs/ARCHITECTURE_DESIGN.md
 [API Documentation]: docs/api-readme.md

@@ -22,10 +22,10 @@ cargo install bbctl
 
 For systems without Rust, download pre-compiled binaries:
 
-1.  Visit the [releases page]
-2.  Download the appropriate binary for your platform
-3.  Make it executable: `chmod +x bbctl`
-4.  Move it to your PATH: `sudo mv bbctl /usr/local/bin/`
+1. Visit the [releases page]
+2. Download the appropriate binary for your platform
+3. Make it executable: `chmod +x bbctl`
+4. Move it to your PATH: `sudo mv bbctl /usr/local/bin/`
 
 [releases page]: https://github.com/bitbuilder-io/bbctl/releases
 
@@ -60,11 +60,11 @@ bbctl providers add proxmox-host --type proxmox --host 192.168.1.2 --token-id yo
 
 BitBuilder Cloud CLI organizes resources into the following categories:
 
--   **Providers**: Infrastructure providers like VyOS routers or Proxmox hosts
--   **Regions**: Logical groupings of infrastructure, typically by location
--   **Instances**: Virtual machines running on the providers
--   **Volumes**: Storage volumes that can be attached to instances
--   **Networks**: Virtual networks for connecting instances
+- **Providers**: Infrastructure providers like VyOS routers or Proxmox hosts
+- **Regions**: Logical groupings of infrastructure, typically by location
+- **Instances**: Virtual machines running on the providers
+- **Volumes**: Storage volumes that can be attached to instances
+- **Networks**: Virtual networks for connecting instances
 
 ## Working with Providers
 
@@ -191,23 +191,23 @@ BitBuilder Cloud CLI includes an interactive terminal interface that can be laun
 
 ### Navigating the TUI
 
--   Use Tab or number keys (1-5) to switch between views
--   Use arrow keys or j/k to select items in lists
--   Press Enter to view or interact with a selected item
--   Press ? to view help
+- Use Tab or number keys (1-5) to switch between views
+- Use arrow keys or j/k to select items in lists
+- Press Enter to view or interact with a selected item
+- Press ? to view help
 
 ### TUI Views
 
-1.  **Home**: Dashboard with summary information
-2.  **Instances**: List and manage virtual machines
-3.  **Volumes**: Manage storage volumes
-4.  **Networks**: Configure virtual networks
-5.  **Settings**: Configure bbctl options
+1. **Home**: Dashboard with summary information
+2. **Instances**: List and manage virtual machines
+3. **Volumes**: Manage storage volumes
+4. **Networks**: Configure virtual networks
+5. **Settings**: Configure bbctl options
 
 ### TUI Key Bindings
 
 | Key       | Action                     |
-|-----------|----------------------------|
+| --------- | -------------------------- |
 | 1-5       | Switch to numbered view    |
 | Tab       | Next view                  |
 | Shift+Tab | Previous view              |
@@ -225,9 +225,9 @@ BitBuilder Cloud CLI includes an interactive terminal interface that can be laun
 
 BitBuilder Cloud CLI uses the following configuration files in `~/.bbctl/`:
 
--   `settings.toml`: Global settings for bbctl
--   `providers.toml`: Provider configurations
--   `credentials.toml`: Authentication credentials (API keys, tokens, etc.)
+- `settings.toml`: Global settings for bbctl
+- `providers.toml`: Provider configurations
+- `credentials.toml`: Authentication credentials (API keys, tokens, etc.)
 
 ### Example Settings File
 
@@ -323,9 +323,9 @@ BitBuilder Cloud CLI provides a powerful, unified interface for managing multi-t
 
 For more detailed information, refer to the other documentation:
 
--   [Architecture Design]
--   [VyOS Test Lab Setup]
--   [API Reference]
+- [Architecture Design]
+- [VyOS Test Lab Setup]
+- [API Reference]
 
 [Architecture Design]: ARCHITECTURE_DESIGN.md
 [VyOS Test Lab Setup]: vyos-test-lab-setup.md
@@ -333,8 +333,8 @@ For more detailed information, refer to the other documentation:
 
 ## Additional Resources
 
--   [GitHub Repository]
--   [Issue Tracker]
+- [GitHub Repository]
+- [Issue Tracker]
 
 [GitHub Repository]: https://github.com/bitbuilder-io/bbctl
 [Issue Tracker]: https://github.com/bitbuilder-io/bbctl/issues

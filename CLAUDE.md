@@ -43,36 +43,36 @@ cargo run -- networks create my-network --cidr 192.168.1.0/24
 
 ## Code Style Guidelines
 
--   **Formatting**: Use `cargo fmt` to format code according to Rust standard style
+- **Formatting**: Use `cargo fmt` to format code according to Rust standard style
 
--   **Linting**: Run `cargo clippy` for static analysis
+- **Linting**: Run `cargo clippy` for static analysis
 
--   **Naming**:
+- **Naming**:
 
--   Use snake_case for variables, functions, and modules
+- Use snake_case for variables, functions, and modules
 
--   Use PascalCase for structs, enums, and traits
+- Use PascalCase for structs, enums, and traits
 
--   **Error Handling**: Use `AppResult<T>` for functions that can fail
+- **Error Handling**: Use `AppResult<T>` for functions that can fail
 
--   **State Management**: Follow the App/AppMode pattern for managing application state
+- **State Management**: Follow the App/AppMode pattern for managing application state
 
--   **UI Components**: Use Ratatui components (List, Table, Paragraph) with consistent styling
+- **UI Components**: Use Ratatui components (List, Table, Paragraph) with consistent styling
 
--   **Provider APIs**: VyOS and Proxmox providers should implement common traits
+- **Provider APIs**: VyOS and Proxmox providers should implement common traits
 
--   **Imports**: Group imports by crate, with std first, then external, then internal
--   **Document**: Use three slashes (`///`) for public API documentation
--   **Async**: Use tokio runtime with futures for async operations
+- **Imports**: Group imports by crate, with std first, then external, then internal
+- **Document**: Use three slashes (`///`) for public API documentation
+- **Async**: Use tokio runtime with futures for async operations
 
 ## Project Structure
 
--   **src/app.rs**: Core application state and data models
--   **src/event.rs**: Event handling for TUI (keyboard, mouse, resize)
--   **src/handler.rs**: Keyboard event processing
--   **src/tui.rs**: Terminal setup and management
--   **src/ui.rs**: UI rendering and layout components
--   **src/main.rs**: CLI command processing using Clap
+- **src/app.rs**: Core application state and data models
+- **src/event.rs**: Event handling for TUI (keyboard, mouse, resize)
+- **src/handler.rs**: Keyboard event processing
+- **src/tui.rs**: Terminal setup and management
+- **src/ui.rs**: UI rendering and layout components
+- **src/main.rs**: CLI command processing using Clap
 
 The app is organized following a typical TUI pattern with app state, event handling, and UI rendering modules. Follow existing patterns when adding new functionality.
 

@@ -15,23 +15,23 @@ const validInstance = {
   size: {
     cpu: 2,
     memoryGb: 4,
-    diskGb: 80
+    diskGb: 80,
   },
   networks: [
     {
       networkId: '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
       ip: '192.168.1.100',
       interface: 'eth0',
-      mac: '00:0a:95:9d:68:16'
-    }
+      mac: '00:0a:95:9d:68:16',
+    },
   ],
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   tags: {
     environment: 'production',
     application: 'web-api',
-    owner: 'devops'
-  }
+    owner: 'devops',
+  },
 };
 
 // Invalid instance data (missing required fields)
@@ -47,8 +47,8 @@ const invalidInstance = {
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
   tags: {
-    environment: 'production'
-  }
+    environment: 'production',
+  },
 };
 
 // Function to validate instance data
@@ -87,7 +87,7 @@ if (instance) {
   console.log(`CPUs: ${instance.size.cpu}`);
   console.log(`RAM: ${instance.size.memoryGb} GB`);
   console.log(`Disk: ${instance.size.diskGb} GB`);
-  
+
   // Safe access to optional fields
   const primaryIp = instance.networks[0]?.ip || 'No IP assigned';
   console.log(`Primary IP: ${primaryIp}`);

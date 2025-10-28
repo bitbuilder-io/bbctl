@@ -9,7 +9,7 @@
    - The lab setup script exists but there's no integration with the main bbctl command line tool to deploy test topologies
 
 3. **Multi-tenant Network Configuration**
-   - Despite detailed architecture plans, there's no implementation of tenant isolation via VRFs and VXLAN 
+   - Despite detailed architecture plans, there's no implementation of tenant isolation via VRFs and VXLAN
 
 4. **Key Management System**
    - The documented key rotation system for WireGuard isn't implemented in the codebase

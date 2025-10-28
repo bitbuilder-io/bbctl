@@ -48,7 +48,7 @@ The lab will consist of:
   - Linux bridge setup for network connectivity
 
 - **Network Configuration**:
-  - Management network (172.27.0.0/16) 
+  - Management network (172.27.0.0/16)
   - Backbone network (172.16.0.0/16)
   - Public IP space simulation (5.254.54.0/26)
   - Tenant space (100.64.0.0/16)
@@ -56,6 +56,7 @@ The lab will consist of:
 ### 2. VyOS Images
 
 We'll create two types of VyOS images:
+
 1. **Base VyOS Image**: Minimal image with core functionality
 2. **Provider Edge Router Image**: Pre-configured with L3VPN, EVPN, and WireGuard
 

@@ -9,7 +9,7 @@ BitBuilder Cloud CLI (bbctl) uses a set of configuration files to store settings
 bbctl uses the following configuration files, located in the `~/.bbctl/` directory:
 
 | File               | Purpose                                             |
-|--------------------|-----------------------------------------------------|
+| ------------------ | --------------------------------------------------- |
 | `settings.toml`    | Global settings and defaults                        |
 | `providers.toml`   | Provider configurations                             |
 | `credentials.toml` | Authentication credentials (API keys, tokens, etc.) |
@@ -131,9 +131,9 @@ verify_ssl = false
 
 ### Security Best Practices
 
-1.  Use API tokens instead of passwords when possible
-2.  Ensure proper file permissions (600) on credentials.toml
-3.  Consider using environment variables for sensitive credentials
+1. Use API tokens instead of passwords when possible
+2. Ensure proper file permissions (600) on credentials.toml
+3. Consider using environment variables for sensitive credentials
 
 ## Network Configuration
 
@@ -171,7 +171,7 @@ config = { wireguard_enabled = "true", persistent_keepalive = "25" }
 You can override configuration using environment variables:
 
 | Variable                 | Description                 |
-|--------------------------|-----------------------------|
+| ------------------------ | --------------------------- |
 | `BBCTL_LOG_LEVEL`        | Override log level          |
 | `BBCTL_CONFIG_DIR`       | Use custom config directory |
 | `BBCTL_DEFAULT_PROVIDER` | Override default provider   |
@@ -219,7 +219,7 @@ memory_gb = 16
 disk_gb = 200
 volumes = [
   { name = "data", size_gb = 100, type = "ssd" },
-  { name = "backup", size_gb = 200, type = "hdd" }
+  { name = "backup", size_gb = 200, type = "hdd" },
 ]
 ```
 
@@ -256,9 +256,9 @@ additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
 
 ### Common Configuration Issues
 
-1.  **Connection Problems**: Check host, port, and credentials
-2.  **Permission Errors**: Verify API key permissions and SSH key access
-3.  **File Format Errors**: Validate TOML syntax in configuration files
+1. **Connection Problems**: Check host, port, and credentials
+2. **Permission Errors**: Verify API key permissions and SSH key access
+3. **File Format Errors**: Validate TOML syntax in configuration files
 
 ### Debugging Configuration
 
@@ -287,17 +287,17 @@ bbctl config reset --all
 
 ## Best Practices
 
-1.  **Organize by Environment**: Use naming conventions like `prod-`, `staging-` prefixes
-2.  **Document Custom Settings**: Add comments to configuration files
-3.  **Version Control**: Consider storing non-sensitive configuration in version control
-4.  **Regular Backups**: Back up your configuration directory regularly
-5.  **Security**: Never expose credentials in scripts or version control
+1. **Organize by Environment**: Use naming conventions like `prod-`, `staging-` prefixes
+2. **Document Custom Settings**: Add comments to configuration files
+3. **Version Control**: Consider storing non-sensitive configuration in version control
+4. **Regular Backups**: Back up your configuration directory regularly
+5. **Security**: Never expose credentials in scripts or version control
 
 ## Further Reading
 
--   [User Guide] - Comprehensive usage instructions
--   [Command Reference] - Detailed command documentation
--   [API Documentation] - API schema and integration details
+- [User Guide] - Comprehensive usage instructions
+- [Command Reference] - Detailed command documentation
+- [API Documentation] - API schema and integration details
 
 [User Guide]: user-guide.md
 [Command Reference]: command-reference.md
