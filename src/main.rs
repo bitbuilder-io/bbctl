@@ -526,6 +526,32 @@ enum Commands {
         #[arg(long)]
         api_key: Option<String>,
     },
+    /// Test connectivity to a VyOS router
+    TestVyOS {
+        /// VyOS host to connect to
+        #[arg(long, default_value = "5.254.54.3")]
+        host: String,
+        
+        /// VyOS SSH port
+        #[arg(long, default_value = "60022")]
+        port: u16,
+        
+        /// VyOS username
+        #[arg(long, default_value = "vyos")]
+        username: String,
+        
+        /// VyOS password (optional)
+        #[arg(long)]
+        password: Option<String>,
+        
+        /// Path to SSH key (optional)
+        #[arg(long)]
+        key_path: Option<String>,
+        
+        /// API key for HTTP API (optional)
+        #[arg(long)]
+        api_key: Option<String>,
+    },
 }
 
 #[derive(Subcommand)]
@@ -796,102 +822,6 @@ async fn main() -> AppResult<()> {
     // If we have command-line arguments, handle them
     if env::args().len() > 1 {
         cli_handler(cli)
-    } else {
-        // Handle special async commands first
-        match &cli.command {
-            Some(Commands::TestVyOS { host, port, username, password, key_path, api_key }) => {
-                println!("Testing connection to VyOS router at {}:{}...", host, port);
-                
-                // Create a VyOS client using our API
-                use crate::api::vyos::{VyOSClient, VyOSConfig};
-                use crate::api::Provider;
-                
-                let config = VyOSConfig {
-                    host: host.clone(),
-                    ssh_port: port,
-                    api_port: 443, // Default API port
-                    username: username.clone(),
-                    password: password.clone(),
-                    key_path: key_path.clone(),
-                    api_key: api_key.clone(),
-                    timeout: 30,
-                };
-                
-                let client = VyOSClient::new(config);
-                
-                // First try the synchronous connection test
-                match client.connect() {
-                    Ok(_) => {
-                        println!("\n✅ SSH connection successful!");
-                        
-                        // If API key is provided, also test the API
-                        if let Some(api_key) = &api_key {
-                            println!("\nTesting VyOS HTTP API...");
-                            
-                            let mut client_mut = client;
-                            match client_mut.get_system_info().await {
-                                Ok(info) => {
-                                    println!("\n✅ API connection successful!");
-                                    println!("\nVyOS system information:");
-                                    println!("{}", serde_json::to_string_pretty(&info).unwrap_or_else(|_| info.to_string()));
-                                },
-                                Err(e) => {
-                                    println!("\n❌ API connection failed: {}", e);
-                                }
-                            }
-                        }
-                        
-                        return Ok(());
-                    },
-                    Err(e) => {
-                        // Fallback to manual SSH connection if the client connect fails
-                        println!("VyOS client connection failed: {}", e);
-                        println!("Falling back to direct SSH connection...");
-                        
-                        // Let's try connecting interactively - we'll just verify the connection first
-                        let ssh_command = format!("ssh -o StrictHostKeyChecking=no -p {} {}@{}", 
-                                                port, username, host);
-                        println!("Running: {}", ssh_command);
-                        
-                        let output = tokio::process::Command::new("sh")
-                            .arg("-c")
-                            .arg(ssh_command)
-                            .output()
-                            .await
-                            .map_err(|e| format!("Failed to execute SSH command: {}", e))?;
-                        
-                        if output.status.success() || output.status.code() == Some(255) {
-                            // If we got output, even with a non-zero exit code, that likely means
-                            // we connected successfully but then got disconnected properly after the welcome message
-                            let stdout = String::from_utf8_lossy(&output.stdout);
-                            if stdout.contains("VyOS") {
-                                println!("\n✅ Connection successful!");
-                                println!("\nVyOS system information:");
-                                // Extract just the version information
-                                if let Some(idx) = stdout.find("VyOS") {
-                                    let version_info = &stdout[idx..];
-                                    println!("{}", version_info);
-                                } else {
-                                    println!("{}", stdout);
-                                }
-                                return Ok(());
-                            } else {
-                                return Err(format!("Connected but did not receive VyOS welcome message").into());
-                            }
-                        } else {
-                            let error = String::from_utf8_lossy(&output.stderr);
-                            return Err(format!("Connection failed: {}", error).into());
-                        }
-                    }
-                }
-            },
-            _ => {
-                // For other commands, use the synchronous handler
-                cli_handler(cli)?;
-            }
-        }
-        
-        Ok(())
     } else {
         // Otherwise, launch the TUI
         run_tui().await
