@@ -6,10 +6,10 @@ This document outlines the setup for a dynamically provisioned systemd-vmspawn m
 
 The lab will consist of:
 
-1.  **Management Plane**: Secure WireGuard overlay network for router management
-2.  **Service Provider Network**: OSPF-based core network with BGP EVPN for tenant isolation
-3.  **Tenant Networks**: L3VPN with VXLAN encapsulation for tenant traffic
-4.  **Integration Points**: API endpoints for bbctl to manage and automate infrastructure
+1. **Management Plane**: Secure WireGuard overlay network for router management
+2. **Service Provider Network**: OSPF-based core network with BGP EVPN for tenant isolation
+3. **Tenant Networks**: L3VPN with VXLAN encapsulation for tenant traffic
+4. **Integration Points**: API endpoints for bbctl to manage and automate infrastructure
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
@@ -42,25 +42,28 @@ The lab will consist of:
 
 ### 1. Base Infrastructure
 
--   **Host Setup**:
-  -   Arch Linux (as specified in your vyos-network-plan.md)
-  -   systemd-vmspawn for container deployment
-  -   Linux bridge setup for network connectivity
--   **Network Configuration**:
-  -   Management network (172.27.0.0/16)
-  -   Backbone network (172.16.0.0/16)
-  -   Public IP space simulation (5.254.54.0/26)
-  -   Tenant space (100.64.0.0/16)
+- **Host Setup**:
+  - Arch Linux (as specified in your vyos-network-plan.md)
+  - systemd-vmspawn for container deployment
+  - Linux bridge setup for network connectivity
+
+- **Network Configuration**:
+  - Management network (172.27.0.0/16) 
+  - Backbone network (172.16.0.0/16)
+  - Public IP space simulation (5.254.54.0/26)
+  - Tenant space (100.64.0.0/16)
 
 ### 2. VyOS Images
 
-We'll create two types of VyOS images: 1. **Base VyOS Image**: Minimal image with core functionality 2. **Provider Edge Router Image**: Pre-configured with L3VPN, EVPN, and WireGuard
+We'll create two types of VyOS images:
+1. **Base VyOS Image**: Minimal image with core functionality
+2. **Provider Edge Router Image**: Pre-configured with L3VPN, EVPN, and WireGuard
 
 ### 3. Test Environment Provisioning Scripts
 
 #### Base System Setup Script
 
-``` bash
+```bash
 #!/bin/bash
 # Setup script for VyOS lab base infrastructure
 
@@ -79,7 +82,7 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 #### VyOS Image Builder Script
 
-``` bash
+```bash
 #!/bin/bash
 # Build VyOS base image for systemd-vmspawn
 
@@ -101,7 +104,7 @@ mkosi
 
 #### Provider Edge Router Deployment Script
 
-``` bash
+```bash
 #!/bin/bash
 # Deploy a VyOS Provider Edge router using systemd-vmspawn
 
@@ -116,18 +119,18 @@ cat > cloud-init.yaml << EOF
 vyos_config_commands:
   # Setup system basics
   - set system host-name ${ROUTER_NAME}
-
+  
   # Setup management interface
   - set interfaces ethernet eth0 address ${ROUTER_MGMT_IP}/16
   - set interfaces ethernet eth0 description 'Management'
-
+  
   # Setup backbone interface
   - set interfaces ethernet eth1 address ${ROUTER_BACKBONE_IP}/16
   - set interfaces ethernet eth1 description 'Backbone'
-
+  
   # Setup OSPF
   - set protocols ospf area 0 network ${ROUTER_BACKBONE_IP}/16
-
+  
   # Enable HTTP API
   - set service https api keys id admin key 'bbctl-test-api'
   - set service https listen-address 0.0.0.0
@@ -157,7 +160,7 @@ systemctl enable --now ${ROUTER_NAME}.service
 
 ### 4. L3VPN/EVPN Configuration Script
 
-``` bash
+```bash
 #!/bin/bash
 # Configure L3VPN with EVPN for a VyOS router
 
@@ -218,7 +221,7 @@ machinectl shell ${ROUTER_NAME} /opt/vyatta/bin/vyatta-cfg-cmd-wrapper save
 
 ### 5. WireGuard Secure Management Plane
 
-``` bash
+```bash
 #!/bin/bash
 # Configure WireGuard for secure management plane
 
@@ -273,7 +276,7 @@ echo "WireGuard public key for ${ROUTER_NAME}: ${WG_PUBLIC_KEY}"
 
 ### 6. Tenant VM Deployment
 
-``` bash
+```bash
 #!/bin/bash
 # Deploy a tenant VM
 
@@ -332,7 +335,7 @@ machinectl shell ${ROUTER_NAME} /opt/vyatta/bin/vyatta-cfg-cmd-wrapper save
 
 Let's create a master orchestration script to deploy the entire testbed:
 
-``` bash
+```bash
 #!/bin/bash
 # Master orchestration script for VyOS lab deployment
 
@@ -395,7 +398,7 @@ Now, let's set up the bbctl CLI to work with our lab environment. We'll create i
 
 Create a configuration file for bbctl to access the test environment:
 
-``` toml
+```toml
 # bbctl test configuration for VyOS lab
 
 [providers]
@@ -444,7 +447,7 @@ api_port = 443
 
 Sample commands to test bbctl with the lab environment:
 
-``` bash
+```bash
 # Test connection to VyOS routers
 bbctl test-vyos --host 172.27.0.10 --port 22 --username vyos --api-key bbctl-test-api
 
@@ -465,42 +468,37 @@ bbctl networks connect tenant-net --instance $INSTANCE_ID
 
 The following methods can be used to verify and troubleshoot the test environment:
 
-1.  **Verify OSPF adjacencies**:
+1. **Verify OSPF adjacencies**:
+   ```
+   show ip ospf neighbor
+   ```
 
-```
-show ip ospf neighbor
-```
+2. **Verify BGP EVPN**:
+   ```
+   show bgp l2vpn evpn
+   ```
 
-2.  **Verify BGP EVPN**:
+3. **Verify L3VPN routes**:
+   ```
+   show ip route vrf all
+   ```
 
-```
-show bgp l2vpn evpn
-```
+4. **Verify WireGuard status**:
+   ```
+   show interfaces wireguard
+   ```
 
-3.  **Verify L3VPN routes**:
-
-```
-show ip route vrf all
-```
-
-4.  **Verify WireGuard status**:
-
-```
-show interfaces wireguard
-```
-
-5.  **Test connectivity between tenants**:
-
-```
-# From tenant1-vm1
-ping 10.1.2.1  # Should work
-ping 10.2.1.1  # Should fail due to VRF isolation
-```
+5. **Test connectivity between tenants**:
+   ```
+   # From tenant1-vm1
+   ping 10.1.2.1  # Should work
+   ping 10.2.1.1  # Should fail due to VRF isolation
+   ```
 
 ## Next Steps
 
-1.  Add support for Docker container deployment
-2.  Implement automated testing with the lab
-3.  Add CI/CD pipeline for continuous testing
-4.  Extend the lab with additional provider types (Proxmox)
-5.  Implement high availability scenarios
+1. Add support for Docker container deployment
+2. Implement automated testing with the lab
+3. Add CI/CD pipeline for continuous testing
+4. Extend the lab with additional provider types (Proxmox)
+5. Implement high availability scenarios

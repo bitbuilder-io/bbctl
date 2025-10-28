@@ -14,7 +14,7 @@ This guide will help you understand how to use bbctl effectively, covering insta
 
 If you have Rust installed, the simplest way to install bbctl is via Cargo:
 
-``` bash
+```bash
 cargo install bbctl
 ```
 
@@ -33,7 +33,7 @@ For systems without Rust, download pre-compiled binaries:
 
 To build the latest version from source:
 
-``` bash
+```bash
 git clone https://github.com/bitbuilder-io/bbctl.git
 cd bbctl
 cargo build --release
@@ -45,7 +45,7 @@ The compiled binary will be in `target/release/bbctl`.
 
 When running bbctl for the first time, you'll need to set up your provider credentials:
 
-``` bash
+```bash
 # Initialize bbctl configuration
 bbctl init
 
@@ -70,19 +70,19 @@ BitBuilder Cloud CLI organizes resources into the following categories:
 
 ### Listing Providers
 
-``` bash
+```bash
 bbctl providers list
 ```
 
 ### Testing Provider Connectivity
 
-``` bash
+```bash
 bbctl providers test vyos-router
 ```
 
 ### Removing a Provider
 
-``` bash
+```bash
 bbctl providers remove vyos-router
 ```
 
@@ -90,7 +90,7 @@ bbctl providers remove vyos-router
 
 ### Creating an Instance
 
-``` bash
+```bash
 bbctl instances create web-server-1 \
   --provider vyos-router \
   --region nyc \
@@ -101,13 +101,13 @@ bbctl instances create web-server-1 \
 
 ### Listing Instances
 
-``` bash
+```bash
 bbctl instances list
 ```
 
 ### Starting and Stopping Instances
 
-``` bash
+```bash
 # Start an instance
 bbctl instances start i-01234567
 
@@ -117,13 +117,13 @@ bbctl instances stop i-01234567
 
 ### Getting Instance Details
 
-``` bash
+```bash
 bbctl instances show i-01234567
 ```
 
 ### Deleting an Instance
 
-``` bash
+```bash
 bbctl instances delete i-01234567
 ```
 
@@ -131,7 +131,7 @@ bbctl instances delete i-01234567
 
 ### Creating a Volume
 
-``` bash
+```bash
 bbctl volumes create db-data \
   --size 100 \
   --region nyc
@@ -139,20 +139,20 @@ bbctl volumes create db-data \
 
 ### Listing Volumes
 
-``` bash
+```bash
 bbctl volumes list
 ```
 
 ### Attaching a Volume to an Instance
 
-``` bash
+```bash
 bbctl volumes attach vol-01234567 \
   --instance i-01234567
 ```
 
 ### Detaching a Volume
 
-``` bash
+```bash
 bbctl volumes detach vol-01234567
 ```
 
@@ -160,27 +160,27 @@ bbctl volumes detach vol-01234567
 
 ### Creating a Network
 
-``` bash
+```bash
 bbctl networks create app-network \
   --cidr 192.168.1.0/24
 ```
 
 ### Listing Networks
 
-``` bash
+```bash
 bbctl networks list
 ```
 
 ### Connecting an Instance to a Network
 
-``` bash
+```bash
 bbctl networks connect net-01234567 \
   --instance i-01234567
 ```
 
 ### Disconnecting an Instance
 
-``` bash
+```bash
 bbctl networks disconnect net-01234567 \
   --instance i-01234567
 ```
@@ -231,7 +231,7 @@ BitBuilder Cloud CLI uses the following configuration files in `~/.bbctl/`:
 
 ### Example Settings File
 
-``` toml
+```toml
 default_provider = "vyos-router"
 default_region = "nyc"
 telemetry_enabled = false
@@ -249,7 +249,7 @@ log_level = "info"
 
 You can use environment variables to override configuration values:
 
-``` bash
+```bash
 export BBCTL_DEFAULT_PROVIDER=vyos-router
 export BBCTL_LOG_LEVEL=debug
 ```
@@ -258,7 +258,7 @@ export BBCTL_LOG_LEVEL=debug
 
 For scripting, you can use the `--json` flag with most commands to get machine-readable output:
 
-``` bash
+```bash
 bbctl instances list --json > instances.json
 ```
 
@@ -266,7 +266,7 @@ bbctl instances list --json > instances.json
 
 BitBuilder Cloud CLI supports setting up WireGuard for secure connectivity:
 
-``` bash
+```bash
 bbctl networks create secure-net \
   --cidr 10.10.0.0/24 \
   --wireguard enabled
@@ -280,7 +280,7 @@ bbctl networks create secure-net \
 
 If you're having trouble connecting to a provider:
 
-``` bash
+```bash
 # Test provider connectivity with verbose output
 bbctl providers test vyos-router --verbose
 
@@ -292,7 +292,7 @@ bbctl providers update vyos-router --api-key new-api-key
 
 For detailed error information, increase the log level:
 
-``` bash
+```bash
 bbctl --log-level debug instances list
 ```
 
@@ -300,7 +300,7 @@ bbctl --log-level debug instances list
 
 If you suspect configuration problems:
 
-``` bash
+```bash
 # View current configuration
 bbctl config show
 
@@ -312,7 +312,7 @@ bbctl config reset
 
 For additional help with specific commands:
 
-``` bash
+```bash
 bbctl help
 bbctl instances --help
 ```

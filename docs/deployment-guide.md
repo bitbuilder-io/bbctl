@@ -30,7 +30,7 @@ The typical deployment workflow consists of:
 
 BitBuilder Cloud CLI uses TOML configuration files for deployments. The main deployment file is typically named `deploy.toml`:
 
-``` toml
+```toml
 [app]
 name = "my-web-app"
 version = "1.0.0"
@@ -62,7 +62,7 @@ subdomain = "web-app"
 
 For environment-specific configurations, use separate files or environment sections:
 
-``` toml
+```toml
 [environments.development]
 instances = { count = 1, size = "small" }
 enable_metrics = false
@@ -79,7 +79,7 @@ volumes.data.size = 500
 
 1.  Initialize a new project:
 
-``` bash
+```bash
 bbctl init --name my-web-app
 ```
 
@@ -87,13 +87,13 @@ bbctl init --name my-web-app
 
 3.  Deploy the application:
 
-``` bash
+```bash
 bbctl deploy
 ```
 
 ### Deployment Options
 
-``` bash
+```bash
 # Deploy with a specific configuration file
 bbctl deploy --config custom-deploy.toml
 
@@ -113,7 +113,7 @@ bbctl deploy --force
 
 For complex applications with dependencies, use multi-stage deployments:
 
-``` toml
+```toml
 [stages]
 order = ["infrastructure", "database", "application", "monitoring"]
 
@@ -137,7 +137,7 @@ depends_on = ["application"]
 
 Minimize downtime using rolling deployments:
 
-``` toml
+```toml
 [deployment.strategy]
 type = "rolling"
 batch_size = 1
@@ -150,7 +150,7 @@ timeout = "5m"
 
 Implement blue-green deployment strategy:
 
-``` toml
+```toml
 [deployment.strategy]
 type = "blue-green"
 traffic_shift = "instant"  # or "gradual"
@@ -166,13 +166,13 @@ For Terraform integration:
 
 1.  Install the bbctl Terraform provider:
 
-``` bash
+```bash
 terraform init -plugin-dir=~/.terraform.d/plugins
 ```
 
 2.  Create a Terraform configuration using bbctl resources:
 
-``` hcl
+```hcl
 provider "bbctl" {
   config_path = "~/.bbctl/config.toml"
 }
@@ -188,7 +188,7 @@ resource "bbctl_instance" "web" {
 
 3.  Apply the Terraform configuration:
 
-``` bash
+```bash
 terraform apply
 ```
 
@@ -196,7 +196,7 @@ terraform apply
 
 For Pulumi integration:
 
-``` typescript
+```typescript
 import * as bbctl from "@pulumi/bbctl";
 
 const network = new bbctl.Network("app-network", {
@@ -221,7 +221,7 @@ export const instanceIp = instance.publicIp;
 
 Example GitHub Actions workflow:
 
-``` yaml
+```yaml
 name: Deploy Application
 
 on:
@@ -252,7 +252,7 @@ jobs:
 
 Example GitLab CI pipeline:
 
-``` yaml
+```yaml
 stages:
   - test
   - build
@@ -275,7 +275,7 @@ deploy:
 
 Inject environment variables into your instances:
 
-``` toml
+```toml
 [instances.web.env]
 DATABASE_URL = "postgres://user:pass@db.internal:5432/mydb"
 REDIS_HOST = "redis.internal"
@@ -286,7 +286,7 @@ LOG_LEVEL = "info"
 
 Deploy configuration files to instances:
 
-``` toml
+```toml
 [instances.web.files]
 "/etc/nginx/nginx.conf" = { source = "./configs/nginx.conf" }
 "/etc/app/config.json" = { content = '{"debug": false, "port": 3000}' }
@@ -296,7 +296,7 @@ Deploy configuration files to instances:
 
 Secure handling of sensitive information:
 
-``` toml
+```toml
 [secrets]
 provider = "vault"
 path = "secret/my-app"
@@ -310,7 +310,7 @@ DB_PASSWORD = "vault:secret/my-app#db_password"
 
 Deploy across multiple regions:
 
-``` toml
+```toml
 [regions]
 enabled = ["nyc", "sfo", "fra"]
 strategy = "all"  # or "weighted"
@@ -332,7 +332,7 @@ instances = { count = 1 }
 
 Configure highly available deployments:
 
-``` toml
+```toml
 [availability]
 zones = ["a", "b", "c"]
 distribution = "spread"
@@ -349,7 +349,7 @@ failover = "automatic"
 
 Configure monitoring for deployments:
 
-``` toml
+```toml
 [monitoring]
 enable = true
 provider = "prometheus"
@@ -365,7 +365,7 @@ options = { tag = "app-logs" }
 
 ### Pre-deployment Testing
 
-``` toml
+```toml
 [testing.pre_deployment]
 enabled = true
 command = "./scripts/pre-deploy-test.sh"
@@ -375,7 +375,7 @@ fail_on_error = true
 
 ### Smoke Testing
 
-``` toml
+```toml
 [testing.smoke]
 enabled = true
 endpoints = [
@@ -388,7 +388,7 @@ retries = 3
 
 ### Load Testing
 
-``` toml
+```toml
 [testing.load]
 enabled = true
 tool = "k6"
@@ -402,7 +402,7 @@ threshold = "p95(http_req_duration) < 200"
 
 ### Security Configurations
 
-``` toml
+```toml
 [security]
 ssl_enabled = true
 certificate = "acme"
@@ -416,7 +416,7 @@ headers = {
 
 ### Compliance Checks
 
-``` toml
+```toml
 [compliance]
 enabled = true
 standards = ["pci-dss", "gdpr"]
@@ -428,7 +428,7 @@ scans = ["vulnerability", "configuration"]
 
 To roll back to a previous deployment:
 
-``` bash
+```bash
 # List deployments
 bbctl deployments list
 
@@ -460,7 +460,7 @@ bbctl deployments rollback --previous
 
 Access deployment logs:
 
-``` bash
+```bash
 # Get summary of deployment logs
 bbctl deployments logs d-01234567
 

@@ -2,7 +2,7 @@
 
 ## Build & Run Commands
 
-``` bash
+```bash
 # Build
 cargo build
 
@@ -27,7 +27,7 @@ cargo clippy
 
 ## CLI Examples
 
-``` bash
+```bash
 # List instances
 cargo run -- instances list
 
