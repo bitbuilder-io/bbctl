@@ -1,3 +1,11 @@
+# Rust / Cargo
+# Remove Cargo.lock from gitignore if creating an executable, leave it for libraries
+# More information here https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
+debug/
+target/
+**/*.rs.bk
+*.pdb
+
 # Bun & Node.js
 node_modules/
 .bun/
@@ -20,7 +28,6 @@ out/
 api-docs/
 
 # TypeScript cache
-*.tsbuildinfo
 .temp/
 .cache/
 
@@ -52,7 +59,6 @@ $RECYCLE.BIN/
 
 # Debug files
 .debug/
-debug/
 debug.log
 
 # Testing
@@ -63,16 +69,8 @@ coverage/
 logs/
 *.log
 
-# Rust output (if any Rust components)
-target/
-*.rs.bk
-Cargo.lock
-
 # Miscellaneous
 .tmp/
-.history/
 .turbo/
 .vercel/
 .next/
-**/.claude.json
-.claude.json
