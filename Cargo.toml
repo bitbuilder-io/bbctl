@@ -34,7 +34,6 @@ openssl = { version = "0.10", features = ["vendored"] }
 
 # Networking & Security
 uuid = { version = "1.4", features = ["v4", "serde"] }
-
 [dev-dependencies]
 assert_cmd = "2.0"
 predicates = "3.0"
