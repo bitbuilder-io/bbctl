@@ -8,6 +8,7 @@ The following options can be used with any command:
 
 | Option                | Description                              |
 | --------------------- | ---------------------------------------- |
+|-----------------------|------------------------------------------|
 | `--help`, `-h`        | Show help information                    |
 | `--version`, `-V`     | Show version information                 |
 | `--log-level=<level>` | Set log level (debug, info, warn, error) |
@@ -541,6 +542,7 @@ bbctl
 
 | Key        | Action               |
 | ---------- | -------------------- |
+|------------|----------------------|
 | 1-5        | Switch tabs          |
 | Tab        | Next tab             |
 | Shift+Tab  | Previous tab         |
@@ -558,6 +560,7 @@ The following environment variables can be used to override configuration:
 
 | Variable                 | Description                          |
 | ------------------------ | ------------------------------------ |
+|--------------------------|--------------------------------------|
 | `BBCTL_LOG_LEVEL`        | Log level (debug, info, warn, error) |
 | `BBCTL_CONFIG_DIR`       | Custom configuration directory       |
 | `BBCTL_DEFAULT_PROVIDER` | Default provider                     |

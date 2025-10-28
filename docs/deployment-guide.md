@@ -12,6 +12,10 @@ BitBuilder Cloud CLI is designed around a consistent infrastructure-as-code appr
 - **Templates**: Reusable configurations for deployment
 - **Environments**: Distinct deployment targets (development, staging, production)
 - **Workspaces**: Isolated deployment contexts for multi-tenant usage
+-   **Resources**: The building blocks of your infrastructure (instances, volumes, networks)
+-   **Templates**: Reusable configurations for deployment
+-   **Environments**: Distinct deployment targets (development, staging, production)
+-   **Workspaces**: Isolated deployment contexts for multi-tenant usage
 
 ### Deployment Workflow
 
@@ -23,6 +27,12 @@ The typical deployment workflow consists of:
 4. **Configure**: Apply post-deployment configuration
 5. **Verify**: Confirm successful deployment
 6. **Monitor**: Track performance and health
+1.  **Define**: Create deployment configuration and resources
+2.  **Validate**: Verify configuration and check dependencies
+3.  **Deploy**: Provision resources and deploy applications
+4.  **Configure**: Apply post-deployment configuration
+5.  **Verify**: Confirm successful deployment
+6.  **Monitor**: Track performance and health
 
 ## Deployment Configuration
 
@@ -31,6 +41,7 @@ The typical deployment workflow consists of:
 BitBuilder Cloud CLI uses TOML configuration files for deployments. The main deployment file is typically named `deploy.toml`:
 
 ```bash
+``` toml
 [app]
 name = "my-web-app"
 version = "1.0.0"
@@ -63,6 +74,7 @@ subdomain = "web-app"
 For environment-specific configurations, use separate files or environment sections:
 
 ```bash
+``` toml
 [environments.development]
 instances = { count = 1, size = "small" }
 enable_metrics = false
@@ -88,12 +100,24 @@ bbctl init --name my-web-app
 3. Deploy the application:
 
 ```bash
+1.  Initialize a new project:
+
+``` bash
+bbctl init --name my-web-app
+```
+
+2.  Create a `deploy.toml` file in the project directory
+
+3.  Deploy the application:
+
+``` bash
 bbctl deploy
 ```
 
 ### Deployment Options
 
 ```bash
+``` bash
 # Deploy with a specific configuration file
 bbctl deploy --config custom-deploy.toml
 
@@ -114,6 +138,7 @@ bbctl deploy --force
 For complex applications with dependencies, use multi-stage deployments:
 
 ```bash
+``` toml
 [stages]
 order = ["infrastructure", "database", "application", "monitoring"]
 
@@ -138,6 +163,7 @@ depends_on = ["application"]
 Minimize downtime using rolling deployments:
 
 ```bash
+``` toml
 [deployment.strategy]
 type = "rolling"
 batch_size = 1
@@ -154,6 +180,10 @@ Implement blue-green deployment strategy:
 [deployment.strategy]
 type = "blue-green"
 traffic_shift = "instant" # or "gradual"
+``` toml
+[deployment.strategy]
+type = "blue-green"
+traffic_shift = "instant"  # or "gradual"
 verification_period = "2m"
 rollback_on_failure = true
 ```
@@ -173,6 +203,15 @@ terraform init -plugin-dir=~/.terraform.d/plugins
 2. Create a Terraform configuration using bbctl resources:
 
 ```bash
+1.  Install the bbctl Terraform provider:
+
+``` bash
+terraform init -plugin-dir=~/.terraform.d/plugins
+```
+
+2.  Create a Terraform configuration using bbctl resources:
+
+``` hcl
 provider "bbctl" {
   config_path = "~/.bbctl/config.toml"
 }
@@ -189,6 +228,9 @@ resource "bbctl_instance" "web" {
 3. Apply the Terraform configuration:
 
 ```bash
+3.  Apply the Terraform configuration:
+
+``` bash
 terraform apply
 ```
 
@@ -209,6 +251,20 @@ const instance = new bbctl.Instance('web-server', {
   region: 'nyc',
   size: 'standard',
   networks: [network.id],
+``` typescript
+import * as bbctl from "@pulumi/bbctl";
+
+const network = new bbctl.Network("app-network", {
+    cidr: "10.0.0.0/24",
+    provider: "vyos-router",
+    region: "nyc",
+});
+
+const instance = new bbctl.Instance("web-server", {
+    provider: "vyos-router",
+    region: "nyc",
+    size: "standard",
+    networks: [network.id],
 });
 
 export const instanceIp = instance.publicIp;
@@ -221,6 +277,7 @@ export const instanceIp = instance.publicIp;
 Example GitHub Actions workflow:
 
 ```bash
+``` yaml
 name: Deploy Application
 
 on:
@@ -252,6 +309,7 @@ jobs:
 Example GitLab CI pipeline:
 
 ```bash
+``` yaml
 stages:
   - test
   - build
@@ -275,6 +333,7 @@ deploy:
 Inject environment variables into your instances:
 
 ```bash
+``` toml
 [instances.web.env]
 DATABASE_URL = "postgres://user:pass@db.internal:5432/mydb"
 REDIS_HOST = "redis.internal"
@@ -286,6 +345,7 @@ LOG_LEVEL = "info"
 Deploy configuration files to instances:
 
 ```bash
+``` toml
 [instances.web.files]
 "/etc/nginx/nginx.conf" = { source = "./configs/nginx.conf" }
 "/etc/app/config.json" = { content = '{"debug": false, "port": 3000}' }
@@ -296,6 +356,7 @@ Deploy configuration files to instances:
 Secure handling of sensitive information:
 
 ```bash
+``` toml
 [secrets]
 provider = "vault"
 path = "secret/my-app"
@@ -313,6 +374,10 @@ Deploy across multiple regions:
 [regions]
 enabled = ["nyc", "sfo", "fra"]
 strategy = "all" # or "weighted"
+``` toml
+[regions]
+enabled = ["nyc", "sfo", "fra"]
+strategy = "all"  # or "weighted"
 
 [regions.nyc]
 weight = 60
@@ -332,12 +397,14 @@ instances = { count = 1 }
 Configure highly available deployments:
 
 ```bash
+``` toml
 [availability]
 zones = ["a", "b", "c"]
 distribution = "spread"
 
 [instances]
 count = 6 # 2 instances per zone
+count = 6  # 2 instances per zone
 
 [database]
 replicas = 3
@@ -349,6 +416,7 @@ failover = "automatic"
 Configure monitoring for deployments:
 
 ```bash
+``` toml
 [monitoring]
 enable = true
 provider = "prometheus"
@@ -365,6 +433,7 @@ options = { tag = "app-logs" }
 ### Pre-deployment Testing
 
 ```bash
+``` toml
 [testing.pre_deployment]
 enabled = true
 command = "./scripts/pre-deploy-test.sh"
@@ -375,11 +444,13 @@ fail_on_error = true
 ### Smoke Testing
 
 ```bash
+``` toml
 [testing.smoke]
 enabled = true
 endpoints = [
   { url = "/health", expect_status = 200 },
   { url = "/api/status", expect_contains = "running" },
+  { url = "/api/status", expect_contains = "running" }
 ]
 timeout = "30s"
 retries = 3
@@ -388,6 +459,7 @@ retries = 3
 ### Load Testing
 
 ```bash
+``` toml
 [testing.load]
 enabled = true
 tool = "k6"
@@ -402,6 +474,7 @@ threshold = "p95(http_req_duration) < 200"
 ### Security Configurations
 
 ```bash
+``` toml
 [security]
 ssl_enabled = true
 certificate = "acme"
@@ -416,6 +489,7 @@ headers = {
 ### Compliance Checks
 
 ```bash
+``` toml
 [compliance]
 enabled = true
 standards = ["pci-dss", "gdpr"]
@@ -428,6 +502,7 @@ scans = ["vulnerability", "configuration"]
 To roll back to a previous deployment:
 
 ```bash
+``` bash
 # List deployments
 bbctl deployments list
 
@@ -459,12 +534,25 @@ bbctl deployments rollback --previous
 - Validate application configuration
 - Check for dependency issues
 - Examine application logs with `bbctl instances logs i-01234567`
+1.  **Resource Provisioning Failures**
+  -   Check provider connectivity
+  -   Verify resource limits and quotas
+  -   Review error logs with `bbctl logs get d-01234567`
+2.  **Network Configuration Issues**
+  -   Verify CIDR blocks don't overlap
+  -   Ensure security groups allow required traffic
+  -   Check DNS resolution with `bbctl network test-dns net-01234567`
+3.  **Application Deployment Failures**
+  -   Validate application configuration
+  -   Check for dependency issues
+  -   Examine application logs with `bbctl instances logs i-01234567`
 
 ### Deployment Logs
 
 Access deployment logs:
 
 ```bash
+``` bash
 # Get summary of deployment logs
 bbctl deployments logs d-01234567
 
@@ -485,6 +573,10 @@ BitBuilder Cloud CLI provides a powerful platform for deploying and managing inf
 - [Command Reference] - Detailed command documentation
 - [Configuration Guide] - Configuration file reference
 - [Architecture Design] - System architecture details
+-   [User Guide] - Comprehensive usage instructions
+-   [Command Reference] - Detailed command documentation
+-   [Configuration Guide] - Configuration file reference
+-   [Architecture Design] - System architecture details
 
 [User Guide]: user-guide.md
 [Command Reference]: command-reference.md

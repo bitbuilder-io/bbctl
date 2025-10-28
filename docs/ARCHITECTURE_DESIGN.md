@@ -8,11 +8,11 @@ bbctl is a command-line interface (CLI) tool for provisioning and managing multi
 
 ### Project Goals
 
-1. Provide a single CLI tool for managing infrastructure across multiple providers
-2. Enable secure multi-tenant isolation using VRFs, VXLANs, and L3VPNs
-3. Support end-to-end encryption using WireGuard
-4. Implement gitops-style declarative configuration
-5. Deliver an intuitive Terminal UI (TUI) for interactive management
+1.  Provide a single CLI tool for managing infrastructure across multiple providers
+2.  Enable secure multi-tenant isolation using VRFs, VXLANs, and L3VPNs
+3.  Support end-to-end encryption using WireGuard
+4.  Implement gitops-style declarative configuration
+5.  Deliver an intuitive Terminal UI (TUI) for interactive management
 
 ## System Architecture
 
@@ -86,24 +86,32 @@ The bbctl architecture consists of multiple layers:
 - Credentials: Secure storage for authentication information
    - CLI Commands: Handles command-line arguments and options
    - Terminal UI (TUI): Interactive dashboard for visualization and management
+1.  **User Interface Layer**
 
-2. **Service Layer**
-   - Provider Services: Manages infrastructure providers
-   - Resource Services: Abstracts operations on instances, volumes, networks
+-   CLI Commands: Handles command-line arguments and options
+-   Terminal UI (TUI): Interactive dashboard for visualization and management
 
-3. **API Layer**
-   - VyOS API: Client for VyOS HTTP API and SSH interfaces
-   - Proxmox API: Client for Proxmox REST API
+2.  **Service Layer**
 
-4. **Data Model Layer**
-   - Instances: VM/container representations
-   - Volumes: Storage abstractions
-   - Networks: Network and connectivity abstractions
-   - Providers: Provider metadata and capabilities
+-   Provider Services: Manages infrastructure providers
+-   Resource Services: Abstracts operations on instances, volumes, networks
 
-5. **Configuration Layer**
-   - Local Settings: User preferences and defaults
-   - Credentials: Secure storage for authentication information
+3.  **API Layer**
+
+-   VyOS API: Client for VyOS HTTP API and SSH interfaces
+-   Proxmox API: Client for Proxmox REST API
+
+4.  **Data Model Layer**
+
+-   Instances: VM/container representations
+-   Volumes: Storage abstractions
+-   Networks: Network and connectivity abstractions
+-   Providers: Provider metadata and capabilities
+
+5.  **Configuration Layer**
+
+-   Local Settings: User preferences and defaults
+-   Credentials: Secure storage for authentication information
 
 ## Implementation Details
 
@@ -164,13 +172,14 @@ pub trait Provider {
     fn check_connection(&self) -> Result<bool>;
 
 ```rust
+``` rust
 pub trait Provider {
     /// Connect to the provider
     fn connect(&self) -> Result<()>;
-    
+
     /// Check connection status
     fn check_connection(&self) -> Result<bool>;
-    
+
     /// Get provider name
     fn name(&self) -> &str;
 }
@@ -191,11 +200,7 @@ The VyOS API client supports:
 
 #### Proxmox API Client
 
-The Proxmox API client supports:
-- REST API integration for VM management
-- Resource allocation and monitoring
-- Template management for deployments
-- Both token and username/password authentication
+The Proxmox API client supports: - REST API integration for VM management - Resource allocation and monitoring - Template management for deployments - Both token and username/password authentication
 
 ### 3. Data Models
 
@@ -205,6 +210,7 @@ Represents virtual machines and containers:
 
 ```bash
 ```rust
+``` rust
 pub struct Instance {
     pub id: Uuid,
     pub name: String,
@@ -226,6 +232,7 @@ Represents storage volumes:
 
 ```bash
 ```rust
+``` rust
 pub struct Volume {
     pub id: Uuid,
     pub name: String,
@@ -249,6 +256,7 @@ Represents virtual networks:
 
 ```bash
 ```rust
+``` rust
 pub struct Network {
     pub id: Uuid,
     pub name: String,
@@ -277,6 +285,7 @@ Manages infrastructure providers, their credentials, and connections:
 
 ```bash
 ```rust
+``` rust
 pub struct ProviderService {
     providers: Providers,
     credentials: Credentials,
@@ -289,6 +298,7 @@ Handles VM/container lifecycle operations:
 
 ```bash
 ```rust
+``` rust
 pub struct InstanceService {
     storage: InstanceStorage,
     provider_service: ProviderService,
@@ -310,21 +320,21 @@ Configuration is stored in the user's home directory:
 
 The CLI supports the following main commands:
 
-- `bbctl init` - Initialize a new project
-- `bbctl instances` - List/create/manage VMs
-- `bbctl volumes` - Manage storage
-- `bbctl networks` - Configure virtual networks
-- `bbctl test-vyos` - Test connectivity to VyOS router
+-   `bbctl init` - Initialize a new project
+-   `bbctl instances` - List/create/manage VMs
+-   `bbctl volumes` - Manage storage
+-   `bbctl networks` - Configure virtual networks
+-   `bbctl test-vyos` - Test connectivity to VyOS router
 
 ### 7. Terminal UI (TUI)
 
 The TUI provides an interactive dashboard with:
 
-- Instances view
-- Volumes view
-- Networks view
-- Settings management
-- Real-time status updates
+-   Instances view
+-   Volumes view
+-   Networks view
+-   Settings management
+-   Real-time status updates
 
 ## Test Environment
 
@@ -355,21 +365,21 @@ The test lab simulates a multi-tenant infrastructure using Docker containers run
 
 The test lab implements:
 
-1. **WireGuard Control Plane**: Secure management and control plane using WireGuard VPN
-2. **BGP EVPN**: Control plane for multi-tenant VXLAN networks
-3. **L3VPN**: Tenant isolation using VRFs and route targets
-4. **HTTP API**: Endpoints for bbctl to manage infrastructure
+1.  **WireGuard Control Plane**: Secure management and control plane using WireGuard VPN
+2.  **BGP EVPN**: Control plane for multi-tenant VXLAN networks
+3.  **L3VPN**: Tenant isolation using VRFs and route targets
+4.  **HTTP API**: Endpoints for bbctl to manage infrastructure
 
 ### Test Scripts
 
 The test environment is managed by a set of scripts:
 
-- `setup-base.sh` - Sets up base infrastructure
-- `setup-vyos-container.sh` - Deploys VyOS containers
-- `configure-l3vpn-evpn.sh` - Configures L3VPN with EVPN
-- `configure-wireguard.sh` - Sets up WireGuard secure management
-- `setup-lab.sh` - Main orchestration script
-- `cleanup-lab.sh` - Teardown script
+-   `setup-base.sh` - Sets up base infrastructure
+-   `setup-vyos-container.sh` - Deploys VyOS containers
+-   `configure-l3vpn-evpn.sh` - Configures L3VPN with EVPN
+-   `configure-wireguard.sh` - Sets up WireGuard secure management
+-   `setup-lab.sh` - Main orchestration script
+-   `cleanup-lab.sh` - Teardown script
 
 ## Current Status
 
@@ -417,34 +427,45 @@ The test environment is managed by a set of scripts:
    - ✅ Provider interface trait
    - ✅ VyOS API client
    - ✅ Proxmox API client
+1.  **API Layer**
 
-2. **Data Models**
-   - ✅ Instance model
-   - ✅ Volume model
-   - ✅ Network model
-   - ✅ Provider model
+-   ✅ Provider interface trait
+-   ✅ VyOS API client
+-   ✅ Proxmox API client
 
-3. **Configuration Management**
-   - ✅ Settings model and storage
-   - ✅ Provider configuration
-   - ✅ Credential management
+2.  **Data Models**
 
-4. **Basic Services**
-   - ✅ Provider service
-   - ✅ Instance service (partial)
+-   ✅ Instance model
+-   ✅ Volume model
+-   ✅ Network model
+-   ✅ Provider model
 
-5. **CLI Interface**
-   - ✅ Basic command structure
-   - ✅ VyOS connectivity testing
+3.  **Configuration Management**
 
-6. **Terminal UI**
-   - ✅ Basic TUI framework
-   - ✅ Navigation and layout
+-   ✅ Settings model and storage
+-   ✅ Provider configuration
+-   ✅ Credential management
 
-7. **Test Environment**
-   - ✅ VyOS lab setup scripts
-   - ✅ L3VPN and EVPN configuration
-   - ✅ WireGuard secure management
+4.  **Basic Services**
+
+-   ✅ Provider service
+-   ✅ Instance service (partial)
+
+5.  **CLI Interface**
+
+-   ✅ Basic command structure
+-   ✅ VyOS connectivity testing
+
+6.  **Terminal UI**
+
+-   ✅ Basic TUI framework
+-   ✅ Navigation and layout
+
+7.  **Test Environment**
+
+-   ✅ VyOS lab setup scripts
+-   ✅ L3VPN and EVPN configuration
+-   ✅ WireGuard secure management
 
 ### Work in Progress
 
@@ -466,14 +487,21 @@ The test environment is managed by a set of scripts:
    - 🔄 Volume service implementation
    - 🔄 Network service implementation
    - 🔄 API integration for resources
+1.  **Service Layer**
 
-2. **CLI Interface**
-   - 🔄 Complete command implementations
-   - 🔄 Error handling and user feedback
+-   🔄 Volume service implementation
+-   🔄 Network service implementation
+-   🔄 API integration for resources
 
-3. **Terminal UI**
-   - 🔄 Real-time data updates
-   - 🔄 Resource management wizards
+2.  **CLI Interface**
+
+-   🔄 Complete command implementations
+-   🔄 Error handling and user feedback
+
+3.  **Terminal UI**
+
+-   🔄 Real-time data updates
+-   🔄 Resource management wizards
 
 ### Planned Work
 
@@ -504,22 +532,30 @@ The test environment is managed by a set of scripts:
    - 📝 Persistence layer for local state
    - 📝 Synchronization with remote state
    - 📝 Event system for notifications
+1.  **Service Layer**
 
-2. **Security Features**
-   - 📝 Token rotation
-   - 📝 Credential encryption
-   - 📝 Secure remote execution
+-   📝 Persistence layer for local state
+-   📝 Synchronization with remote state
+-   📝 Event system for notifications
 
-3. **Advanced Features**
-   - 📝 Multi-tenant management
-   - 📝 Role-based access control
-   - 📝 Audit logging
-   - 📝 Resource quotas and limits
+2.  **Security Features**
 
-4. **Integration**
-   - 📝 Public cloud integration
-   - 📝 CI/CD workflows
-   - 📝 Integration with external tools
+-   📝 Token rotation
+-   📝 Credential encryption
+-   📝 Secure remote execution
+
+3.  **Advanced Features**
+
+-   📝 Multi-tenant management
+-   📝 Role-based access control
+-   📝 Audit logging
+-   📝 Resource quotas and limits
+
+4.  **Integration**
+
+-   📝 Public cloud integration
+-   📝 CI/CD workflows
+-   📝 Integration with external tools
 
 ## Implementation Roadmap
 
@@ -557,32 +593,64 @@ The test environment is managed by a set of scripts:
 - 📝 Deployment workflows
 - 📝 Integration with external CI/CD systems
 - 📝 Scaling and update policies
+-   ✅ Create directory structure for core components
+-   ✅ Implement VyOS and Proxmox provider interfaces
+-   ✅ Setup test environment with containers
+-   ✅ Implement SSH connectivity to provider hosts
+-   ✅ Basic authentication mechanism
+
+### Phase 2: Resource Management
+
+-   🔄 Complete API for VM/instance management
+-   📝 Storage (volume) provisioning and attachment
+-   📝 Network creation and configuration
+-   📝 IP address management
+
+### Phase 3: TUI Enhancement
+
+-   📝 Improve dashboard with real-time status updates
+-   📝 Resource creation wizards
+-   📝 Detailed views for resources
+-   📝 Settings management
+
+### Phase 4: Multi-Tenancy & Security
+
+-   📝 User and organization management
+-   📝 Role-based access control
+-   📝 Secure credential management
+-   📝 Encryption for data in transit
+
+### Phase 5: CI/CD Integration
+
+-   📝 Deployment workflows
+-   📝 Integration with external CI/CD systems
+-   📝 Scaling and update policies
 
 ## Design Decisions
 
 ### 1. Language and Framework Selection
 
-- **Rust**: Selected for its performance, safety, and excellent async support
-- **Tokio**: Used for async runtime
-- **Ratatui**: Chosen for TUI implementation due to its flexibility and performance
+-   **Rust**: Selected for its performance, safety, and excellent async support
+-   **Tokio**: Used for async runtime
+-   **Ratatui**: Chosen for TUI implementation due to its flexibility and performance
 
 ### 2. API Design
 
-- **Trait-based API**: Uses traits to define common provider interfaces
-- **Async-first**: Designed with async operations in mind to prevent UI blocking
-- **Error handling**: Consistent error propagation using `anyhow` for user-friendly messages
+-   **Trait-based API**: Uses traits to define common provider interfaces
+-   **Async-first**: Designed with async operations in mind to prevent UI blocking
+-   **Error handling**: Consistent error propagation using `anyhow` for user-friendly messages
 
 ### 3. Configuration Storage
 
-- **TOML format**: Selected for human-readability and easy editing
-- **User directory storage**: Uses `~/.bbctl` to store user configurations
-- **Credential separation**: Stores credentials in a separate file for better security
+-   **TOML format**: Selected for human-readability and easy editing
+-   **User directory storage**: Uses `~/.bbctl` to store user configurations
+-   **Credential separation**: Stores credentials in a separate file for better security
 
 ### 4. Network Architecture
 
-- **L3VPN with EVPN**: Chosen for scalable multi-tenant isolation
-- **WireGuard**: Selected for secure management plane due to its simplicity and strong encryption
-- **VXLAN**: Used for tenant traffic encapsulation to support network virtualization
+-   **L3VPN with EVPN**: Chosen for scalable multi-tenant isolation
+-   **WireGuard**: Selected for secure management plane due to its simplicity and strong encryption
+-   **VXLAN**: Used for tenant traffic encapsulation to support network virtualization
 
 ## Development Guidelines
 
@@ -600,13 +668,22 @@ The test environment is managed by a set of scripts:
 - **Imports**: Group imports by crate, with std first, then external, then internal
 - **Document**: Use three slashes (`///`) for public API documentation
 - **Async**: Use tokio runtime with futures for async operations
+-   **Formatting**: Use `cargo fmt` to format code according to Rust standard style
+-   **Linting**: Run `cargo clippy` for static analysis
+-   **Naming**:
+-   Use snake_case for variables, functions, and modules
+-   Use PascalCase for structs, enums, and traits
+-   **Error Handling**: Use `AppResult<T>` for functions that can fail
+-   **Imports**: Group imports by crate, with std first, then external, then internal
+-   **Document**: Use three slashes (`///`) for public API documentation
+-   **Async**: Use tokio runtime with futures for async operations
 
 ### Testing Strategy
 
-1. **Unit Tests**: Test individual components in isolation
-2. **Integration Tests**: Test component interactions
-3. **System Tests**: Test against the VyOS lab environment
-4. **Manual Testing**: Interactive testing of the TUI
+1.  **Unit Tests**: Test individual components in isolation
+2.  **Integration Tests**: Test component interactions
+3.  **System Tests**: Test against the VyOS lab environment
+4.  **Manual Testing**: Interactive testing of the TUI
 
 ## Conclusion
 

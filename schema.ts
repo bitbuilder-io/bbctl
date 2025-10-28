@@ -1,6 +1,9 @@
 import { zodToOpenAPI } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { z } from 'zod';
+import { z } from 'zod';
+import { zodToOpenAPI } from '@asteasolutions/zod-to-openapi';
+import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 
 // Initialize the OpenAPI registry
 const registry = new OpenAPIRegistry();
@@ -22,6 +25,7 @@ export const InstanceStatusEnum = z.enum([
   'Restarting',
   'Deleting',
   'Unknown',
+  'Unknown'
 ]);
 export type InstanceStatus = z.infer<typeof InstanceStatusEnum>;
 
@@ -33,6 +37,7 @@ export const VolumeStatusEnum = z.enum([
   'Deleting',
   'Error',
   'Unknown',
+  'Unknown'
 ]);
 export type VolumeStatus = z.infer<typeof VolumeStatusEnum>;
 
@@ -43,6 +48,7 @@ export const VolumeTypeEnum = z.enum([
   'NVMe',
   'HDD',
   'Network',
+  'Network'
 ]);
 export type VolumeType = z.infer<typeof VolumeTypeEnum>;
 
@@ -53,6 +59,7 @@ export const NetworkStatusEnum = z.enum([
   'Deleting',
   'Error',
   'Unknown',
+  'Unknown'
 ]);
 export type NetworkStatus = z.infer<typeof NetworkStatusEnum>;
 
@@ -63,6 +70,7 @@ export const NetworkTypeEnum = z.enum([
   'Isolated',
   'VXLAN',
   'VPN',
+  'VPN'
 ]);
 export type NetworkType = z.infer<typeof NetworkTypeEnum>;
 
@@ -972,6 +980,34 @@ export {
   VyOSCredentialsSchema,
   WireGuardConfigSchema,
   WireGuardPeerSchema,
+  ProviderTypeEnum,
+  InstanceStatusEnum,
+  VolumeStatusEnum,
+  VolumeTypeEnum,
+  NetworkStatusEnum,
+  NetworkTypeEnum,
+  ResourceLimitsSchema,
+  ProviderConfigSchema,
+  RegionSchema,
+  VyOSCredentialsSchema,
+  ProxmoxTokenAuthSchema,
+  ProxmoxUserPassAuthSchema,
+  ProxmoxCredentialsSchema,
+  ProviderCredentialsSchema,
+  InstanceSizeSchema,
+  InstanceNetworkSchema,
+  InstanceSchema,
+  CreateInstanceRequestSchema,
+  VolumeSchema,
+  CreateVolumeRequestSchema,
+  AttachVolumeRequestSchema,
+  IpAllocationSchema,
+  NetworkSchema,
+  CreateNetworkRequestSchema,
+  ConnectNetworkRequestSchema,
+  WireGuardPeerSchema,
+  WireGuardConfigSchema,
+  openApiSchema,
 };
 
 // For backward compatibility
@@ -1006,4 +1042,5 @@ export default {
     WireGuardConfigSchema,
   },
   openApiSchema,
+};
 };

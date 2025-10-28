@@ -291,6 +291,7 @@ fn cli_handler(cli: Cli) -> AppResult<()> {
             }
         }
         Some(Commands::TestVyOS { host, port, username, .. }) => {
+        Some(Commands::TestVyOS { host, port, username }) => {
             // This would block, so we need to call it outside the CLI handler
             // Will be implemented in main()
             return Err("Use tokio runtime to test VyOS connectivity".into());

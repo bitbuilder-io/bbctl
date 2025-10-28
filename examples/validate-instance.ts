@@ -16,6 +16,7 @@ const validInstance = {
     cpu: 2,
     memoryGb: 4,
     diskGb: 80,
+    diskGb: 80
   },
   networks: [
     {
@@ -24,6 +25,8 @@ const validInstance = {
       interface: 'eth0',
       mac: '00:0a:95:9d:68:16',
     },
+      mac: '00:0a:95:9d:68:16'
+    }
   ],
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
@@ -32,6 +35,8 @@ const validInstance = {
     application: 'web-api',
     owner: 'devops',
   },
+    owner: 'devops'
+  }
 };
 
 // Invalid instance data (missing required fields)
@@ -49,6 +54,8 @@ const invalidInstance = {
   tags: {
     environment: 'production',
   },
+    environment: 'production'
+  }
 };
 
 // Function to validate instance data
@@ -88,6 +95,7 @@ if (instance) {
   console.log(`RAM: ${instance.size.memoryGb} GB`);
   console.log(`Disk: ${instance.size.diskGb} GB`);
 
+  
   // Safe access to optional fields
   const primaryIp = instance.networks[0]?.ip || 'No IP assigned';
   console.log(`Primary IP: ${primaryIp}`);
@@ -107,4 +115,5 @@ if (isInstance(someData)) {
   console.log('Data is not a valid instance');
 }
 
+// Run this example with: bun run examples/validate-instance.ts
 // Run this example with: bun run examples/validate-instance.ts
