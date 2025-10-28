@@ -173,6 +173,7 @@ pub trait Provider {
 
 ```rust
 ``` rust
+```rust
 pub trait Provider {
     /// Connect to the provider
     fn connect(&self) -> Result<()>;
@@ -211,6 +212,7 @@ Represents virtual machines and containers:
 ```bash
 ```rust
 ``` rust
+```rust
 pub struct Instance {
     pub id: Uuid,
     pub name: String,
@@ -233,6 +235,7 @@ Represents storage volumes:
 ```bash
 ```rust
 ``` rust
+```rust
 pub struct Volume {
     pub id: Uuid,
     pub name: String,
@@ -257,6 +260,7 @@ Represents virtual networks:
 ```bash
 ```rust
 ``` rust
+```rust
 pub struct Network {
     pub id: Uuid,
     pub name: String,
@@ -286,6 +290,7 @@ Manages infrastructure providers, their credentials, and connections:
 ```bash
 ```rust
 ``` rust
+```rust
 pub struct ProviderService {
     providers: Providers,
     credentials: Credentials,
@@ -299,6 +304,7 @@ Handles VM/container lifecycle operations:
 ```bash
 ```rust
 ``` rust
+```rust
 pub struct InstanceService {
     storage: InstanceStorage,
     provider_service: ProviderService,

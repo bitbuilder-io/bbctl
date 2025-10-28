@@ -42,6 +42,7 @@ BitBuilder Cloud CLI uses TOML configuration files for deployments. The main dep
 
 ```bash
 ``` toml
+```toml
 [app]
 name = "my-web-app"
 version = "1.0.0"
@@ -75,6 +76,7 @@ For environment-specific configurations, use separate files or environment secti
 
 ```bash
 ``` toml
+```toml
 [environments.development]
 instances = { count = 1, size = "small" }
 enable_metrics = false
@@ -102,7 +104,7 @@ bbctl init --name my-web-app
 ```bash
 1.  Initialize a new project:
 
-``` bash
+```bash
 bbctl init --name my-web-app
 ```
 
@@ -110,7 +112,7 @@ bbctl init --name my-web-app
 
 3.  Deploy the application:
 
-``` bash
+```bash
 bbctl deploy
 ```
 
@@ -139,6 +141,7 @@ For complex applications with dependencies, use multi-stage deployments:
 
 ```bash
 ``` toml
+```toml
 [stages]
 order = ["infrastructure", "database", "application", "monitoring"]
 
@@ -164,6 +167,7 @@ Minimize downtime using rolling deployments:
 
 ```bash
 ``` toml
+```toml
 [deployment.strategy]
 type = "rolling"
 batch_size = 1
@@ -181,6 +185,7 @@ Implement blue-green deployment strategy:
 type = "blue-green"
 traffic_shift = "instant" # or "gradual"
 ``` toml
+```toml
 [deployment.strategy]
 type = "blue-green"
 traffic_shift = "instant"  # or "gradual"
@@ -205,13 +210,13 @@ terraform init -plugin-dir=~/.terraform.d/plugins
 ```bash
 1.  Install the bbctl Terraform provider:
 
-``` bash
+```bash
 terraform init -plugin-dir=~/.terraform.d/plugins
 ```
 
 2.  Create a Terraform configuration using bbctl resources:
 
-``` hcl
+```hcl
 provider "bbctl" {
   config_path = "~/.bbctl/config.toml"
 }
@@ -230,7 +235,7 @@ resource "bbctl_instance" "web" {
 ```bash
 3.  Apply the Terraform configuration:
 
-``` bash
+```bash
 terraform apply
 ```
 
@@ -252,6 +257,7 @@ const instance = new bbctl.Instance('web-server', {
   size: 'standard',
   networks: [network.id],
 ``` typescript
+```typescript
 import * as bbctl from "@pulumi/bbctl";
 
 const network = new bbctl.Network("app-network", {
@@ -278,6 +284,7 @@ Example GitHub Actions workflow:
 
 ```bash
 ``` yaml
+```yaml
 name: Deploy Application
 
 on:
@@ -310,6 +317,7 @@ Example GitLab CI pipeline:
 
 ```bash
 ``` yaml
+```yaml
 stages:
   - test
   - build
@@ -334,6 +342,7 @@ Inject environment variables into your instances:
 
 ```bash
 ``` toml
+```toml
 [instances.web.env]
 DATABASE_URL = "postgres://user:pass@db.internal:5432/mydb"
 REDIS_HOST = "redis.internal"
@@ -346,6 +355,7 @@ Deploy configuration files to instances:
 
 ```bash
 ``` toml
+```toml
 [instances.web.files]
 "/etc/nginx/nginx.conf" = { source = "./configs/nginx.conf" }
 "/etc/app/config.json" = { content = '{"debug": false, "port": 3000}' }
@@ -357,6 +367,7 @@ Secure handling of sensitive information:
 
 ```bash
 ``` toml
+```toml
 [secrets]
 provider = "vault"
 path = "secret/my-app"
@@ -375,6 +386,7 @@ Deploy across multiple regions:
 enabled = ["nyc", "sfo", "fra"]
 strategy = "all" # or "weighted"
 ``` toml
+```toml
 [regions]
 enabled = ["nyc", "sfo", "fra"]
 strategy = "all"  # or "weighted"
@@ -398,6 +410,7 @@ Configure highly available deployments:
 
 ```bash
 ``` toml
+```toml
 [availability]
 zones = ["a", "b", "c"]
 distribution = "spread"
@@ -417,6 +430,7 @@ Configure monitoring for deployments:
 
 ```bash
 ``` toml
+```toml
 [monitoring]
 enable = true
 provider = "prometheus"
@@ -434,6 +448,7 @@ options = { tag = "app-logs" }
 
 ```bash
 ``` toml
+```toml
 [testing.pre_deployment]
 enabled = true
 command = "./scripts/pre-deploy-test.sh"
@@ -445,6 +460,7 @@ fail_on_error = true
 
 ```bash
 ``` toml
+```toml
 [testing.smoke]
 enabled = true
 endpoints = [
@@ -460,6 +476,7 @@ retries = 3
 
 ```bash
 ``` toml
+```toml
 [testing.load]
 enabled = true
 tool = "k6"
@@ -475,6 +492,7 @@ threshold = "p95(http_req_duration) < 200"
 
 ```bash
 ``` toml
+```toml
 [security]
 ssl_enabled = true
 certificate = "acme"
@@ -490,6 +508,7 @@ headers = {
 
 ```bash
 ``` toml
+```toml
 [compliance]
 enabled = true
 standards = ["pci-dss", "gdpr"]

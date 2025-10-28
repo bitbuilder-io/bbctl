@@ -31,7 +31,7 @@ The API schema is defined using [Zod], a TypeScript-first schema validation libr
 
 ### Installation
 
-``` bash
+```bash
 cd bitbuilder.io/bbctl
 bun install
 ```

@@ -28,7 +28,7 @@ cargo clippy
 
 ## CLI Examples
 
-``` bash
+```bash
 # List instances
 cargo run -- instances list
 

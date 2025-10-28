@@ -279,7 +279,7 @@ BitBuilder Cloud CLI uses the following configuration files in `~/.bbctl/`:
 
 ### Example Settings File
 
-``` toml
+```toml
 default_provider = "vyos-router"
 default_region = "nyc"
 telemetry_enabled = false

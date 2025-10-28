@@ -64,6 +64,7 @@ The `providers.toml` file defines infrastructure providers and regions:
 
 ```bash
 ``` toml
+```toml
 # Provider configurations
 [providers]
 
@@ -121,6 +122,7 @@ The `credentials.toml` file stores authentication information for providers:
 
 ```bash
 ``` toml
+```toml
 [credentials]
 
 [credentials.vyos-router]
@@ -150,6 +152,7 @@ Network configuration is stored within the provider settings:
 
 ```bash
 ``` toml
+```toml
 [networks.app-network]
 id = "net-01234567"
 name = "app-network"
@@ -167,6 +170,7 @@ For secure encrypted networks using WireGuard:
 
 ```bash
 ``` toml
+```toml
 [networks.secure-net]
 id = "net-89abcdef"
 name = "secure-net"
@@ -206,6 +210,7 @@ Configure resource limits by tenant:
 
 ```bash
 ``` toml
+```toml
 [tenants.eng-team]
 max_instances = 20
 max_volumes = 40
@@ -221,6 +226,7 @@ Define templates for quick provisioning:
 
 ```bash
 ``` toml
+```toml
 [templates.web-server]
 cpu = 2
 memory_gb = 4
@@ -252,6 +258,7 @@ Configure the API server component:
 
 ```bash
 ``` toml
+```toml
 [api]
 enabled = true
 listen = "127.0.0.1"
@@ -266,6 +273,7 @@ Configure SSH keys for instance access:
 
 ```bash
 ``` toml
+```toml
 [ssh]
 default_key = "~/.ssh/id_ed25519"
 additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
@@ -288,7 +296,7 @@ additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
 
 ### Debugging Configuration
 
-``` bash
+```bash
 # Show current configuration
 bbctl config show
 
