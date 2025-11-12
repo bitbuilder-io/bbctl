@@ -18,7 +18,15 @@ bbctl uses the following configuration files, located in the `~/.bbctl/` directo
 
 The `settings.toml` file contains global configuration for bbctl behavior:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Default provider to use when not specified
 default_provider = "vyos-router"
 
@@ -47,7 +55,15 @@ log_level = "info"
 
 You can modify settings using the config command:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Set default provider
 bbctl config set default_provider vyos-router
 
@@ -59,7 +75,15 @@ bbctl config set log_level debug
 
 The `providers.toml` file defines infrastructure providers and regions:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Provider configurations
 [providers]
 
@@ -99,7 +123,15 @@ limits = { max_instances = 5, max_cpu_per_instance = 4 }
 
 Provider configuration can be managed using CLI commands:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Add a new VyOS provider
 bbctl providers add vyos-router2 --type vyos --host 192.168.1.3 --username vyos
 
@@ -114,7 +146,15 @@ bbctl providers remove vyos-router2
 
 The `credentials.toml` file stores authentication information for providers:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [credentials]
 
 [credentials.vyos-router]
@@ -139,7 +179,15 @@ verify_ssl = false
 
 Network configuration is stored within the provider settings:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [networks.app-network]
 id = "net-01234567"
 name = "app-network"
@@ -155,7 +203,15 @@ dns_servers = ["1.1.1.1", "8.8.8.8"]
 
 For secure encrypted networks using WireGuard:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [networks.secure-net]
 id = "net-89abcdef"
 name = "secure-net"
@@ -179,7 +235,15 @@ You can override configuration using environment variables:
 
 Example:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 export BBCTL_LOG_LEVEL=debug
 export BBCTL_DEFAULT_PROVIDER=vyos-router
 bbctl instances list  # Will use debug logging and vyos-router as default
@@ -191,7 +255,15 @@ bbctl instances list  # Will use debug logging and vyos-router as default
 
 Configure resource limits by tenant:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [tenants.eng-team]
 max_instances = 20
 max_volumes = 40
@@ -205,7 +277,15 @@ regions = ["nyc", "sfo"]
 
 Define templates for quick provisioning:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [templates.web-server]
 cpu = 2
 memory_gb = 4
@@ -225,7 +305,15 @@ volumes = [
 
 Usage:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 bbctl instances create web1 --template web-server
 ```
 
@@ -233,7 +321,15 @@ bbctl instances create web1 --template web-server
 
 Configure the API server component:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [api]
 enabled = true
 listen = "127.0.0.1"
@@ -246,7 +342,15 @@ cors_origins = ["http://localhost:3000"]
 
 Configure SSH keys for instance access:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [ssh]
 default_key = "~/.ssh/id_ed25519"
 additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
@@ -262,7 +366,15 @@ additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
 
 ### Debugging Configuration
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Show current configuration
 bbctl config show
 
@@ -277,7 +389,15 @@ bbctl config validate
 
 If you need to reset your configuration:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Reset specific section
 bbctl config reset --section credentials
 

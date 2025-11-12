@@ -30,7 +30,15 @@ The typical deployment workflow consists of:
 
 BitBuilder Cloud CLI uses TOML configuration files for deployments. The main deployment file is typically named `deploy.toml`:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [app]
 name = "my-web-app"
 version = "1.0.0"
@@ -62,7 +70,15 @@ subdomain = "web-app"
 
 For environment-specific configurations, use separate files or environment sections:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [environments.development]
 instances = { count = 1, size = "small" }
 enable_metrics = false
@@ -79,7 +95,15 @@ volumes.data.size = 500
 
 1. Initialize a new project:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 bbctl init --name my-web-app
 ```
 
@@ -87,13 +111,29 @@ bbctl init --name my-web-app
 
 3. Deploy the application:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 bbctl deploy
 ```
 
 ### Deployment Options
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Deploy with a specific configuration file
 bbctl deploy --config custom-deploy.toml
 
@@ -113,7 +153,15 @@ bbctl deploy --force
 
 For complex applications with dependencies, use multi-stage deployments:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [stages]
 order = ["infrastructure", "database", "application", "monitoring"]
 
@@ -137,7 +185,15 @@ depends_on = ["application"]
 
 Minimize downtime using rolling deployments:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [deployment.strategy]
 type = "rolling"
 batch_size = 1
@@ -150,7 +206,15 @@ timeout = "5m"
 
 Implement blue-green deployment strategy:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [deployment.strategy]
 type = "blue-green"
 traffic_shift = "instant" # or "gradual"
@@ -166,13 +230,29 @@ For Terraform integration:
 
 1. Install the bbctl Terraform provider:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 terraform init -plugin-dir=~/.terraform.d/plugins
 ```
 
 2. Create a Terraform configuration using bbctl resources:
 
+<<<<<<< Updated upstream
 ```hcl
+=======
+<<<<<<< HEAD
+``` hcl
+=======
+```hcl
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 provider "bbctl" {
   config_path = "~/.bbctl/config.toml"
 }
@@ -188,7 +268,15 @@ resource "bbctl_instance" "web" {
 
 3. Apply the Terraform configuration:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 terraform apply
 ```
 
@@ -196,8 +284,17 @@ terraform apply
 
 For Pulumi integration:
 
+<<<<<<< Updated upstream
 ```typescript
 import * as bbctl from '@pulumi/bbctl';
+=======
+<<<<<<< HEAD
+``` typescript
+=======
+```typescript
+>>>>>>> chore/bisect
+import * as bbctl from "@pulumi/bbctl";
+>>>>>>> Stashed changes
 
 const network = new bbctl.Network('app-network', {
   cidr: '10.0.0.0/24',
@@ -221,7 +318,15 @@ export const instanceIp = instance.publicIp;
 
 Example GitHub Actions workflow:
 
+<<<<<<< Updated upstream
 ```yaml
+=======
+<<<<<<< HEAD
+``` yaml
+=======
+```yaml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 name: Deploy Application
 
 on:
@@ -252,7 +357,15 @@ jobs:
 
 Example GitLab CI pipeline:
 
+<<<<<<< Updated upstream
 ```yaml
+=======
+<<<<<<< HEAD
+``` yaml
+=======
+```yaml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 stages:
   - test
   - build
@@ -275,7 +388,15 @@ deploy:
 
 Inject environment variables into your instances:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [instances.web.env]
 DATABASE_URL = "postgres://user:pass@db.internal:5432/mydb"
 REDIS_HOST = "redis.internal"
@@ -286,7 +407,15 @@ LOG_LEVEL = "info"
 
 Deploy configuration files to instances:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [instances.web.files]
 "/etc/nginx/nginx.conf" = { source = "./configs/nginx.conf" }
 "/etc/app/config.json" = { content = '{"debug": false, "port": 3000}' }
@@ -296,7 +425,15 @@ Deploy configuration files to instances:
 
 Secure handling of sensitive information:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [secrets]
 provider = "vault"
 path = "secret/my-app"
@@ -310,7 +447,15 @@ DB_PASSWORD = "vault:secret/my-app#db_password"
 
 Deploy across multiple regions:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [regions]
 enabled = ["nyc", "sfo", "fra"]
 strategy = "all" # or "weighted"
@@ -332,7 +477,15 @@ instances = { count = 1 }
 
 Configure highly available deployments:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [availability]
 zones = ["a", "b", "c"]
 distribution = "spread"
@@ -349,7 +502,15 @@ failover = "automatic"
 
 Configure monitoring for deployments:
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [monitoring]
 enable = true
 provider = "prometheus"
@@ -365,7 +526,15 @@ options = { tag = "app-logs" }
 
 ### Pre-deployment Testing
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [testing.pre_deployment]
 enabled = true
 command = "./scripts/pre-deploy-test.sh"
@@ -375,7 +544,15 @@ fail_on_error = true
 
 ### Smoke Testing
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [testing.smoke]
 enabled = true
 endpoints = [
@@ -388,7 +565,15 @@ retries = 3
 
 ### Load Testing
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [testing.load]
 enabled = true
 tool = "k6"
@@ -402,7 +587,15 @@ threshold = "p95(http_req_duration) < 200"
 
 ### Security Configurations
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [security]
 ssl_enabled = true
 certificate = "acme"
@@ -416,7 +609,15 @@ headers = {
 
 ### Compliance Checks
 
+<<<<<<< Updated upstream
 ```toml
+=======
+<<<<<<< HEAD
+``` toml
+=======
+```toml
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 [compliance]
 enabled = true
 standards = ["pci-dss", "gdpr"]
@@ -428,7 +629,15 @@ scans = ["vulnerability", "configuration"]
 
 To roll back to a previous deployment:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # List deployments
 bbctl deployments list
 
@@ -465,7 +674,15 @@ bbctl deployments rollback --previous
 
 Access deployment logs:
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Get summary of deployment logs
 bbctl deployments logs d-01234567
 

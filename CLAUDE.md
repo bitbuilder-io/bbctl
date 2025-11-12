@@ -2,7 +2,15 @@
 
 ## Build & Run Commands
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # Build
 cargo build
 
@@ -27,7 +35,15 @@ cargo clippy
 
 ## CLI Examples
 
+<<<<<<< Updated upstream
 ```bash
+=======
+<<<<<<< HEAD
+``` bash
+=======
+```bash
+>>>>>>> chore/bisect
+>>>>>>> Stashed changes
 # List instances
 cargo run -- instances list
 
