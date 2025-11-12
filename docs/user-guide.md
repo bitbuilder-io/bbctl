@@ -14,15 +14,7 @@ This guide will help you understand how to use bbctl effectively, covering insta
 
 If you have Rust installed, the simplest way to install bbctl is via Cargo:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 cargo install bbctl
 ```
 
@@ -41,15 +33,7 @@ For systems without Rust, download pre-compiled binaries:
 
 To build the latest version from source:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 git clone https://github.com/bitbuilder-io/bbctl.git
 cd bbctl
 cargo build --release
@@ -61,15 +45,7 @@ The compiled binary will be in `target/release/bbctl`.
 
 When running bbctl for the first time, you'll need to set up your provider credentials:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 # Initialize bbctl configuration
 bbctl init
 
@@ -94,43 +70,19 @@ BitBuilder Cloud CLI organizes resources into the following categories:
 
 ### Listing Providers
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl providers list
 ```
 
 ### Testing Provider Connectivity
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl providers test vyos-router
 ```
 
 ### Removing a Provider
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl providers remove vyos-router
 ```
 
@@ -138,15 +90,7 @@ bbctl providers remove vyos-router
 
 ### Creating an Instance
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl instances create web-server-1 \
   --provider vyos-router \
   --region nyc \
@@ -157,29 +101,13 @@ bbctl instances create web-server-1 \
 
 ### Listing Instances
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl instances list
 ```
 
 ### Starting and Stopping Instances
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 # Start an instance
 bbctl instances start i-01234567
 
@@ -189,29 +117,13 @@ bbctl instances stop i-01234567
 
 ### Getting Instance Details
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl instances show i-01234567
 ```
 
 ### Deleting an Instance
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl instances delete i-01234567
 ```
 
@@ -219,15 +131,7 @@ bbctl instances delete i-01234567
 
 ### Creating a Volume
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl volumes create db-data \
   --size 100 \
   --region nyc
@@ -235,44 +139,20 @@ bbctl volumes create db-data \
 
 ### Listing Volumes
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl volumes list
 ```
 
 ### Attaching a Volume to an Instance
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl volumes attach vol-01234567 \
   --instance i-01234567
 ```
 
 ### Detaching a Volume
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl volumes detach vol-01234567
 ```
 
@@ -280,59 +160,27 @@ bbctl volumes detach vol-01234567
 
 ### Creating a Network
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl networks create app-network \
   --cidr 192.168.1.0/24
 ```
 
 ### Listing Networks
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl networks list
 ```
 
 ### Connecting an Instance to a Network
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl networks connect net-01234567 \
   --instance i-01234567
 ```
 
 ### Disconnecting an Instance
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl networks disconnect net-01234567 \
   --instance i-01234567
 ```
@@ -383,15 +231,7 @@ BitBuilder Cloud CLI uses the following configuration files in `~/.bbctl/`:
 
 ### Example Settings File
 
-<<<<<<< Updated upstream
-```toml
-=======
-<<<<<<< HEAD
-``` toml
-=======
-```toml
->>>>>>> chore/bisect
->>>>>>> Stashed changes
+```bash
 default_provider = "vyos-router"
 default_region = "nyc"
 telemetry_enabled = false
@@ -409,15 +249,7 @@ log_level = "info"
 
 You can use environment variables to override configuration values:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 export BBCTL_DEFAULT_PROVIDER=vyos-router
 export BBCTL_LOG_LEVEL=debug
 ```
@@ -426,15 +258,7 @@ export BBCTL_LOG_LEVEL=debug
 
 For scripting, you can use the `--json` flag with most commands to get machine-readable output:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl instances list --json > instances.json
 ```
 
@@ -442,15 +266,7 @@ bbctl instances list --json > instances.json
 
 BitBuilder Cloud CLI supports setting up WireGuard for secure connectivity:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl networks create secure-net \
   --cidr 10.10.0.0/24 \
   --wireguard enabled
@@ -464,15 +280,7 @@ bbctl networks create secure-net \
 
 If you're having trouble connecting to a provider:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 # Test provider connectivity with verbose output
 bbctl providers test vyos-router --verbose
 
@@ -484,15 +292,7 @@ bbctl providers update vyos-router --api-key new-api-key
 
 For detailed error information, increase the log level:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl --log-level debug instances list
 ```
 
@@ -500,15 +300,7 @@ bbctl --log-level debug instances list
 
 If you suspect configuration problems:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 # View current configuration
 bbctl config show
 
@@ -520,15 +312,7 @@ bbctl config reset
 
 For additional help with specific commands:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bbctl help
 bbctl instances --help
 ```

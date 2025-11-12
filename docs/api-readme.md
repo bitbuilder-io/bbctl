@@ -22,15 +22,7 @@ The API schema is defined using [Zod], a TypeScript-first schema validation libr
 
 ### Installation
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 cd bitbuilder.io/bbctl
 bun install
 ```
@@ -39,15 +31,7 @@ bun install
 
 To generate the OpenAPI schema and documentation:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bun run generate-openapi
 ```
 
@@ -61,15 +45,7 @@ Open `api-docs/index.html` in your browser to view the interactive API documenta
 
 You can use the Zod schemas to validate data at runtime:
 
-<<<<<<< Updated upstream
 ```typescript
-=======
-<<<<<<< HEAD
-``` typescript
-=======
-```typescript
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 import { InstanceSchema } from './schema.js';
 
 // Data from API or user input
@@ -94,15 +70,7 @@ try {
 
 The schemas also provide TypeScript types:
 
-<<<<<<< Updated upstream
 ```typescript
-=======
-<<<<<<< HEAD
-``` typescript
-=======
-```typescript
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 import { Instance, InstanceStatus } from './schema.js';
 
 // Type-safe instance object
@@ -154,15 +122,7 @@ The OpenAPI documentation can be used to generate clients in various languages u
 
 For example, to generate a TypeScript client:
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 bunx --bun @openapitools/openapi-generator-cli generate \
   -i api-docs/openapi.json \
   -g typescript-axios \

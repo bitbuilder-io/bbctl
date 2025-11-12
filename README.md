@@ -74,15 +74,7 @@ cargo run
 
 A VyOS test lab environment is provided for testing bbctl against real infrastructure. The lab uses Docker to create VyOS routers configured with WireGuard, VXLAN, OSPF, and L3VPN to simulate a multi-tenant network environment.
 
-<<<<<<< Updated upstream
 ```bash
-=======
-<<<<<<< HEAD
-``` bash
-=======
-```bash
->>>>>>> chore/bisect
->>>>>>> Stashed changes
 # Setup the VyOS test lab
 cd tests/vyos-lab
 ./setup-lab.sh
@@ -94,7 +86,6 @@ bbctl test-vyos --host localhost --port 21022 --username vyos --api-key bbctl-te
 ./cleanup-lab.sh
 ```
 
-<<<<<<< HEAD
 For more information about the test lab, see [tests/vyos-lab/README.md] or the [VyOS Test Lab Setup] documentation.
 
 [tests/vyos-lab/README.md]: tests/vyos-lab/README.md
@@ -141,9 +132,6 @@ For more examples and detailed usage instructions, see the [User Guide] and [Com
 
 [User Guide]: docs/user-guide.md
 [Command Reference]: docs/command-reference.md
-=======
-For more information about the test lab, see [tests/vyos-lab/README.md](tests/vyos-lab/README.md).
->>>>>>> chore/bisect
 
 ## License
 
