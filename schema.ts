@@ -267,7 +267,11 @@ export const NetworkSchema = z.object({
   provider: ProviderTypeEnum,
   providerId: z.string(),
   region: z.string(),
-  cidr: z.string().regex(/^([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]{1,2}$/),
+  cidr: z
+    .string()
+    .regex(
+      /^((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\/(3[0-2]|[12]?\d)$/
+    ),
   networkType: NetworkTypeEnum,
   gateway: z.string().ip().optional(),
   dnsServers: z.array(z.string().ip()),
