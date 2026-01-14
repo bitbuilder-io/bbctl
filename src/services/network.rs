@@ -1,5 +1,5 @@
 use anyhow::{Result, anyhow};
-use log::{info, error};
+use log::info;
 use std::collections::HashMap;
 use std::net::IpAddr;
 use uuid::Uuid;
@@ -63,6 +63,7 @@ impl NetworkStorage {
 }
 
 /// Network service for managing virtual networks
+#[allow(dead_code)]
 pub struct NetworkService {
     storage: NetworkStorage,
     provider_service: ProviderService,

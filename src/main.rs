@@ -386,7 +386,7 @@ async fn main() -> AppResult<()> {
                                 Ok(info) => {
                                     println!("\n✅ API connection successful!");
                                     println!("\nVyOS system information:");
-                                    println!("{}", serde_json::to_string_pretty::<serde_json::Value>(&info).unwrap_or_else(|_| info.to_string()));
+                                    println!("{}", serde_json::to_string_pretty(&info).unwrap_or_else(|_| info.to_string()));
                                 },
                                 Err(e) => {
                                     println!("\n❌ API connection failed: {}", e);

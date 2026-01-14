@@ -1,5 +1,5 @@
 use anyhow::{Result, anyhow};
-use log::{info, error};
+use log::info;
 use std::collections::HashMap;
 use uuid::Uuid;
 
@@ -62,6 +62,7 @@ impl VolumeStorage {
 }
 
 /// Volume service for managing storage volumes
+#[allow(dead_code)]
 pub struct VolumeService {
     storage: VolumeStorage,
     provider_service: ProviderService,
