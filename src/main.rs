@@ -16,6 +16,10 @@ pub mod event;
 pub mod handler;
 pub mod tui;
 pub mod ui;
+pub mod api;
+pub mod models;
+pub mod config;
+pub mod services;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -286,7 +290,7 @@ fn cli_handler(cli: Cli) -> AppResult<()> {
                 }
             }
         }
-        Some(Commands::TestVyOS { host, port, username }) => {
+        Some(Commands::TestVyOS { host, port, username, .. }) => {
             // This would block, so we need to call it outside the CLI handler
             // Will be implemented in main()
             return Err("Use tokio runtime to test VyOS connectivity".into());
@@ -357,7 +361,7 @@ async fn main() -> AppResult<()> {
                 
                 let config = VyOSConfig {
                     host: host.clone(),
-                    ssh_port: port,
+                    ssh_port: *port,
                     api_port: 443, // Default API port
                     username: username.clone(),
                     password: password.clone(),
@@ -382,7 +386,7 @@ async fn main() -> AppResult<()> {
                                 Ok(info) => {
                                     println!("\n✅ API connection successful!");
                                     println!("\nVyOS system information:");
-                                    println!("{}", serde_json::to_string_pretty(&info).unwrap_or_else(|_| info.to_string()));
+                                    println!("{}", serde_json::to_string_pretty::<serde_json::Value>(&info).unwrap_or_else(|_| info.to_string()));
                                 },
                                 Err(e) => {
                                     println!("\n❌ API connection failed: {}", e);
