@@ -65,6 +65,7 @@ impl VolumeStorage {
 #[allow(dead_code)]
 pub struct VolumeService {
     storage: VolumeStorage,
+    /// Reserved for future provider-specific volume operations.
     provider_service: ProviderService,
 }
 

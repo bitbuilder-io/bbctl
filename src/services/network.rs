@@ -66,6 +66,7 @@ impl NetworkStorage {
 #[allow(dead_code)]
 pub struct NetworkService {
     storage: NetworkStorage,
+    /// Reserved for future provider-specific network operations.
     provider_service: ProviderService,
 }
 
