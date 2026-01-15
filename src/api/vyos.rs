@@ -101,7 +101,6 @@ impl VyOSClient {
         if self.http_client.is_none() {
             let client = Client::builder()
                 .timeout(Duration::from_secs(self.config.timeout))
-                .danger_accept_invalid_certs(true) // VyOS might use self-signed certs
                 .build()
                 .context("Failed to build HTTP client")?;
             
