@@ -25,8 +25,8 @@ pub fn handle_key_events(key_event: KeyEvent, app: &mut App) -> AppResult<()> {
         KeyCode::Up | KeyCode::Char('k') => {
             app.previous_item();
         }
-        
-        // Mode switching 
+
+        // Mode switching
         KeyCode::Char('1') => {
             app.change_mode(AppMode::Home);
         }
@@ -45,31 +45,27 @@ pub fn handle_key_events(key_event: KeyEvent, app: &mut App) -> AppResult<()> {
         KeyCode::Char('?') => {
             app.change_mode(AppMode::Help);
         }
-        
+
         // Tab navigation
-        KeyCode::Tab => {
-            match app.mode {
-                AppMode::Home => app.change_mode(AppMode::Instances),
-                AppMode::Instances => app.change_mode(AppMode::Volumes),
-                AppMode::Volumes => app.change_mode(AppMode::Networks),
-                AppMode::Networks => app.change_mode(AppMode::Settings),
-                AppMode::Settings => app.change_mode(AppMode::Help),
-                AppMode::Help => app.change_mode(AppMode::Home),
-            }
-        }
-        
+        KeyCode::Tab => match app.mode {
+            AppMode::Home => app.change_mode(AppMode::Instances),
+            AppMode::Instances => app.change_mode(AppMode::Volumes),
+            AppMode::Volumes => app.change_mode(AppMode::Networks),
+            AppMode::Networks => app.change_mode(AppMode::Settings),
+            AppMode::Settings => app.change_mode(AppMode::Help),
+            AppMode::Help => app.change_mode(AppMode::Home),
+        },
+
         // Shift+Tab for reverse navigation
-        KeyCode::BackTab => {
-            match app.mode {
-                AppMode::Home => app.change_mode(AppMode::Help),
-                AppMode::Instances => app.change_mode(AppMode::Home),
-                AppMode::Volumes => app.change_mode(AppMode::Instances),
-                AppMode::Networks => app.change_mode(AppMode::Volumes),
-                AppMode::Settings => app.change_mode(AppMode::Networks),
-                AppMode::Help => app.change_mode(AppMode::Settings),
-            }
-        }
-        
+        KeyCode::BackTab => match app.mode {
+            AppMode::Home => app.change_mode(AppMode::Help),
+            AppMode::Instances => app.change_mode(AppMode::Home),
+            AppMode::Volumes => app.change_mode(AppMode::Instances),
+            AppMode::Networks => app.change_mode(AppMode::Volumes),
+            AppMode::Settings => app.change_mode(AppMode::Networks),
+            AppMode::Help => app.change_mode(AppMode::Settings),
+        },
+
         // Other handlers
         _ => {}
     }

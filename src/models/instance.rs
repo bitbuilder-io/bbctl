@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
-use uuid::Uuid;
-use std::collections::HashMap;
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use uuid::Uuid;
 
 use crate::models::provider::ProviderType;
 
@@ -114,15 +114,22 @@ impl Instance {
             tags: HashMap::new(),
         }
     }
-    
+
     /// Get primary IP address
     pub fn primary_ip(&self) -> Option<&str> {
-        self.networks.first()
+        self.networks
+            .first()
             .and_then(|network| network.ip.as_deref())
     }
-    
+
     /// Add a network to the instance
-    pub fn add_network(&mut self, network_id: String, ip: Option<String>, interface: Option<String>, mac: Option<String>) {
+    pub fn add_network(
+        &mut self,
+        network_id: String,
+        ip: Option<String>,
+        interface: Option<String>,
+        mac: Option<String>,
+    ) {
         self.networks.push(InstanceNetwork {
             network_id,
             ip,
@@ -131,19 +138,19 @@ impl Instance {
         });
         self.updated_at = Utc::now();
     }
-    
+
     /// Update instance status
     pub fn update_status(&mut self, status: InstanceStatus) {
         self.status = status;
         self.updated_at = Utc::now();
     }
-    
+
     /// Add a tag to the instance
     pub fn add_tag(&mut self, key: String, value: String) {
         self.tags.insert(key, value);
         self.updated_at = Utc::now();
     }
-    
+
     /// Remove a tag from the instance
     pub fn remove_tag(&mut self, key: &str) -> Option<String> {
         let result = self.tags.remove(key);

@@ -75,7 +75,7 @@ impl Default for App {
             memory_gb: 4,
             disk_gb: 80,
         });
-        
+
         instances.push(Instance {
             id: "i-89abcdef".to_string(),
             name: "db-1".to_string(),
@@ -87,7 +87,7 @@ impl Default for App {
             memory_gb: 16,
             disk_gb: 160,
         });
-        
+
         let mut volumes = Vec::new();
         volumes.push(Volume {
             id: "vol-01234567".to_string(),
@@ -96,7 +96,7 @@ impl Default for App {
             attached_to: Some("i-89abcdef".to_string()),
             region: "nyc".to_string(),
         });
-        
+
         let mut networks = Vec::new();
         networks.push(Network {
             id: "net-01234567".to_string(),
@@ -104,7 +104,7 @@ impl Default for App {
             cidr: "192.168.1.0/24".to_string(),
             instances: vec!["i-01234567".to_string(), "i-89abcdef".to_string()],
         });
-        
+
         Self {
             running: true,
             mode: AppMode::Home,
@@ -129,7 +129,7 @@ impl App {
     pub fn quit(&mut self) {
         self.running = false;
     }
-    
+
     pub fn next_item(&mut self) {
         let max_index = match self.mode {
             AppMode::Instances => self.instances.len().saturating_sub(1),
@@ -137,7 +137,7 @@ impl App {
             AppMode::Networks => self.networks.len().saturating_sub(1),
             _ => 0,
         };
-        
+
         if max_index > 0 {
             self.selected_index = if self.selected_index >= max_index {
                 0
@@ -146,7 +146,7 @@ impl App {
             };
         }
     }
-    
+
     pub fn previous_item(&mut self) {
         let max_index = match self.mode {
             AppMode::Instances => self.instances.len().saturating_sub(1),
@@ -154,7 +154,7 @@ impl App {
             AppMode::Networks => self.networks.len().saturating_sub(1),
             _ => 0,
         };
-        
+
         if max_index > 0 {
             self.selected_index = if self.selected_index == 0 {
                 max_index
@@ -163,7 +163,7 @@ impl App {
             };
         }
     }
-    
+
     pub fn change_mode(&mut self, mode: AppMode) {
         self.mode = mode;
         self.selected_index = 0;

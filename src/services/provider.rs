@@ -1,11 +1,14 @@
-use anyhow::{Result, Context, anyhow};
-use log::{debug, info, error};
+use anyhow::{anyhow, Context, Result};
+use log::{debug, error, info};
 use std::collections::HashMap;
 
-use crate::models::provider::{ProviderType, ProviderConfig, Region, ResourceLimits};
-use crate::config::provider::Providers;
+use crate::api::{
+    proxmox::ProxmoxAuth, proxmox::ProxmoxClient, proxmox::ProxmoxConfig, vyos::VyOSClient,
+    vyos::VyOSConfig, Provider,
+};
 use crate::config::credentials::{Credentials, ProviderCredentials};
-use crate::api::{Provider, vyos::VyOSClient, vyos::VyOSConfig, proxmox::ProxmoxClient, proxmox::ProxmoxConfig, proxmox::ProxmoxAuth};
+use crate::config::provider::Providers;
+use crate::models::provider::{ProviderConfig, ProviderType, Region, ResourceLimits};
 
 /// Provider service for managing infrastructure providers
 pub struct ProviderService {
@@ -18,28 +21,28 @@ impl ProviderService {
     pub fn new() -> Result<Self> {
         let providers = Providers::load()?;
         let credentials = Credentials::load()?;
-        
+
         Ok(Self {
             providers,
             credentials,
         })
     }
-    
+
     /// Get provider configs
     pub fn get_providers(&self) -> &HashMap<String, ProviderConfig> {
         self.providers.get_all_providers()
     }
-    
+
     /// Get regions
     pub fn get_regions(&self) -> &HashMap<String, Region> {
         self.providers.get_all_regions()
     }
-    
+
     /// Get regions by provider
     pub fn get_regions_by_provider(&self, provider_type: ProviderType) -> Vec<&Region> {
         self.providers.get_regions_by_provider(provider_type)
     }
-    
+
     /// Add a new VyOS provider
     pub fn add_vyos_provider(
         &mut self,
@@ -54,29 +57,24 @@ impl ProviderService {
     ) -> Result<()> {
         // Create provider params
         let mut params = HashMap::new();
-        
+
         // Add provider
-        self.providers.add_provider(name, ProviderType::VyOS, host, params)?;
-        
+        self.providers
+            .add_provider(name, ProviderType::VyOS, host, params)?;
+
         // Add credentials
         self.credentials.add_vyos_credentials(
-            name,
-            username,
-            password,
-            key_path,
-            api_key,
-            ssh_port,
-            api_port,
+            name, username, password, key_path, api_key, ssh_port, api_port,
         )?;
-        
+
         // Save changes
         self.providers.save()?;
         self.credentials.save()?;
-        
+
         info!("Added VyOS provider: {}", name);
         Ok(())
     }
-    
+
     /// Add a new Proxmox provider with token auth
     pub fn add_proxmox_provider_with_token(
         &mut self,
@@ -89,10 +87,11 @@ impl ProviderService {
     ) -> Result<()> {
         // Create provider params
         let mut params = HashMap::new();
-        
+
         // Add provider
-        self.providers.add_provider(name, ProviderType::Proxmox, host, params)?;
-        
+        self.providers
+            .add_provider(name, ProviderType::Proxmox, host, params)?;
+
         // Add credentials
         self.credentials.add_proxmox_token_credentials(
             name,
@@ -101,15 +100,15 @@ impl ProviderService {
             port,
             verify_ssl,
         )?;
-        
+
         // Save changes
         self.providers.save()?;
         self.credentials.save()?;
-        
+
         info!("Added Proxmox provider with token auth: {}", name);
         Ok(())
     }
-    
+
     /// Add a new Proxmox provider with username/password auth
     pub fn add_proxmox_provider_with_user_pass(
         &mut self,
@@ -123,46 +122,41 @@ impl ProviderService {
     ) -> Result<()> {
         // Create provider params
         let mut params = HashMap::new();
-        
+
         // Add provider
-        self.providers.add_provider(name, ProviderType::Proxmox, host, params)?;
-        
+        self.providers
+            .add_provider(name, ProviderType::Proxmox, host, params)?;
+
         // Add credentials
-        self.credentials.add_proxmox_user_pass_credentials(
-            name,
-            username,
-            password,
-            realm,
-            port,
-            verify_ssl,
-        )?;
-        
+        self.credentials
+            .add_proxmox_user_pass_credentials(name, username, password, realm, port, verify_ssl)?;
+
         // Save changes
         self.providers.save()?;
         self.credentials.save()?;
-        
+
         info!("Added Proxmox provider with user/pass auth: {}", name);
         Ok(())
     }
-    
+
     /// Remove a provider
     pub fn remove_provider(&mut self, name: &str) -> Result<()> {
         // Remove provider config
         self.providers.remove_provider(name)?;
-        
+
         // Remove credentials
         if let Err(e) = self.credentials.remove_credentials(name) {
             debug!("No credentials found for provider '{}': {}", name, e);
         }
-        
+
         // Save changes
         self.providers.save()?;
         self.credentials.save()?;
-        
+
         info!("Removed provider: {}", name);
         Ok(())
     }
-    
+
     /// Add a new region
     pub fn add_region(
         &mut self,
@@ -181,37 +175,42 @@ impl ProviderService {
             available,
             limits: limits.unwrap_or_default(),
         };
-        
+
         self.providers.add_region(region)?;
         self.providers.save()?;
-        
+
         info!("Added region: {}", id);
         Ok(())
     }
-    
+
     /// Remove a region
     pub fn remove_region(&mut self, id: &str) -> Result<()> {
         self.providers.remove_region(id)?;
         self.providers.save()?;
-        
+
         info!("Removed region: {}", id);
         Ok(())
     }
-    
+
     /// Get a VyOS client for a provider
     pub fn get_vyos_client(&self, provider_name: &str) -> Result<VyOSClient> {
         // Get provider config
-        let provider = self.providers.get_provider(provider_name)
+        let provider = self
+            .providers
+            .get_provider(provider_name)
             .ok_or_else(|| anyhow!("Provider not found: {}", provider_name))?;
-            
+
         // Ensure it's a VyOS provider
         if provider.provider_type != ProviderType::VyOS {
-            return Err(anyhow!("Provider '{}' is not a VyOS provider", provider_name));
+            return Err(anyhow!(
+                "Provider '{}' is not a VyOS provider",
+                provider_name
+            ));
         }
-        
+
         // Get credentials
         let creds = self.credentials.get_vyos_credentials(provider_name)?;
-        
+
         // Create client config
         let config = VyOSConfig {
             host: provider.host.clone(),
@@ -223,27 +222,32 @@ impl ProviderService {
             api_key: creds.api_key.clone(),
             timeout: 30,
         };
-        
+
         // Create client
         let client = VyOSClient::new(config);
-        
+
         Ok(client)
     }
-    
+
     /// Get a Proxmox client for a provider
     pub fn get_proxmox_client(&self, provider_name: &str) -> Result<ProxmoxClient> {
         // Get provider config
-        let provider = self.providers.get_provider(provider_name)
+        let provider = self
+            .providers
+            .get_provider(provider_name)
             .ok_or_else(|| anyhow!("Provider not found: {}", provider_name))?;
-            
+
         // Ensure it's a Proxmox provider
         if provider.provider_type != ProviderType::Proxmox {
-            return Err(anyhow!("Provider '{}' is not a Proxmox provider", provider_name));
+            return Err(anyhow!(
+                "Provider '{}' is not a Proxmox provider",
+                provider_name
+            ));
         }
-        
+
         // Get credentials
         let creds = self.credentials.get_proxmox_credentials(provider_name)?;
-        
+
         // Create auth config
         let auth = if creds.use_token_auth {
             if let Some(token) = &creds.token_auth {
@@ -265,7 +269,7 @@ impl ProviderService {
                 return Err(anyhow!("Proxmox provider '{}' is configured to use user/pass auth, but no credentials are provided", provider_name));
             }
         };
-        
+
         // Create client config
         let config = ProxmoxConfig {
             host: provider.host.clone(),
@@ -274,46 +278,57 @@ impl ProviderService {
             timeout: 30,
             verify_ssl: creds.verify_ssl,
         };
-        
+
         // Create client
         let client = ProxmoxClient::new(config);
-        
+
         Ok(client)
     }
-    
+
     /// Test connection to a provider
     pub async fn test_connection(&self, provider_name: &str) -> Result<bool> {
         // Get provider config
-        let provider = self.providers.get_provider(provider_name)
+        let provider = self
+            .providers
+            .get_provider(provider_name)
             .ok_or_else(|| anyhow!("Provider not found: {}", provider_name))?;
-        
+
         match provider.provider_type {
             ProviderType::VyOS => {
                 let client = self.get_vyos_client(provider_name)?;
-                
+
                 // Use the synchronous connect method for testing
                 match client.connect() {
                     Ok(_) => {
                         info!("Successfully connected to VyOS provider: {}", provider_name);
                         Ok(true)
-                    },
+                    }
                     Err(e) => {
-                        error!("Failed to connect to VyOS provider '{}': {}", provider_name, e);
+                        error!(
+                            "Failed to connect to VyOS provider '{}': {}",
+                            provider_name, e
+                        );
                         Ok(false)
                     }
                 }
-            },
+            }
             ProviderType::Proxmox => {
                 let mut client = self.get_proxmox_client(provider_name)?;
-                
+
                 // Login to test connection
                 match client.login().await {
                     Ok(_) => {
-                        info!("Successfully connected to Proxmox provider: {}", provider_name);
+                        info!(
+                            "Successfully connected to Proxmox provider: {}",
+                            provider_name
+                        );
                         Ok(true)
-                    },
+                    }
                     Err(e) => {
-                        error!("Failed to connect to Proxmox provider '{}': {}", provider_name, e);
+                        error!(
+                            "Failed to connect to Proxmox provider '{}': {}",
+                            provider_name, e
+                        );
                         Ok(false)
                     }
                 }
