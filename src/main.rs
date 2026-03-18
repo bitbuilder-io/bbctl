@@ -20,6 +20,7 @@ pub mod api;
 pub mod models;
 pub mod config;
 pub mod services;
+pub mod network;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -54,6 +55,16 @@ enum Commands {
     Networks {
         #[command(subcommand)]
         action: NetworksCommands,
+    },
+    /// Manage tenants (E2E encrypted multi-tenant networking)
+    Tenants {
+        #[command(subcommand)]
+        action: TenantsCommands,
+    },
+    /// WireGuard key utilities
+    Wireguard {
+        #[command(subcommand)]
+        action: WireguardCommands,
     },
     /// Test connectivity to a VyOS router
     TestVyOS {
@@ -183,6 +194,65 @@ enum NetworksCommands {
     },
 }
 
+#[derive(Subcommand)]
+enum TenantsCommands {
+    /// List all tenants
+    List,
+    /// Create a new tenant with auto-generated WireGuard keys
+    Create {
+        /// Tenant name
+        name: String,
+        /// BGP AS number for the fabric (default: 65000)
+        #[arg(long, default_value = "65000")]
+        bgp_as: u32,
+        /// Source address (VTEP / loopback IP) used for VXLAN
+        #[arg(long)]
+        source_address: Option<String>,
+    },
+    /// Show details for a tenant
+    Show {
+        /// Tenant UUID
+        id: String,
+    },
+    /// Delete a tenant
+    Delete {
+        /// Tenant UUID
+        id: String,
+    },
+}
+
+#[derive(Subcommand)]
+enum WireguardCommands {
+    /// Generate a new WireGuard key pair
+    GenerateKeys,
+    /// Derive the public key from a base64 private key
+    PublicKey {
+        /// Base64-encoded WireGuard private key
+        private_key: String,
+    },
+    /// Generate a client configuration file
+    ClientConfig {
+        /// Client private key (base64)
+        #[arg(long)]
+        private_key: String,
+        /// Client IP address (CIDR, e.g. 100.64.1.2/24)
+        #[arg(long)]
+        address: String,
+        /// Server public key (base64)
+        #[arg(long)]
+        server_public_key: String,
+        /// Server endpoint (host:port)
+        #[arg(long)]
+        server_endpoint: String,
+        /// Allowed IPs (comma-separated CIDRs, default: 0.0.0.0/0)
+        #[arg(long, default_value = "0.0.0.0/0")]
+        allowed_ips: String,
+        /// Persistent keepalive in seconds (default: 25)
+        #[arg(long, default_value = "25")]
+        keepalive: u16,
+    },
+}
+
 fn cli_handler(cli: Cli) -> AppResult<()> {
     match cli.command {
         Some(Commands::Init { name }) => {
@@ -287,6 +357,69 @@ fn cli_handler(cli: Cli) -> AppResult<()> {
                     println!("Name: default");
                     println!("CIDR: 192.168.1.0/24");
                     println!("Instances: i-01234567 (web-1), i-89abcdef (db-1)");
+                }
+            }
+        }
+        Some(Commands::Tenants { action }) => {
+            match action {
+                TenantsCommands::List => {
+                    println!("Listing tenants...");
+                    println!("ID\t\t\t\t\tNAME\tTENANT_ID\tSTATUS\tVRF\t\tVXLAN VNI");
+                    println!("(No tenants provisioned yet – use 'bbctl tenants create' to add one)");
+                }
+                TenantsCommands::Create { name, bgp_as, source_address } => {
+                    // Generate keys and print the result
+                    let kp = crate::network::generate_wireguard_keypair()
+                        .map_err(|e| format!("Failed to generate WireGuard keys: {}", e))?;
+                    println!("Creating tenant '{}'", name);
+                    println!("  BGP AS       : {}", bgp_as);
+                    println!("  Source addr  : {}", source_address.as_deref().unwrap_or("(use provider default)"));
+                    println!("  WG public key: {}", kp.public_key);
+                    println!("  WG private key: {} (store securely!)", kp.private_key);
+                    println!();
+                    println!("Tenant '{}' created. Use 'bbctl tenants show <id>' to inspect it.", name);
+                    println!("To push configuration to a VyOS router, use the API or TUI interface.");
+                }
+                TenantsCommands::Show { id } => {
+                    println!("Tenant details for '{}':", id);
+                    println!("Use the TUI dashboard (run 'bbctl' without arguments) to view tenant details.");
+                }
+                TenantsCommands::Delete { id } => {
+                    println!("Deleting tenant '{}'", id);
+                }
+            }
+        }
+        Some(Commands::Wireguard { action }) => {
+            match action {
+                WireguardCommands::GenerateKeys => {
+                    let kp = crate::network::generate_wireguard_keypair()
+                        .map_err(|e| format!("Failed to generate WireGuard key pair: {}", e))?;
+                    println!("Private key: {}", kp.private_key);
+                    println!("Public key:  {}", kp.public_key);
+                }
+                WireguardCommands::PublicKey { private_key } => {
+                    let public_key = crate::network::derive_public_key(&private_key)
+                        .map_err(|e| format!("Failed to derive public key: {}", e))?;
+                    println!("{}", public_key);
+                }
+                WireguardCommands::ClientConfig {
+                    private_key,
+                    address,
+                    server_public_key,
+                    server_endpoint,
+                    allowed_ips,
+                    keepalive,
+                } => {
+                    let allowed: Vec<&str> = allowed_ips.split(',').map(|s| s.trim()).collect();
+                    let config = crate::network::generate_client_config(
+                        &private_key,
+                        &address,
+                        &server_public_key,
+                        &server_endpoint,
+                        &allowed,
+                        keepalive,
+                    );
+                    print!("{}", config);
                 }
             }
         }
