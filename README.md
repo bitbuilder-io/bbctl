@@ -203,7 +203,7 @@ bbctl supports advanced networking features:
 - **VRF Isolation** - Complete tenant network separation
 
 For detailed network architecture, see [VyOS Network Plan](docs/vyos-network-plan.md).
-In TUI mode, you can: - Navigate with Tab or number keys (1-5) - Use arrow keys or j/k to select items - View and manage Instances, Volumes, and Networks - Configure system settings
+
 In TUI mode, you can:
 - Navigate with Tab or number keys (1-5)
 - Use arrow keys or j/k to select items
