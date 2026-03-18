@@ -404,7 +404,7 @@ async fn main() -> AppResult<()> {
                         // Let's try connecting interactively - we'll just verify the connection first
                         let ssh_command = format!("ssh -o StrictHostKeyChecking=no -p {} {}@{}", 
                                                 port, username, host);
-                        println!("Running: {}", ssh_command);
+                        println!("Attempting direct SSH connection to {}:{}...", host, port);
                         
                         let output = tokio::process::Command::new("sh")
                             .arg("-c")
