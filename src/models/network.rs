@@ -1,8 +1,8 @@
-use serde::{Deserialize, Serialize};
-use uuid::Uuid;
-use std::collections::{HashMap, HashSet};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
+use std::collections::{HashMap, HashSet};
 use std::net::IpAddr;
+use uuid::Uuid;
 
 use crate::models::provider::ProviderType;
 
@@ -125,7 +125,13 @@ pub struct Network {
 
 impl Network {
     /// Create a new network
-    pub fn new(name: String, provider: ProviderType, region: String, cidr: String, network_type: NetworkType) -> Self {
+    pub fn new(
+        name: String,
+        provider: ProviderType,
+        region: String,
+        cidr: String,
+        network_type: NetworkType,
+    ) -> Self {
         let now = Utc::now();
         Self {
             id: Uuid::new_v4(),
@@ -146,19 +152,19 @@ impl Network {
             config: HashMap::new(),
         }
     }
-    
+
     /// Update network status
     pub fn update_status(&mut self, status: NetworkStatus) {
         self.status = status;
         self.updated_at = Utc::now();
     }
-    
+
     /// Add a gateway IP
     pub fn set_gateway(&mut self, gateway: IpAddr) {
         self.gateway = Some(gateway);
         self.updated_at = Utc::now();
     }
-    
+
     /// Add a DNS server
     pub fn add_dns_server(&mut self, dns_server: IpAddr) {
         if !self.dns_servers.contains(&dns_server) {
@@ -166,7 +172,7 @@ impl Network {
             self.updated_at = Utc::now();
         }
     }
-    
+
     /// Remove a DNS server
     pub fn remove_dns_server(&mut self, dns_server: &IpAddr) {
         if let Some(idx) = self.dns_servers.iter().position(|ip| ip == dns_server) {
@@ -174,7 +180,7 @@ impl Network {
             self.updated_at = Utc::now();
         }
     }
-    
+
     /// Connect an instance to the network
     pub fn connect_instance(&mut self, instance_id: Uuid) -> bool {
         let result = self.instances.insert(instance_id);
@@ -183,41 +189,42 @@ impl Network {
         }
         result
     }
-    
+
     /// Disconnect an instance from the network
     pub fn disconnect_instance(&mut self, instance_id: &Uuid) -> bool {
         let result = self.instances.remove(instance_id);
         if result {
             // Also remove any IP allocations for this instance
-            self.ip_allocations.retain(|alloc| alloc.instance_id != Some(*instance_id));
+            self.ip_allocations
+                .retain(|alloc| alloc.instance_id != Some(*instance_id));
             self.updated_at = Utc::now();
         }
         result
     }
-    
+
     /// Allocate an IP address to an instance
     pub fn allocate_ip(&mut self, ip: IpAddr, instance_id: Uuid) -> Result<(), &'static str> {
         // Check if IP is already allocated
         if self.ip_allocations.iter().any(|alloc| alloc.ip == ip) {
             return Err("IP address already allocated");
         }
-        
+
         // Ensure instance is connected to this network
         if !self.instances.contains(&instance_id) {
             return Err("Instance not connected to this network");
         }
-        
+
         // Allocate the IP
         self.ip_allocations.push(IpAllocation {
             ip,
             instance_id: Some(instance_id),
             assigned_at: Some(Utc::now()),
         });
-        
+
         self.updated_at = Utc::now();
         Ok(())
     }
-    
+
     /// Release an IP address
     pub fn release_ip(&mut self, ip: &IpAddr) -> Result<(), &'static str> {
         if let Some(idx) = self.ip_allocations.iter().position(|alloc| &alloc.ip == ip) {
@@ -228,13 +235,13 @@ impl Network {
             Err("IP address not found")
         }
     }
-    
+
     /// Add a tag to the network
     pub fn add_tag(&mut self, key: String, value: String) {
         self.tags.insert(key, value);
         self.updated_at = Utc::now();
     }
-    
+
     /// Remove a tag from the network
     pub fn remove_tag(&mut self, key: &str) -> Option<String> {
         let result = self.tags.remove(key);
@@ -243,18 +250,18 @@ impl Network {
         }
         result
     }
-    
+
     /// Set a configuration parameter
     pub fn set_config(&mut self, key: String, value: String) {
         self.config.insert(key, value);
         self.updated_at = Utc::now();
     }
-    
+
     /// Get a configuration parameter
     pub fn get_config(&self, key: &str) -> Option<&String> {
         self.config.get(key)
     }
-    
+
     /// Remove a configuration parameter
     pub fn remove_config(&mut self, key: &str) -> Option<String> {
         let result = self.config.remove(key);

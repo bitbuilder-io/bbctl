@@ -1,5 +1,5 @@
-pub mod vyos;
 pub mod proxmox;
+pub mod vyos;
 
 use anyhow::Result;
 
@@ -7,10 +7,10 @@ use anyhow::Result;
 pub trait Provider {
     /// Connect to the provider
     fn connect(&self) -> Result<()>;
-    
+
     /// Check connection status
     fn check_connection(&self) -> Result<bool>;
-    
+
     /// Get provider name
     fn name(&self) -> &str;
 }

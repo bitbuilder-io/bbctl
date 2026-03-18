@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
-use uuid::Uuid;
-use std::collections::HashMap;
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use uuid::Uuid;
 
 use crate::models::provider::ProviderType;
 
@@ -110,7 +110,13 @@ pub struct Volume {
 
 impl Volume {
     /// Create a new volume
-    pub fn new(name: String, provider: ProviderType, region: String, size_gb: u16, volume_type: VolumeType) -> Self {
+    pub fn new(
+        name: String,
+        provider: ProviderType,
+        region: String,
+        size_gb: u16,
+        volume_type: VolumeType,
+    ) -> Self {
         let now = Utc::now();
         Self {
             id: Uuid::new_v4(),
@@ -128,13 +134,13 @@ impl Volume {
             tags: HashMap::new(),
         }
     }
-    
+
     /// Update volume status
     pub fn update_status(&mut self, status: VolumeStatus) {
         self.status = status;
         self.updated_at = Utc::now();
     }
-    
+
     /// Attach volume to an instance
     pub fn attach(&mut self, instance_id: Uuid, device: Option<String>) {
         self.attached_to = Some(instance_id);
@@ -142,7 +148,7 @@ impl Volume {
         self.status = VolumeStatus::InUse;
         self.updated_at = Utc::now();
     }
-    
+
     /// Detach volume from an instance
     pub fn detach(&mut self) {
         self.attached_to = None;
@@ -150,24 +156,24 @@ impl Volume {
         self.status = VolumeStatus::Available;
         self.updated_at = Utc::now();
     }
-    
+
     /// Extend volume size
     pub fn extend(&mut self, new_size_gb: u16) -> Result<(), &'static str> {
         if new_size_gb <= self.size_gb {
             return Err("New size must be larger than current size");
         }
-        
+
         self.size_gb = new_size_gb;
         self.updated_at = Utc::now();
         Ok(())
     }
-    
+
     /// Add a tag to the volume
     pub fn add_tag(&mut self, key: String, value: String) {
         self.tags.insert(key, value);
         self.updated_at = Utc::now();
     }
-    
+
     /// Remove a tag from the volume
     pub fn remove_tag(&mut self, key: &str) -> Option<String> {
         let result = self.tags.remove(key);

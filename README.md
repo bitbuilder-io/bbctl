@@ -9,13 +9,14 @@ BitBuilder Cloud CLI is an all-in-one tool for provisioning and managing multi-t
 
 ## Features
 
-- **Manage VMs** - Create, configure, and manage virtual machines across your infrastructure
-- **Storage Management** - Provision and attach volumes to your applications
-- **Network Configuration** - Set up and manage virtual networks with secure connectivity
-- **Multi-provider Support** - Works with VyOS v1.5 and Proxmox
-- **Interactive TUI** - Terminal-based dashboard for visual resource management
-- **Bare Metal Efficiency** - Optimized for bare metal server deployment
-- **E2E Encryption** - Secure networking with WireGuard integration (coming soon)
+- **Manage VMs**: Create, configure, and manage virtual machines across your infrastructure
+- **Storage Management**: Provision and attach volumes to your applications
+- **Network Configuration**: Set up and manage virtual networks with secure connectivity
+- **Multi-provider Support**: Works with VyOS v1.5 and Proxmox
+- **Interactive TUI**: Terminal-based dashboard for visual resource management
+- **Bare Metal Efficiency**: Optimized for bare metal server deployment
+- **E2E Encryption**: Secure networking with WireGuard integration (coming soon)
+- **Future Public Cloud Integration**: Scale out to public clouds with E2E encryption (coming soon)
 
 ## Installation
 
@@ -203,6 +204,12 @@ bbctl supports advanced networking features:
 
 For detailed network architecture, see [VyOS Network Plan](docs/vyos-network-plan.md).
 
+In TUI mode, you can:
+- Navigate with Tab or number keys (1-5)
+- Use arrow keys or j/k to select items
+- View and manage Instances, Volumes, and Networks
+- Configure system settings
+
 ## Development
 
 ### Prerequisites
@@ -313,6 +320,24 @@ cargo test
 # Submit a pull request
 ```
 
+### Testing with VyOS Lab Environment
+
+A VyOS test lab environment is provided for testing bbctl against real infrastructure. The lab uses Docker to create VyOS routers configured with WireGuard, VXLAN, OSPF, and L3VPN to simulate a multi-tenant network environment.
+
+```bash
+# Setup the VyOS test lab
+cd tests/vyos-lab
+./setup-lab.sh
+
+# Test bbctl against the lab environment
+bbctl test-vyos --host localhost --port 21022 --username vyos --api-key bbctl-test-api
+
+# Cleanup the lab environment when done
+./cleanup-lab.sh
+```
+
+For more information about the test lab, see [tests/vyos-lab/README.md](tests/vyos-lab/README.md).
+
 ## License
 
 MIT License.
@@ -322,3 +347,5 @@ MIT License.
 - [VyOS](https://vyos.io/) - Open source network operating system
 - [Proxmox VE](https://www.proxmox.com/) - Virtualization management platform
 - [Ratatui](https://github.com/ratatui-org/ratatui) - Rust TUI library
+MIT License
+MIT License

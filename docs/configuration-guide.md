@@ -10,6 +10,7 @@ bbctl uses the following configuration files, located in the `~/.bbctl/` directo
 
 | File               | Purpose                                             |
 | ------------------ | --------------------------------------------------- |
+|--------------------|-----------------------------------------------------|
 | `settings.toml`    | Global settings and defaults                        |
 | `providers.toml`   | Provider configurations                             |
 | `credentials.toml` | Authentication credentials (API keys, tokens, etc.) |
@@ -19,6 +20,7 @@ bbctl uses the following configuration files, located in the `~/.bbctl/` directo
 The `settings.toml` file contains global configuration for bbctl behavior:
 
 ```toml
+``` toml
 # Default provider to use when not specified
 default_provider = "vyos-router"
 
@@ -48,6 +50,7 @@ log_level = "info"
 You can modify settings using the config command:
 
 ```bash
+``` bash
 # Set default provider
 bbctl config set default_provider vyos-router
 
@@ -60,6 +63,8 @@ bbctl config set log_level debug
 The `providers.toml` file defines infrastructure providers and regions:
 
 ```bash
+``` toml
+```toml
 # Provider configurations
 [providers]
 
@@ -100,6 +105,7 @@ limits = { max_instances = 5, max_cpu_per_instance = 4 }
 Provider configuration can be managed using CLI commands:
 
 ```bash
+``` bash
 # Add a new VyOS provider
 bbctl providers add vyos-router2 --type vyos --host 192.168.1.3 --username vyos
 
@@ -115,6 +121,8 @@ bbctl providers remove vyos-router2
 The `credentials.toml` file stores authentication information for providers:
 
 ```bash
+``` toml
+```toml
 [credentials]
 
 [credentials.vyos-router]
@@ -134,12 +142,17 @@ verify_ssl = false
 1. Use API tokens instead of passwords when possible
 2. Ensure proper file permissions (600) on credentials.toml
 3. Consider using environment variables for sensitive credentials
+1.  Use API tokens instead of passwords when possible
+2.  Ensure proper file permissions (600) on credentials.toml
+3.  Consider using environment variables for sensitive credentials
 
 ## Network Configuration
 
 Network configuration is stored within the provider settings:
 
 ```bash
+``` toml
+```toml
 [networks.app-network]
 id = "net-01234567"
 name = "app-network"
@@ -156,6 +169,8 @@ dns_servers = ["1.1.1.1", "8.8.8.8"]
 For secure encrypted networks using WireGuard:
 
 ```bash
+``` toml
+```toml
 [networks.secure-net]
 id = "net-89abcdef"
 name = "secure-net"
@@ -172,6 +187,7 @@ You can override configuration using environment variables:
 
 | Variable                 | Description                 |
 | ------------------------ | --------------------------- |
+|--------------------------|-----------------------------|
 | `BBCTL_LOG_LEVEL`        | Override log level          |
 | `BBCTL_CONFIG_DIR`       | Use custom config directory |
 | `BBCTL_DEFAULT_PROVIDER` | Override default provider   |
@@ -180,6 +196,7 @@ You can override configuration using environment variables:
 Example:
 
 ```bash
+``` bash
 export BBCTL_LOG_LEVEL=debug
 export BBCTL_DEFAULT_PROVIDER=vyos-router
 bbctl instances list  # Will use debug logging and vyos-router as default
@@ -192,6 +209,8 @@ bbctl instances list  # Will use debug logging and vyos-router as default
 Configure resource limits by tenant:
 
 ```bash
+``` toml
+```toml
 [tenants.eng-team]
 max_instances = 20
 max_volumes = 40
@@ -206,6 +225,8 @@ regions = ["nyc", "sfo"]
 Define templates for quick provisioning:
 
 ```bash
+``` toml
+```toml
 [templates.web-server]
 cpu = 2
 memory_gb = 4
@@ -220,12 +241,14 @@ disk_gb = 200
 volumes = [
   { name = "data", size_gb = 100, type = "ssd" },
   { name = "backup", size_gb = 200, type = "hdd" },
+  { name = "backup", size_gb = 200, type = "hdd" }
 ]
 ```
 
 Usage:
 
 ```bash
+``` bash
 bbctl instances create web1 --template web-server
 ```
 
@@ -234,6 +257,8 @@ bbctl instances create web1 --template web-server
 Configure the API server component:
 
 ```bash
+``` toml
+```toml
 [api]
 enabled = true
 listen = "127.0.0.1"
@@ -247,6 +272,8 @@ cors_origins = ["http://localhost:3000"]
 Configure SSH keys for instance access:
 
 ```bash
+``` toml
+```toml
 [ssh]
 default_key = "~/.ssh/id_ed25519"
 additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
@@ -259,6 +286,13 @@ additional_keys = ["~/.ssh/id_rsa", "~/.ssh/custom_key"]
 1. **Connection Problems**: Check host, port, and credentials
 2. **Permission Errors**: Verify API key permissions and SSH key access
 3. **File Format Errors**: Validate TOML syntax in configuration files
+
+### Debugging Configuration
+
+```bash
+1.  **Connection Problems**: Check host, port, and credentials
+2.  **Permission Errors**: Verify API key permissions and SSH key access
+3.  **File Format Errors**: Validate TOML syntax in configuration files
 
 ### Debugging Configuration
 
@@ -278,6 +312,7 @@ bbctl config validate
 If you need to reset your configuration:
 
 ```bash
+``` bash
 # Reset specific section
 bbctl config reset --section credentials
 
@@ -298,6 +333,17 @@ bbctl config reset --all
 - [User Guide] - Comprehensive usage instructions
 - [Command Reference] - Detailed command documentation
 - [API Documentation] - API schema and integration details
+1.  **Organize by Environment**: Use naming conventions like `prod-`, `staging-` prefixes
+2.  **Document Custom Settings**: Add comments to configuration files
+3.  **Version Control**: Consider storing non-sensitive configuration in version control
+4.  **Regular Backups**: Back up your configuration directory regularly
+5.  **Security**: Never expose credentials in scripts or version control
+
+## Further Reading
+
+-   [User Guide] - Comprehensive usage instructions
+-   [Command Reference] - Detailed command documentation
+-   [API Documentation] - API schema and integration details
 
 [User Guide]: user-guide.md
 [Command Reference]: command-reference.md

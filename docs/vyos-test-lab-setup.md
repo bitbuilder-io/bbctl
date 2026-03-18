@@ -49,6 +49,7 @@ The lab will consist of:
 
 - **Network Configuration**:
   - Management network (172.27.0.0/16)
+  - Management network (172.27.0.0/16) 
   - Backbone network (172.16.0.0/16)
   - Public IP space simulation (5.254.54.0/26)
   - Tenant space (100.64.0.0/16)
@@ -57,6 +58,21 @@ The lab will consist of:
 
 We'll create two types of VyOS images:
 
+1. **Base VyOS Image**: Minimal image with core functionality
+2. **Provider Edge Router Image**: Pre-configured with L3VPN, EVPN, and WireGuard
+-   **Host Setup**:
+  -   Arch Linux (as specified in your vyos-network-plan.md)
+  -   systemd-vmspawn for container deployment
+  -   Linux bridge setup for network connectivity
+-   **Network Configuration**:
+  -   Management network (172.27.0.0/16)
+  -   Backbone network (172.16.0.0/16)
+  -   Public IP space simulation (5.254.54.0/26)
+  -   Tenant space (100.64.0.0/16)
+
+### 2. VyOS Images
+
+We'll create two types of VyOS images:
 1. **Base VyOS Image**: Minimal image with core functionality
 2. **Provider Edge Router Image**: Pre-configured with L3VPN, EVPN, and WireGuard
 
@@ -502,4 +518,11 @@ The following methods can be used to verify and troubleshoot the test environmen
 2. Implement automated testing with the lab
 3. Add CI/CD pipeline for continuous testing
 4. Extend the lab with additional provider types (Proxmox)
+5. Implement high availability scenarios
+5. Implement high availability scenarios
+1.  Add support for Docker container deployment
+2.  Implement automated testing with the lab
+3.  Add CI/CD pipeline for continuous testing
+4.  Extend the lab with additional provider types (Proxmox)
+5.  Implement high availability scenarios
 5. Implement high availability scenarios

@@ -28,6 +28,19 @@ Both codebases need to share consistent data models. This document outlines the 
 | `struct`           | `z.object()`                           |
 | `Uuid`             | `z.string().uuid()`                    |
 | `DateTime<Utc>`    | `z.string().datetime()`                |
+| Rust Type | TypeScript/Zod Type |
+|-----------|---------------------|
+| `String` | `z.string()` |
+| `i32`, `u32`, etc. | `z.number().int()` |
+| `f32`, `f64` | `z.number()` |
+| `bool` | `z.boolean()` |
+| `Option<T>` | `z.optional()` |
+| `Vec<T>` | `z.array(...)` |
+| `HashMap<K, V>` | `z.record(...)` |
+| `enum` | `z.enum()` or `z.discriminatedUnion()` |
+| `struct` | `z.object()` |
+| `Uuid` | `z.string().uuid()` |
+| `DateTime<Utc>` | `z.string().datetime()` |
 
 ## Development Workflow
 
@@ -114,6 +127,7 @@ pub struct Instance {
 // ES module import syntax
 import { z } from 'zod';
 import { InstanceNetworkSchema, InstanceSizeSchema, InstanceStatusEnum, ProviderTypeEnum, TagsSchema } from './schemas.js';
+import { InstanceStatusEnum, ProviderTypeEnum, InstanceSizeSchema, InstanceNetworkSchema, TagsSchema } from './schemas.js';
 
 export const InstanceSchema = z.object({
   id: z.string().uuid(),
@@ -142,6 +156,11 @@ export const InstanceSchema = z.object({
 1. **Inconsistent naming conventions**: Rust uses snake_case, TypeScript uses camelCase
 2. **Different validation rules**: Ensure limits (min/max values, string lengths) are consistent
 3. **Enum handling differences**: Map string values consistently
+4. **Date/time format issues**: Use ISO 8601 format (RFC 3339) consistently
+5. **UUID representation**: Use the same format (hyphenated, lowercase)
+6. **ES module issues**: Remember to add `.js` extensions to imports in TypeScript
+7. **Bun compatibility**: Ensure all dependencies are compatible with Bun's runtime
+3. **Enum handling differences**: Map string values consistently 
 4. **Date/time format issues**: Use ISO 8601 format (RFC 3339) consistently
 5. **UUID representation**: Use the same format (hyphenated, lowercase)
 6. **ES module issues**: Remember to add `.js` extensions to imports in TypeScript

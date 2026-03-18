@@ -2,7 +2,7 @@ use ratatui::{
     layout::{Alignment, Constraint, Direction, Layout, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span, Text},
-    widgets::{Block, BorderType, List, ListItem, ListState, Paragraph, Table, Row, Cell, Tabs},
+    widgets::{Block, BorderType, Cell, List, ListItem, ListState, Paragraph, Row, Table, Tabs},
     Frame,
 };
 
@@ -25,7 +25,14 @@ pub fn render(app: &mut App, frame: &mut Frame) {
         .split(frame.area());
 
     // Render the title bar
-    let titles = vec!["Home", "Instances", "Volumes", "Networks", "Settings", "Help"];
+    let titles = vec![
+        "Home",
+        "Instances",
+        "Volumes",
+        "Networks",
+        "Settings",
+        "Help",
+    ];
     let tabs = Tabs::new(
         titles
             .iter()
@@ -40,7 +47,11 @@ pub fn render(app: &mut App, frame: &mut Frame) {
     )
     .select(app.mode as usize)
     .style(Style::default())
-    .highlight_style(Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD));
+    .highlight_style(
+        Style::default()
+            .fg(Color::Yellow)
+            .add_modifier(Modifier::BOLD),
+    );
 
     frame.render_widget(tabs, chunks[0]);
 
@@ -85,7 +96,11 @@ fn render_home(app: &mut App, frame: &mut Frame, area: Rect) {
     ];
 
     let paragraph = Paragraph::new(text)
-        .block(Block::bordered().title("Dashboard").border_type(BorderType::Rounded))
+        .block(
+            Block::bordered()
+                .title("Dashboard")
+                .border_type(BorderType::Rounded),
+        )
         .alignment(Alignment::Left);
 
     frame.render_widget(paragraph, area);
@@ -95,7 +110,7 @@ fn render_instances(app: &mut App, frame: &mut Frame, area: Rect) {
     let instances = Block::bordered()
         .title("Instances")
         .border_type(BorderType::Rounded);
-    
+
     if app.instances.is_empty() {
         let text = Text::from("No instances found. Press 'a' to add a new instance.");
         let paragraph = Paragraph::new(text)
@@ -117,7 +132,10 @@ fn render_instances(app: &mut App, frame: &mut Frame, area: Rect) {
 
             ListItem::new(vec![
                 Line::from(vec![
-                    Span::styled(format!("{}: ", instance.name), Style::default().fg(Color::Cyan)),
+                    Span::styled(
+                        format!("{}: ", instance.name),
+                        Style::default().fg(Color::Cyan),
+                    ),
                     Span::styled(instance.status.clone(), status_style),
                 ]),
                 Line::from(vec![
@@ -127,9 +145,11 @@ fn render_instances(app: &mut App, frame: &mut Frame, area: Rect) {
                 Line::from(vec![
                     Span::styled(format!("IP: {}", instance.ip), Style::default()),
                     Span::styled(
-                        format!(" | CPU: {} | Memory: {} GB | Disk: {} GB", 
-                                instance.cpu, instance.memory_gb, instance.disk_gb),
-                        Style::default()
+                        format!(
+                            " | CPU: {} | Memory: {} GB | Disk: {} GB",
+                            instance.cpu, instance.memory_gb, instance.disk_gb
+                        ),
+                        Style::default(),
                     ),
                 ]),
                 Line::from(""),
@@ -145,7 +165,7 @@ fn render_instances(app: &mut App, frame: &mut Frame, area: Rect) {
     // Use a stateful widget
     let mut state = ListState::default();
     state.select(Some(app.selected_index));
-    
+
     frame.render_stateful_widget(list, area, &mut state);
 }
 
@@ -169,18 +189,22 @@ fn render_volumes(app: &mut App, frame: &mut Frame, area: Rect) {
         .map(|volume| {
             let attached_info = match &volume.attached_to {
                 Some(instance_id) => {
-                    let instance_name = app.instances
+                    let instance_name = app
+                        .instances
                         .iter()
                         .find(|i| &i.id == instance_id)
                         .map_or(instance_id.as_str(), |i| i.name.as_str());
                     format!("Attached to: {}", instance_name)
-                },
+                }
                 None => "Not attached".to_string(),
             };
 
             ListItem::new(vec![
                 Line::from(vec![
-                    Span::styled(format!("{}: ", volume.name), Style::default().fg(Color::Cyan)),
+                    Span::styled(
+                        format!("{}: ", volume.name),
+                        Style::default().fg(Color::Cyan),
+                    ),
                     Span::styled(format!("{} GB", volume.size_gb), Style::default()),
                 ]),
                 Line::from(vec![
@@ -200,7 +224,7 @@ fn render_volumes(app: &mut App, frame: &mut Frame, area: Rect) {
     // Use a stateful widget
     let mut state = ListState::default();
     state.select(Some(app.selected_index));
-    
+
     frame.render_stateful_widget(list, area, &mut state);
 }
 
@@ -223,20 +247,23 @@ fn render_networks(app: &mut App, frame: &mut Frame, area: Rect) {
         .iter()
         .map(|network| {
             let instance_count = network.instances.len();
-            
+
             ListItem::new(vec![
                 Line::from(vec![
-                    Span::styled(format!("{}: ", network.name), Style::default().fg(Color::Cyan)),
+                    Span::styled(
+                        format!("{}: ", network.name),
+                        Style::default().fg(Color::Cyan),
+                    ),
                     Span::styled(network.cidr.clone(), Style::default()),
                 ]),
-                Line::from(vec![
-                    Span::styled(
-                        format!("{} instance{} connected", 
-                                instance_count, 
-                                if instance_count == 1 { "" } else { "s" }),
-                        Style::default()
+                Line::from(vec![Span::styled(
+                    format!(
+                        "{} instance{} connected",
+                        instance_count,
+                        if instance_count == 1 { "" } else { "s" }
                     ),
-                ]),
+                    Style::default(),
+                )]),
                 Line::from(""),
             ])
         })
@@ -250,7 +277,7 @@ fn render_networks(app: &mut App, frame: &mut Frame, area: Rect) {
     // Use a stateful widget
     let mut state = ListState::default();
     state.select(Some(app.selected_index));
-    
+
     frame.render_stateful_widget(list, area, &mut state);
 }
 
@@ -270,15 +297,26 @@ fn render_settings(_app: &mut App, frame: &mut Frame, area: Rect) {
         ])
     });
 
-    let table = Table::new(rows, [Constraint::Percentage(50), Constraint::Percentage(50)])
-        .block(Block::bordered().title("Settings").border_type(BorderType::Rounded))
-        .header(
-            Row::new(vec![
-                Cell::from(Span::styled("Setting", Style::default().add_modifier(Modifier::BOLD))),
-                Cell::from(Span::styled("Value", Style::default().add_modifier(Modifier::BOLD))),
-            ])
-        )
-        .column_spacing(2);
+    let table = Table::new(
+        rows,
+        [Constraint::Percentage(50), Constraint::Percentage(50)],
+    )
+    .block(
+        Block::bordered()
+            .title("Settings")
+            .border_type(BorderType::Rounded),
+    )
+    .header(Row::new(vec![
+        Cell::from(Span::styled(
+            "Setting",
+            Style::default().add_modifier(Modifier::BOLD),
+        )),
+        Cell::from(Span::styled(
+            "Value",
+            Style::default().add_modifier(Modifier::BOLD),
+        )),
+    ]))
+    .column_spacing(2);
 
     frame.render_widget(table, area);
 }
@@ -303,9 +341,16 @@ fn render_help(_app: &mut App, frame: &mut Frame, area: Rect) {
         ])
     });
 
-    let table = Table::new(rows, [Constraint::Percentage(20), Constraint::Percentage(80)])
-        .block(Block::bordered().title("Keyboard Shortcuts").border_type(BorderType::Rounded))
-        .column_spacing(2);
+    let table = Table::new(
+        rows,
+        [Constraint::Percentage(20), Constraint::Percentage(80)],
+    )
+    .block(
+        Block::bordered()
+            .title("Keyboard Shortcuts")
+            .border_type(BorderType::Rounded),
+    )
+    .column_spacing(2);
 
     frame.render_widget(table, area);
 }

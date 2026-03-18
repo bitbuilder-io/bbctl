@@ -22,6 +22,7 @@ export const InstanceStatusEnum = z.enum([
   'Restarting',
   'Deleting',
   'Unknown',
+  'Unknown'
 ]);
 export type InstanceStatus = z.infer<typeof InstanceStatusEnum>;
 
@@ -33,6 +34,7 @@ export const VolumeStatusEnum = z.enum([
   'Deleting',
   'Error',
   'Unknown',
+  'Unknown'
 ]);
 export type VolumeStatus = z.infer<typeof VolumeStatusEnum>;
 
@@ -43,6 +45,7 @@ export const VolumeTypeEnum = z.enum([
   'NVMe',
   'HDD',
   'Network',
+  'Network'
 ]);
 export type VolumeType = z.infer<typeof VolumeTypeEnum>;
 
@@ -53,6 +56,7 @@ export const NetworkStatusEnum = z.enum([
   'Deleting',
   'Error',
   'Unknown',
+  'Unknown'
 ]);
 export type NetworkStatus = z.infer<typeof NetworkStatusEnum>;
 
@@ -63,6 +67,7 @@ export const NetworkTypeEnum = z.enum([
   'Isolated',
   'VXLAN',
   'VPN',
+  'VPN'
 ]);
 export type NetworkType = z.infer<typeof NetworkTypeEnum>;
 
@@ -259,7 +264,11 @@ export const NetworkSchema = z.object({
   provider: ProviderTypeEnum,
   providerId: z.string(),
   region: z.string(),
-  cidr: z.string().regex(/^([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]{1,2}$/),
+  cidr: z
+    .string()
+    .regex(
+      /^((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\/(3[0-2]|[12]?\d)$/
+    ),
   networkType: NetworkTypeEnum,
   gateway: z.string().ip().optional(),
   dnsServers: z.array(z.string().ip()),
@@ -972,6 +981,34 @@ export {
   VyOSCredentialsSchema,
   WireGuardConfigSchema,
   WireGuardPeerSchema,
+  ProviderTypeEnum,
+  InstanceStatusEnum,
+  VolumeStatusEnum,
+  VolumeTypeEnum,
+  NetworkStatusEnum,
+  NetworkTypeEnum,
+  ResourceLimitsSchema,
+  ProviderConfigSchema,
+  RegionSchema,
+  VyOSCredentialsSchema,
+  ProxmoxTokenAuthSchema,
+  ProxmoxUserPassAuthSchema,
+  ProxmoxCredentialsSchema,
+  ProviderCredentialsSchema,
+  InstanceSizeSchema,
+  InstanceNetworkSchema,
+  InstanceSchema,
+  CreateInstanceRequestSchema,
+  VolumeSchema,
+  CreateVolumeRequestSchema,
+  AttachVolumeRequestSchema,
+  IpAllocationSchema,
+  NetworkSchema,
+  CreateNetworkRequestSchema,
+  ConnectNetworkRequestSchema,
+  WireGuardPeerSchema,
+  WireGuardConfigSchema,
+  openApiSchema,
 };
 
 // For backward compatibility
@@ -1006,4 +1043,5 @@ export default {
     WireGuardConfigSchema,
   },
   openApiSchema,
+};
 };

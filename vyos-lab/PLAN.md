@@ -179,6 +179,8 @@ set vrf name tenant1 interfaces 'br100'
 
 ## Security Considerations
 
+   
+## Security Considerations
 - Isolation between tenants using VRFs
 - Encryption of management traffic with WireGuard
 - API access control and authentication

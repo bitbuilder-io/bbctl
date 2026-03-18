@@ -13,12 +13,21 @@ The API schema is defined using [Zod], a TypeScript-first schema validation libr
 - Static TypeScript types
 - OpenAPI documentation
 - API client generation capabilities
+-   Runtime type validation
+-   Static TypeScript types
+-   OpenAPI documentation
+-   API client generation capabilities
 
 ## Getting Started
 
 ### Prerequisites
 
 - Bun 1.0 or higher
+
+### Installation
+
+```bash
+-   Bun 1.0 or higher
 
 ### Installation
 
@@ -32,6 +41,7 @@ bun install
 To generate the OpenAPI schema and documentation:
 
 ```bash
+``` bash
 bun run generate-openapi
 ```
 
@@ -46,6 +56,7 @@ Open `api-docs/index.html` in your browser to view the interactive API documenta
 You can use the Zod schemas to validate data at runtime:
 
 ```typescript
+``` typescript
 import { InstanceSchema } from './schema.js';
 
 // Data from API or user input
@@ -54,6 +65,10 @@ const instanceData = {
   name: 'web-server-1',
   status: 'Running',
   provider: 'VyOS',
+  id: "550e8400-e29b-41d4-a716-446655440000",
+  name: "web-server-1",
+  status: "Running",
+  provider: "VyOS",
   // ...
 };
 
@@ -63,6 +78,9 @@ try {
   console.log('Valid instance:', validatedInstance);
 } catch (error) {
   console.error('Invalid instance data:', error);
+  console.log("Valid instance:", validatedInstance);
+} catch (error) {
+  console.error("Invalid instance data:", error);
 }
 ```
 
@@ -71,12 +89,15 @@ try {
 The schemas also provide TypeScript types:
 
 ```typescript
+``` typescript
 import { Instance, InstanceStatus } from './schema.js';
 
 // Type-safe instance object
 const instance: Instance = {
   id: '550e8400-e29b-41d4-a716-446655440000',
   name: 'web-server-1',
+  id: "550e8400-e29b-41d4-a716-446655440000",
+  name: "web-server-1",
   status: InstanceStatus.Running,
   // ...
 };
@@ -89,6 +110,9 @@ The Zod/OpenAPI schema and the Rust CLI share the same data models. When updatin
 1. Modify both the Rust structs (`src/models/*.rs`) and the TypeScript schemas (`schema.ts`)
 2. Regenerate the OpenAPI documentation
 3. Update any dependent code in both languages
+1.  Modify both the Rust structs (`src/models/*.rs`) and the TypeScript schemas (`schema.ts`)
+2.  Regenerate the OpenAPI documentation
+3.  Update any dependent code in both languages
 
 ## API Endpoints
 
@@ -98,6 +122,10 @@ The OpenAPI documentation details all available endpoints:
 - `/instances` - Create and manage virtual machines
 - `/volumes` - Manage storage volumes
 - `/networks` - Configure virtual networks
+-   `/providers` - Manage infrastructure providers
+-   `/instances` - Create and manage virtual machines
+-   `/volumes` - Manage storage volumes
+-   `/networks` - Configure virtual networks
 
 For detailed parameters and response formats, refer to the Swagger UI documentation.
 
@@ -109,6 +137,10 @@ To extend the API schema:
 2. Register your schemas with the OpenAPI registry
 3. Define new paths and operations in the OpenAPI schema
 4. Regenerate the documentation
+1.  Add new Zod schemas in `schema.ts`
+2.  Register your schemas with the OpenAPI registry
+3.  Define new paths and operations in the OpenAPI schema
+4.  Regenerate the documentation
 
 ## Testing with the API
 
@@ -116,6 +148,8 @@ The OpenAPI documentation can be used to generate clients in various languages u
 
 - [OpenAPI Generator]
 - [Swagger Codegen]
+-   [OpenAPI Generator]
+-   [Swagger Codegen]
 
 [OpenAPI Generator]: https://github.com/OpenAPITools/openapi-generator
 [Swagger Codegen]: https://github.com/swagger-api/swagger-codegen
@@ -123,6 +157,7 @@ The OpenAPI documentation can be used to generate clients in various languages u
 For example, to generate a TypeScript client:
 
 ```bash
+``` bash
 bunx --bun @openapitools/openapi-generator-cli generate \
   -i api-docs/openapi.json \
   -g typescript-axios \

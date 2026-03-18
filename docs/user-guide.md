@@ -26,6 +26,10 @@ For systems without Rust, download pre-compiled binaries:
 2. Download the appropriate binary for your platform
 3. Make it executable: `chmod +x bbctl`
 4. Move it to your PATH: `sudo mv bbctl /usr/local/bin/`
+1.  Visit the [releases page]
+2.  Download the appropriate binary for your platform
+3.  Make it executable: `chmod +x bbctl`
+4.  Move it to your PATH: `sudo mv bbctl /usr/local/bin/`
 
 [releases page]: https://github.com/bitbuilder-io/bbctl/releases
 
@@ -46,6 +50,7 @@ The compiled binary will be in `target/release/bbctl`.
 When running bbctl for the first time, you'll need to set up your provider credentials:
 
 ```bash
+``` bash
 # Initialize bbctl configuration
 bbctl init
 
@@ -65,24 +70,32 @@ BitBuilder Cloud CLI organizes resources into the following categories:
 - **Instances**: Virtual machines running on the providers
 - **Volumes**: Storage volumes that can be attached to instances
 - **Networks**: Virtual networks for connecting instances
+-   **Providers**: Infrastructure providers like VyOS routers or Proxmox hosts
+-   **Regions**: Logical groupings of infrastructure, typically by location
+-   **Instances**: Virtual machines running on the providers
+-   **Volumes**: Storage volumes that can be attached to instances
+-   **Networks**: Virtual networks for connecting instances
 
 ## Working with Providers
 
 ### Listing Providers
 
 ```bash
+``` bash
 bbctl providers list
 ```
 
 ### Testing Provider Connectivity
 
 ```bash
+``` bash
 bbctl providers test vyos-router
 ```
 
 ### Removing a Provider
 
 ```bash
+``` bash
 bbctl providers remove vyos-router
 ```
 
@@ -91,6 +104,7 @@ bbctl providers remove vyos-router
 ### Creating an Instance
 
 ```bash
+``` bash
 bbctl instances create web-server-1 \
   --provider vyos-router \
   --region nyc \
@@ -102,12 +116,14 @@ bbctl instances create web-server-1 \
 ### Listing Instances
 
 ```bash
+``` bash
 bbctl instances list
 ```
 
 ### Starting and Stopping Instances
 
 ```bash
+``` bash
 # Start an instance
 bbctl instances start i-01234567
 
@@ -118,12 +134,14 @@ bbctl instances stop i-01234567
 ### Getting Instance Details
 
 ```bash
+``` bash
 bbctl instances show i-01234567
 ```
 
 ### Deleting an Instance
 
 ```bash
+``` bash
 bbctl instances delete i-01234567
 ```
 
@@ -132,6 +150,7 @@ bbctl instances delete i-01234567
 ### Creating a Volume
 
 ```bash
+``` bash
 bbctl volumes create db-data \
   --size 100 \
   --region nyc
@@ -140,12 +159,14 @@ bbctl volumes create db-data \
 ### Listing Volumes
 
 ```bash
+``` bash
 bbctl volumes list
 ```
 
 ### Attaching a Volume to an Instance
 
 ```bash
+``` bash
 bbctl volumes attach vol-01234567 \
   --instance i-01234567
 ```
@@ -153,6 +174,7 @@ bbctl volumes attach vol-01234567 \
 ### Detaching a Volume
 
 ```bash
+``` bash
 bbctl volumes detach vol-01234567
 ```
 
@@ -161,6 +183,7 @@ bbctl volumes detach vol-01234567
 ### Creating a Network
 
 ```bash
+``` bash
 bbctl networks create app-network \
   --cidr 192.168.1.0/24
 ```
@@ -168,12 +191,14 @@ bbctl networks create app-network \
 ### Listing Networks
 
 ```bash
+``` bash
 bbctl networks list
 ```
 
 ### Connecting an Instance to a Network
 
 ```bash
+``` bash
 bbctl networks connect net-01234567 \
   --instance i-01234567
 ```
@@ -181,6 +206,7 @@ bbctl networks connect net-01234567 \
 ### Disconnecting an Instance
 
 ```bash
+``` bash
 bbctl networks disconnect net-01234567 \
   --instance i-01234567
 ```
@@ -203,11 +229,24 @@ BitBuilder Cloud CLI includes an interactive terminal interface that can be laun
 3. **Volumes**: Manage storage volumes
 4. **Networks**: Configure virtual networks
 5. **Settings**: Configure bbctl options
+-   Use Tab or number keys (1-5) to switch between views
+-   Use arrow keys or j/k to select items in lists
+-   Press Enter to view or interact with a selected item
+-   Press ? to view help
+
+### TUI Views
+
+1.  **Home**: Dashboard with summary information
+2.  **Instances**: List and manage virtual machines
+3.  **Volumes**: Manage storage volumes
+4.  **Networks**: Configure virtual networks
+5.  **Settings**: Configure bbctl options
 
 ### TUI Key Bindings
 
 | Key       | Action                     |
 | --------- | -------------------------- |
+|-----------|----------------------------|
 | 1-5       | Switch to numbered view    |
 | Tab       | Next view                  |
 | Shift+Tab | Previous view              |
@@ -232,6 +271,13 @@ BitBuilder Cloud CLI uses the following configuration files in `~/.bbctl/`:
 ### Example Settings File
 
 ```bash
+-   `settings.toml`: Global settings for bbctl
+-   `providers.toml`: Provider configurations
+-   `credentials.toml`: Authentication credentials (API keys, tokens, etc.)
+
+### Example Settings File
+
+```toml
 default_provider = "vyos-router"
 default_region = "nyc"
 telemetry_enabled = false
@@ -250,6 +296,7 @@ log_level = "info"
 You can use environment variables to override configuration values:
 
 ```bash
+``` bash
 export BBCTL_DEFAULT_PROVIDER=vyos-router
 export BBCTL_LOG_LEVEL=debug
 ```
@@ -259,6 +306,7 @@ export BBCTL_LOG_LEVEL=debug
 For scripting, you can use the `--json` flag with most commands to get machine-readable output:
 
 ```bash
+``` bash
 bbctl instances list --json > instances.json
 ```
 
@@ -267,6 +315,7 @@ bbctl instances list --json > instances.json
 BitBuilder Cloud CLI supports setting up WireGuard for secure connectivity:
 
 ```bash
+``` bash
 bbctl networks create secure-net \
   --cidr 10.10.0.0/24 \
   --wireguard enabled
@@ -281,6 +330,7 @@ bbctl networks create secure-net \
 If you're having trouble connecting to a provider:
 
 ```bash
+``` bash
 # Test provider connectivity with verbose output
 bbctl providers test vyos-router --verbose
 
@@ -293,6 +343,7 @@ bbctl providers update vyos-router --api-key new-api-key
 For detailed error information, increase the log level:
 
 ```bash
+``` bash
 bbctl --log-level debug instances list
 ```
 
@@ -301,6 +352,7 @@ bbctl --log-level debug instances list
 If you suspect configuration problems:
 
 ```bash
+``` bash
 # View current configuration
 bbctl config show
 
@@ -313,6 +365,7 @@ bbctl config reset
 For additional help with specific commands:
 
 ```bash
+``` bash
 bbctl help
 bbctl instances --help
 ```
@@ -326,6 +379,9 @@ For more detailed information, refer to the other documentation:
 - [Architecture Design]
 - [VyOS Test Lab Setup]
 - [API Reference]
+-   [Architecture Design]
+-   [VyOS Test Lab Setup]
+-   [API Reference]
 
 [Architecture Design]: ARCHITECTURE_DESIGN.md
 [VyOS Test Lab Setup]: vyos-test-lab-setup.md
@@ -335,6 +391,8 @@ For more detailed information, refer to the other documentation:
 
 - [GitHub Repository]
 - [Issue Tracker]
+-   [GitHub Repository]
+-   [Issue Tracker]
 
 [GitHub Repository]: https://github.com/bitbuilder-io/bbctl
 [Issue Tracker]: https://github.com/bitbuilder-io/bbctl/issues

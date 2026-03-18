@@ -1,7 +1,7 @@
+use anyhow::{anyhow, Context, Result};
+use log::{debug, error, info};
 use serde::{Deserialize, Serialize};
-use anyhow::{Result, Context, anyhow};
 use std::fs;
-use log::{debug, info, error};
 
 use crate::config::{read_config_file, write_config_file, SETTINGS_FILE};
 
@@ -48,7 +48,7 @@ impl Settings {
     /// Load settings from file
     pub fn load() -> Result<Self> {
         debug!("Loading settings from file");
-        
+
         // Read settings file
         let content = match read_config_file(SETTINGS_FILE) {
             Ok(content) => content,
@@ -57,75 +57,83 @@ impl Settings {
                 return Ok(Self::default());
             }
         };
-        
+
         // Parse TOML
-        let settings: Settings = toml::from_str(&content)
-            .context("Failed to parse settings TOML")?;
-        
+        let settings: Settings =
+            toml::from_str(&content).context("Failed to parse settings TOML")?;
+
         Ok(settings)
     }
-    
+
     /// Save settings to file
     pub fn save(&self) -> Result<()> {
         debug!("Saving settings to file");
-        
+
         // Serialize to TOML
-        let content = toml::to_string_pretty(self)
-            .context("Failed to serialize settings")?;
-        
+        let content = toml::to_string_pretty(self).context("Failed to serialize settings")?;
+
         // Write to file
-        write_config_file(SETTINGS_FILE, &content)
-            .context("Failed to write settings file")?;
-        
+        write_config_file(SETTINGS_FILE, &content).context("Failed to write settings file")?;
+
         info!("Settings saved successfully");
         Ok(())
     }
-    
+
     /// Update a setting
     pub fn update(&mut self, key: &str, value: &str) -> Result<()> {
         match key {
             "default_provider" => {
                 self.default_provider = Some(value.to_string());
-            },
+            }
             "default_region" => {
                 self.default_region = Some(value.to_string());
-            },
+            }
             "telemetry_enabled" => {
-                self.telemetry_enabled = value.parse::<bool>()
+                self.telemetry_enabled = value
+                    .parse::<bool>()
                     .context("Invalid boolean value for telemetry_enabled")?;
-            },
+            }
             "auto_update_enabled" => {
-                self.auto_update_enabled = value.parse::<bool>()
+                self.auto_update_enabled = value
+                    .parse::<bool>()
                     .context("Invalid boolean value for auto_update_enabled")?;
-            },
+            }
             "colors_enabled" => {
-                self.colors_enabled = value.parse::<bool>()
+                self.colors_enabled = value
+                    .parse::<bool>()
                     .context("Invalid boolean value for colors_enabled")?;
-            },
+            }
             "default_cpu" => {
-                self.default_cpu = value.parse::<u8>()
+                self.default_cpu = value
+                    .parse::<u8>()
                     .context("Invalid value for default_cpu")?;
-            },
+            }
             "default_memory_gb" => {
-                self.default_memory_gb = value.parse::<u8>()
+                self.default_memory_gb = value
+                    .parse::<u8>()
                     .context("Invalid value for default_memory_gb")?;
-            },
+            }
             "default_disk_gb" => {
-                self.default_disk_gb = value.parse::<u8>()
+                self.default_disk_gb = value
+                    .parse::<u8>()
                     .context("Invalid value for default_disk_gb")?;
-            },
+            }
             "log_level" => {
                 // Validate log level
                 match value.to_lowercase().as_str() {
                     "trace" | "debug" | "info" | "warn" | "error" => {
                         self.log_level = value.to_lowercase();
-                    },
-                    _ => return Err(anyhow!("Invalid log level. Use: trace, debug, info, warn, error")),
+                    }
+                    _ => {
+                        return Err(anyhow!(
+                            "Invalid log level. Use: trace, debug, info, warn, error"
+                        ))
+                    }
                 }
-            },
+            }
             _ => return Err(anyhow!("Unknown setting: {}", key)),
         }
-        
+
         Ok(())
     }
 }

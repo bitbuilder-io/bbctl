@@ -1,7 +1,7 @@
+use anyhow::{anyhow, Context, Result};
+use log::{debug, error, info};
 use serde::{Deserialize, Serialize};
-use anyhow::{Result, Context, anyhow};
 use std::collections::HashMap;
-use log::{debug, info, error};
 
 use crate::config::{read_config_file, write_config_file, CREDENTIALS_FILE};
 use crate::models::provider::ProviderType;
@@ -84,7 +84,7 @@ impl Credentials {
     /// Load credentials from file
     pub fn load() -> Result<Self> {
         debug!("Loading credentials from file");
-        
+
         // Read credentials file
         let content = match read_config_file(CREDENTIALS_FILE) {
             Ok(content) => content,
@@ -93,30 +93,29 @@ impl Credentials {
                 return Ok(Self::default());
             }
         };
-        
+
         // Parse TOML
-        let credentials: Credentials = toml::from_str(&content)
-            .context("Failed to parse credentials TOML")?;
-        
+        let credentials: Credentials =
+            toml::from_str(&content).context("Failed to parse credentials TOML")?;
+
         Ok(credentials)
     }
-    
+
     /// Save credentials to file
     pub fn save(&self) -> Result<()> {
         debug!("Saving credentials to file");
-        
+
         // Serialize to TOML
-        let content = toml::to_string_pretty(self)
-            .context("Failed to serialize credentials")?;
-        
+        let content = toml::to_string_pretty(self).context("Failed to serialize credentials")?;
+
         // Write to file
         write_config_file(CREDENTIALS_FILE, &content)
             .context("Failed to write credentials file")?;
-        
+
         info!("Credentials saved successfully");
         Ok(())
     }
-    
+
     /// Add VyOS credentials
     pub fn add_vyos_credentials(
         &mut self,
@@ -136,12 +135,13 @@ impl Credentials {
             ssh_port,
             api_port,
         };
-        
-        self.credentials.insert(provider_name.to_string(), ProviderCredentials::VyOS(creds));
+
+        self.credentials
+            .insert(provider_name.to_string(), ProviderCredentials::VyOS(creds));
         info!("Added VyOS credentials for provider: {}", provider_name);
         Ok(())
     }
-    
+
     /// Add Proxmox token credentials
     pub fn add_proxmox_token_credentials(
         &mut self,
@@ -155,7 +155,7 @@ impl Credentials {
             token_id: token_id.to_string(),
             token_secret: token_secret.to_string(),
         };
-        
+
         let creds = ProxmoxCredentials {
             port,
             use_token_auth: true,
@@ -163,12 +163,18 @@ impl Credentials {
             user_pass_auth: None,
             verify_ssl,
         };
-        
-        self.credentials.insert(provider_name.to_string(), ProviderCredentials::Proxmox(creds));
-        info!("Added Proxmox token credentials for provider: {}", provider_name);
+
+        self.credentials.insert(
+            provider_name.to_string(),
+            ProviderCredentials::Proxmox(creds),
+        );
+        info!(
+            "Added Proxmox token credentials for provider: {}",
+            provider_name
+        );
         Ok(())
     }
-    
+
     /// Add Proxmox username/password credentials
     pub fn add_proxmox_user_pass_credentials(
         &mut self,
@@ -184,7 +190,7 @@ impl Credentials {
             password: password.to_string(),
             realm: realm.to_string(),
         };
-        
+
         let creds = ProxmoxCredentials {
             port,
             use_token_auth: false,
@@ -192,43 +198,64 @@ impl Credentials {
             user_pass_auth: Some(user_pass_auth),
             verify_ssl,
         };
-        
-        self.credentials.insert(provider_name.to_string(), ProviderCredentials::Proxmox(creds));
-        info!("Added Proxmox user/pass credentials for provider: {}", provider_name);
+
+        self.credentials.insert(
+            provider_name.to_string(),
+            ProviderCredentials::Proxmox(creds),
+        );
+        info!(
+            "Added Proxmox user/pass credentials for provider: {}",
+            provider_name
+        );
         Ok(())
     }
-    
+
     /// Remove credentials for a provider
     pub fn remove_credentials(&mut self, provider_name: &str) -> Result<()> {
         if !self.credentials.contains_key(provider_name) {
-            return Err(anyhow!("Credentials for provider '{}' do not exist", provider_name));
+            return Err(anyhow!(
+                "Credentials for provider '{}' do not exist",
+                provider_name
+            ));
         }
-        
+
         self.credentials.remove(provider_name);
         info!("Removed credentials for provider: {}", provider_name);
         Ok(())
     }
-    
+
     /// Get credentials for a provider
     pub fn get_credentials(&self, provider_name: &str) -> Option<&ProviderCredentials> {
         self.credentials.get(provider_name)
     }
-    
+
     /// Get VyOS credentials for a provider
     pub fn get_vyos_credentials(&self, provider_name: &str) -> Result<&VyOSCredentials> {
         match self.credentials.get(provider_name) {
             Some(ProviderCredentials::VyOS(creds)) => Ok(creds),
-            Some(_) => Err(anyhow!("Provider '{}' does not have VyOS credentials", provider_name)),
-            None => Err(anyhow!("No credentials found for provider '{}'", provider_name)),
+            Some(_) => Err(anyhow!(
+                "Provider '{}' does not have VyOS credentials",
+                provider_name
+            )),
+            None => Err(anyhow!(
+                "No credentials found for provider '{}'",
+                provider_name
+            )),
         }
     }
-    
+
     /// Get Proxmox credentials for a provider
     pub fn get_proxmox_credentials(&self, provider_name: &str) -> Result<&ProxmoxCredentials> {
         match self.credentials.get(provider_name) {
             Some(ProviderCredentials::Proxmox(creds)) => Ok(creds),
-            Some(_) => Err(anyhow!("Provider '{}' does not have Proxmox credentials", provider_name)),
-            None => Err(anyhow!("No credentials found for provider '{}'", provider_name)),
+            Some(_) => Err(anyhow!(
+                "Provider '{}' does not have Proxmox credentials",
+                provider_name
+            )),
+            None => Err(anyhow!(
+                "No credentials found for provider '{}'",
+                provider_name
+            )),
         }
     }
 }

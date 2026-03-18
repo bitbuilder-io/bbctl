@@ -7,6 +7,10 @@ import { openApiSchema } from '../schema';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Get current file directory with ESM compatibility
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const OUTPUT_DIR = join(__dirname, '../api-docs');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'openapi.json');
 
@@ -97,6 +101,7 @@ const htmlContent = `
 
 try {
   writeFileSync(HTML_FILE, htmlContent, 'utf8');
+  writeFileSync(HTML_FILE, htmlContent, "utf8");
   console.log(`Successfully generated Swagger UI HTML: ${HTML_FILE}`);
   console.log(`Open ${HTML_FILE} in your browser to view the API documentation`);
   console.log(`Documentation links have been added to the UI:`);
@@ -105,4 +110,5 @@ try {
   console.log(`- Architecture Design: docs/ARCHITECTURE_DESIGN.md`);
 } catch (error) {
   console.error('Error generating Swagger UI HTML:', error);
+  console.error("Error generating Swagger UI HTML:", error);
 }
