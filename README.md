@@ -9,24 +9,13 @@ BitBuilder Cloud CLI is an all-in-one tool for provisioning and managing multi-t
 
 ## Features
 
-- **Manage VMs** - Create, configure, and manage virtual machines across your infrastructure
-- **Storage Management** - Provision and attach volumes to your applications
-- **Network Configuration** - Set up and manage virtual networks with secure connectivity
-- **Multi-provider Support** - Works with VyOS v1.5 and Proxmox
-- **Interactive TUI** - Terminal-based dashboard for visual resource management
-- **Bare Metal Efficiency** - Optimized for bare metal server deployment
-- **E2E Encryption** - Secure networking with WireGuard integration (coming soon)
--   **Manage VMs**: Create, configure, and manage virtual machines across your infrastructure
--   **Storage Management**: Provision and attach volumes to your applications
--   **Network Configuration**: Set up and manage virtual networks with secure connectivity
--   **Multi-provider Support**: Works with VyOS v1.5 and Proxmox
--   **Bare Metal Efficiency**: Optimized for bare metal server deployment
--   **Future Public Cloud Integration**: Scale out to public clouds with E2E encryption (coming soon)
 - **Manage VMs**: Create, configure, and manage virtual machines across your infrastructure
 - **Storage Management**: Provision and attach volumes to your applications
 - **Network Configuration**: Set up and manage virtual networks with secure connectivity
 - **Multi-provider Support**: Works with VyOS v1.5 and Proxmox
+- **Interactive TUI**: Terminal-based dashboard for visual resource management
 - **Bare Metal Efficiency**: Optimized for bare metal server deployment
+- **E2E Encryption**: Secure networking with WireGuard integration (coming soon)
 - **Future Public Cloud Integration**: Scale out to public clouds with E2E encryption (coming soon)
 
 ## Installation

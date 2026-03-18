@@ -1,9 +1,6 @@
 import { zodToOpenAPI } from '@asteasolutions/zod-to-openapi';
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { z } from 'zod';
-import { z } from 'zod';
-import { zodToOpenAPI } from '@asteasolutions/zod-to-openapi';
-import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 
 // Initialize the OpenAPI registry
 const registry = new OpenAPIRegistry();

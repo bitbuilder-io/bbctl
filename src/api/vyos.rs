@@ -27,6 +27,14 @@ pub struct VyOSConfig {
     pub api_key: Option<String>,
     /// Connection timeout in seconds
     pub timeout: u64,
+    /// Verify TLS certificates for HTTP API connections (default: true).
+    /// Set to false to allow self-signed certificates in lab/dev environments.
+    #[serde(default = "default_verify_ssl")]
+    pub verify_ssl: bool,
+}
+
+fn default_verify_ssl() -> bool {
+    true
 }
 
 impl Default for VyOSConfig {
@@ -40,6 +48,7 @@ impl Default for VyOSConfig {
             key_path: None,
             api_key: None,
             timeout: 30,
+            verify_ssl: default_verify_ssl(),
         }
     }
 }
@@ -101,8 +110,15 @@ impl VyOSClient {
     /// Initialize HTTP client for API operations
     fn init_http_client(&mut self) -> Result<()> {
         if self.http_client.is_none() {
-            let client = Client::builder()
-                .timeout(Duration::from_secs(self.config.timeout))
+            let mut builder = Client::builder()
+                .timeout(Duration::from_secs(self.config.timeout));
+
+            // Optionally disable TLS certificate verification for lab/dev setups
+            if !self.config.verify_ssl {
+                builder = builder.danger_accept_invalid_certs(true);
+            }
+
+            let client = builder
                 .build()
                 .context("Failed to build HTTP client")?;
 

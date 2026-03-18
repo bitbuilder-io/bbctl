@@ -12,10 +12,6 @@ BitBuilder Cloud CLI is designed around a consistent infrastructure-as-code appr
 - **Templates**: Reusable configurations for deployment
 - **Environments**: Distinct deployment targets (development, staging, production)
 - **Workspaces**: Isolated deployment contexts for multi-tenant usage
--   **Resources**: The building blocks of your infrastructure (instances, volumes, networks)
--   **Templates**: Reusable configurations for deployment
--   **Environments**: Distinct deployment targets (development, staging, production)
--   **Workspaces**: Isolated deployment contexts for multi-tenant usage
 
 ### Deployment Workflow
 
@@ -27,12 +23,6 @@ The typical deployment workflow consists of:
 4. **Configure**: Apply post-deployment configuration
 5. **Verify**: Confirm successful deployment
 6. **Monitor**: Track performance and health
-1.  **Define**: Create deployment configuration and resources
-2.  **Validate**: Verify configuration and check dependencies
-3.  **Deploy**: Provision resources and deploy applications
-4.  **Configure**: Apply post-deployment configuration
-5.  **Verify**: Confirm successful deployment
-6.  **Monitor**: Track performance and health
 
 ## Deployment Configuration
 
@@ -40,8 +30,6 @@ The typical deployment workflow consists of:
 
 BitBuilder Cloud CLI uses TOML configuration files for deployments. The main deployment file is typically named `deploy.toml`:
 
-```bash
-``` toml
 ```toml
 [app]
 name = "my-web-app"

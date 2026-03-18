@@ -54,8 +54,6 @@ const invalidInstance = {
   tags: {
     environment: 'production',
   },
-    environment: 'production'
-  }
 };
 
 // Function to validate instance data

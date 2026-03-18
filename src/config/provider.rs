@@ -110,7 +110,7 @@ impl Providers {
         if !self
             .providers
             .iter()
-            .any(|(name, p)| p.provider_type == region.provider)
+            .any(|(_, p)| p.provider_type == region.provider)
         {
             return Err(anyhow!("Provider '{}' does not exist", provider_name));
         }

@@ -15,7 +15,6 @@ This guide will help you understand how to use bbctl effectively, covering insta
 If you have Rust installed, the simplest way to install bbctl is via Cargo:
 
 ```bash
-``` bash
 cargo install bbctl
 ```
 
@@ -39,7 +38,6 @@ For systems without Rust, download pre-compiled binaries:
 To build the latest version from source:
 
 ```bash
-``` bash
 git clone https://github.com/bitbuilder-io/bbctl.git
 cd bbctl
 cargo build --release
