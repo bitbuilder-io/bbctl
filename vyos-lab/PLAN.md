@@ -198,4 +198,3 @@ set vrf name tenant1 interfaces 'br100'
 ## Conclusion
 
 This lab architecture provides a comprehensive environment for testing multi-tenant network isolation using VyOS and modern networking concepts. It combines the security of WireGuard with the flexibility and scalability of EVPN to create isolated tenant environments that closely mirror cloud deployment scenarios.
-This lab architecture provides a comprehensive environment for testing multi-tenant network isolation using VyOS and modern networking concepts. It combines the security of WireGuard with the flexibility and scalability of EVPN to create isolated tenant environments that closely mirror cloud deployment scenarios.
