@@ -1,10 +1,10 @@
-use anyhow::{Result, Context, anyhow};
+use anyhow::{Result, anyhow};
 use log::{debug, info, error};
 use std::collections::HashMap;
 
 use crate::models::provider::{ProviderType, ProviderConfig, Region, ResourceLimits};
 use crate::config::provider::Providers;
-use crate::config::credentials::{Credentials, ProviderCredentials};
+use crate::config::credentials::Credentials;
 use crate::api::{Provider, vyos::VyOSClient, vyos::VyOSConfig, proxmox::ProxmoxClient, proxmox::ProxmoxConfig, proxmox::ProxmoxAuth};
 
 /// Provider service for managing infrastructure providers
@@ -53,7 +53,7 @@ impl ProviderService {
         api_port: Option<u16>,
     ) -> Result<()> {
         // Create provider params
-        let mut params = HashMap::new();
+        let params = HashMap::new();
         
         // Add provider
         self.providers.add_provider(name, ProviderType::VyOS, host, params)?;
@@ -88,7 +88,7 @@ impl ProviderService {
         verify_ssl: bool,
     ) -> Result<()> {
         // Create provider params
-        let mut params = HashMap::new();
+        let params = HashMap::new();
         
         // Add provider
         self.providers.add_provider(name, ProviderType::Proxmox, host, params)?;
@@ -122,7 +122,7 @@ impl ProviderService {
         verify_ssl: bool,
     ) -> Result<()> {
         // Create provider params
-        let mut params = HashMap::new();
+        let params = HashMap::new();
         
         // Add provider
         self.providers.add_provider(name, ProviderType::Proxmox, host, params)?;
