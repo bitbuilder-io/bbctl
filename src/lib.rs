@@ -7,6 +7,7 @@ pub mod api;
 pub mod models;
 pub mod config;
 pub mod services;
+pub mod network;
 
 // Re-export commonly used types
 pub use app::AppResult;

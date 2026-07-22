@@ -34,6 +34,10 @@ toml = "0.8.8"
 
 # Networking & Security
 uuid = { version = "1.4", features = ["v4", "serde"] }
+base64 = "0.21"
+rand = "0.8"
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+
 [dev-dependencies]
 assert_cmd = "2.0"
 mockito = "1.2"
