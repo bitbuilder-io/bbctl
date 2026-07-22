@@ -3,9 +3,8 @@ use log::{debug, info, error};
 use std::collections::HashMap;
 use uuid::Uuid;
 use serde_json::json;
-use chrono::Utc;
 
-use crate::models::instance::{Instance, InstanceStatus, InstanceSize, InstanceNetwork};
+use crate::models::instance::{Instance, InstanceStatus, InstanceSize};
 use crate::models::provider::ProviderType;
 use crate::services::provider::ProviderService;
 
@@ -246,7 +245,7 @@ impl InstanceService {
         match provider {
             ProviderType::VyOS => {
                 // Get VyOS client
-                let mut client = self.provider_service.get_vyos_client(&provider_name)?;
+                let client = self.provider_service.get_vyos_client(&provider_name)?;
                 
                 // Use VyOS API to start the VM
                 // Example: Send commands over SSH
@@ -320,7 +319,7 @@ impl InstanceService {
         match provider {
             ProviderType::VyOS => {
                 // Get VyOS client
-                let mut client = self.provider_service.get_vyos_client(&provider_name)?;
+                let client = self.provider_service.get_vyos_client(&provider_name)?;
                 
                 // Use VyOS API to stop the VM
                 // Example: Send commands over SSH
@@ -394,7 +393,7 @@ impl InstanceService {
         match provider {
             ProviderType::VyOS => {
                 // Get VyOS client
-                let mut client = self.provider_service.get_vyos_client(&provider_name)?;
+                let client = self.provider_service.get_vyos_client(&provider_name)?;
                 
                 // Use VyOS API to delete the VM
                 // Example: Send commands over SSH
