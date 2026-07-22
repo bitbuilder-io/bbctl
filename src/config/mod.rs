@@ -2,9 +2,9 @@ pub mod provider;
 pub mod settings;
 pub mod credentials;
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use anyhow::{Result, Context, anyhow};
-use log::{debug, info, error};
+use log::{debug, info};
 use std::fs;
 use dirs::home_dir;
 

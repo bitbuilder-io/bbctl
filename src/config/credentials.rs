@@ -1,10 +1,9 @@
 use serde::{Deserialize, Serialize};
 use anyhow::{Result, Context, anyhow};
 use std::collections::HashMap;
-use log::{debug, info, error};
+use log::{debug, info};
 
 use crate::config::{read_config_file, write_config_file, CREDENTIALS_FILE};
-use crate::models::provider::ProviderType;
 
 /// VyOS credentials
 #[derive(Debug, Clone, Serialize, Deserialize)]

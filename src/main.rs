@@ -423,7 +423,7 @@ fn cli_handler(cli: Cli) -> AppResult<()> {
                 }
             }
         }
-        Some(Commands::TestVyOS { host, port, username, .. }) => {
+        Some(Commands::TestVyOS { .. }) => {
             // This would block, so we need to call it outside the CLI handler
             // Will be implemented in main()
             return Err("Use tokio runtime to test VyOS connectivity".into());
@@ -511,7 +511,7 @@ async fn main() -> AppResult<()> {
                         println!("\n✅ SSH connection successful!");
                         
                         // If API key is provided, also test the API
-                        if let Some(api_key) = &api_key {
+                        if api_key.is_some() {
                             println!("\nTesting VyOS HTTP API...");
                             
                             let mut client_mut = client;

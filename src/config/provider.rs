@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use anyhow::{Result, Context, anyhow};
 use std::collections::HashMap;
-use log::{debug, info, error};
+use log::{debug, info};
 
 use crate::config::{read_config_file, write_config_file, PROVIDERS_FILE};
 use crate::models::provider::{ProviderType, ProviderConfig, Region};
@@ -102,7 +102,7 @@ impl Providers {
         
         // Ensure the provider exists
         let provider_name = region.provider.to_string();
-        if !self.providers.iter().any(|(name, p)| p.provider_type == region.provider) {
+        if !self.providers.iter().any(|(_name, p)| p.provider_type == region.provider) {
             return Err(anyhow!("Provider '{}' does not exist", provider_name));
         }
         

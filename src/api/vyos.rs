@@ -1,5 +1,5 @@
 use anyhow::{Result, Context, anyhow};
-use reqwest::{Client, StatusCode};
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use std::process::Command;
 use tokio::process::Command as AsyncCommand;

@@ -3,7 +3,7 @@ use log::info;
 use std::collections::HashMap;
 use uuid::Uuid;
 
-use crate::models::volume::{Volume, VolumeStatus, VolumeType};
+use crate::models::volume::{Volume, VolumeType};
 use crate::models::provider::ProviderType;
 use crate::services::provider::ProviderService;
 

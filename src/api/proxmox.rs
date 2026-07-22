@@ -1,8 +1,8 @@
 use anyhow::{Result, Context, anyhow};
-use reqwest::{Client, StatusCode};
+use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
-use log::{debug, error, info};
+use log::{debug, info};
 
 use crate::api::Provider;
 
